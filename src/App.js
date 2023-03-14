@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" exact element={<Dashboard />} />
-        <Route path="/training" element={<Training />} />
+        <Route path="/training" exact element={<Training />} />
       </Routes>
     </BrowserRouter>
   );
