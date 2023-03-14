@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/athena_2/static/css/main.073c9b0a.css",
-    "main.js": "/athena_2/static/js/main.025154d1.js",
+    "main.js": "/athena_2/static/js/main.ee46ecf9.js",
     "index.html": "/athena_2/index.html",
     "main.073c9b0a.css.map": "/athena_2/static/css/main.073c9b0a.css.map",
-    "main.025154d1.js.map": "/athena_2/static/js/main.025154d1.js.map"
+    "main.ee46ecf9.js.map": "/athena_2/static/js/main.ee46ecf9.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.025154d1.js"
+    "static/js/main.ee46ecf9.js"
   ]
 }
