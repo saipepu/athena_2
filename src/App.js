@@ -1,16 +1,18 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard';
 import Training from './Pages/Training';
+import WaterRising from './Games/WaterRising/WaterRising';
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <HashRouter>
       <Routes>
-        <Route path="/" exact element={<Dashboard />} />
-        <Route path="/training" exact element={<Training />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/training" element={<Training />} />
+        <Route path="/water-rising" element={<WaterRising />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

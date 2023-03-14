@@ -2,7 +2,7 @@
   "name": "athena_v2",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://saipepu.github.io/athena_2",
+  "homepage": "https://saipepu.github.io/athena_2/#",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
