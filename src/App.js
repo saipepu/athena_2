@@ -4,8 +4,11 @@ import Dashboard from './Pages/Dashboard';
 import Training from './Pages/Training';
 import WaterRising from './Games/WaterRising/WaterRising';
 import StoryBased from './Games/StoryBased/StoryBased';
+import StoryBasedSheet from './Gsheet/StoryBasedSheet'
 
 function App() {
+  // const data = StoryBasedSheet;
+  const data = StoryBasedSheet;
   return (
     <div className="App">
       <HashRouter>
