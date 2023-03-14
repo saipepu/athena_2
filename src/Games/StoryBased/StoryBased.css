@@ -1,0 +1,309 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+
+.customerPosition {
+  position: absolute;
+  width: 874px;
+  height: 943px;
+  left: 0px;
+  top: 186px;
+}
+
+.StartPosition {
+  position: absolute;
+  width: 1063px;
+  height: 938px;
+  left: 0%;
+  top: -36px;
+}
+
+.employeePosition {
+  position: absolute;
+  width: 949px;
+  height: 680px;
+  left: 289px;
+
+  /* left: 239px; */
+  top: 239px;
+  background-size: 963px;
+}
+
+.employeeSpeakbubble {
+  position: absolute;
+  width: 889px;
+  height: 523px;
+  left: -154px;
+  top: 75px;
+  background: url('../../assets/speakbubble.png');
+}
+
+.customerSpeakbubble {
+  position: absolute;
+  width: 889px;
+  height: 523px;
+  left: 303px;
+  top: 102px;
+  background: url('../../assets/speakbubble.png');
+}
+
+.startingscenemodel {
+  position: absolute;
+  width: 1920px;
+  height: 1136px;
+  left: -1287px;
+  top: -30px;
+
+  /* background: url("src/assets/start_model.png"); */
+}
+
+.questionScene {
+  z-index: 20;
+  /* position: absolute; */
+  left: 230px;
+  top: 181px;
+  background-color: #fff;
+  border: 1px solid #a0a0a0;
+  border-radius: 15px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 20px;
+
+  /* background: url("src/assets/question_box.png"); */
+}
+
+.containerquestion {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 74%;
+  z-index: 30;
+  position: absolute;
+  flex-direction: column;
+  position: absolute;
+  left: 10%;
+  top: 27%;
+  overflow: visible;
+}
+
+.answerOptions {
+  box-sizing: border-box;
+  background: #ffffff;
+  width: auto;
+  border: 1px solid #a0a0a0;
+  padding: 10px;
+  border-radius: 15px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 30px;
+
+  color: #182227;
+}
+
+#submitform {
+  z-index: 20;
+  width: 100%;
+}
+
+.questionText {
+  padding: 25px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 39px;
+
+  color: #182227;
+}
+
+.employeebackground {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.micperson {
+  /* Gaia (1) 1 */
+  position: absolute;
+  width: 1537px;
+  height: 1027px;
+  left: 420px;
+  top: 225px;
+
+  background: url("../../assets/micperson.png");
+}
+
+/* Hi sir! How can I help you today? */
+.hisir {
+  position: absolute;
+  font-family: "Lexend";
+  color: #182227;
+  width: 562px;
+  height: 324px;
+  left: 295px;
+  top: 68px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 80px;
+}
+
+.storyBasedtitle {
+  /* Talky-Talky */
+
+  position: absolute;
+  width: 763px;
+  height: 182px;
+  left: 40%;
+  top: 300px;
+
+  font-family: "Poppins";
+  font-style: italic;
+  font-weight: 500;
+  font-size: 130px;
+  line-height: 140%;
+  /* identical to box height, or 182px */
+
+  color: #ffffff;
+}
+
+.questionandanswer {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eeeeee;
+  padding: 50px;
+  overflow: hidden;
+}
+
+.Scontainer {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px #00000005;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+button:hover {
+  border-color: transparent !important;
+}
+
+.next_btn {
+  border-color: transparent;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+  right: 10px;
+  top: 10px;
+}
+
+.back_btn {
+  border-color: transparent;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+  left: 10px;
+  top: 10px;
+}
+
+.start_btn {
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+  background: #ee5253;
+  border-radius: 15px;
+  padding: 20px 60px;
+  font-size: 45px;
+  font-weight: 600;
+  color: white;
+  z-index: 10;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #a0a0a0;
+  padding: 25px;
+  border-radius: 15px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 30px;
+
+  color: #182227;
+}
+
+.timetext {
+  text-align: center;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 80px;
+
+  color: #182227;
+}
+
+.timebox {
+  position: absolute;
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* input:checked+label {
+    background: red;
+} */
+label {
+  outline: 0px solid #d8febb;
+}
+input:checked + label {
+  outline-width: 5px;
+}
+
+input:checked + .wronganswer {
+  background: #fedfe1;
+}
+.input_container {
+  overflow: visible;
+}

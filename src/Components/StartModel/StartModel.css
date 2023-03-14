@@ -1,0 +1,34 @@
+.start_model {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  /* background: white; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.banner {
+  background: white;
+  border-radius: 20px;
+  width: 65%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+}
+.banner > p {
+  text-align: center;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 150%;
+}
+.start_btn {
+  background: #ee5253;
+  border-radius: 15px;
+  padding: 20px 60px;
+  font-size: 45px;
+  font-weight: 600;
+  color: white;
+}

@@ -1,0 +1,83 @@
+.model_wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url("../../assets/model_bg.png");
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+}
+.gameOver {
+  position: relative;
+  height: 80%;
+  width: 80%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 90px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+}
+.media_container,
+.content {
+  width: 100%;
+  height: auto;
+  display: grid;
+}
+.media {
+  width: 50%;
+  height: 100%;
+  object-fit: contain;
+}
+.media_container > *,
+.content > * {
+  margin: auto;
+}
+.title {
+  font-size: 35px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 150%;
+}
+.title > span {
+  color: #ee5253;
+}
+.subtitle {
+  font-size: 24px;
+  font-weight: 400;
+  color: #838383;
+  line-height: 150%;
+}
+.btn_gp {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  overflow: visible;
+}
+.btn_gp > * {
+  font-size: 16px;
+  font-weight: 600;
+}
+.claim_reward {
+  color: white;
+  background: #5dca25;
+  border: 1px solid #c7c7c7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 11px;
+  text-decoration: underline;
+  padding: 12px 24px;
+}
+.play_again {
+  color: white;
+  background: #ee5253;
+  border: 1px solid #c7c7c7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 11px;
+  padding: 12px 24px;
+}
