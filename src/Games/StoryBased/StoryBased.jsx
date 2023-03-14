@@ -19,7 +19,7 @@ if (scenes !== null) {
       scene: "start",
       background: talky_talky_startscreen,
       question: "",
-      avatar: "start_model",
+      avatar: start_model,
       text: "Talky-Talky",
       backgroundSize: "",
       option1: "",
