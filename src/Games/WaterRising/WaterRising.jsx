@@ -16,11 +16,11 @@ import exp_img from '../../assets/exp_img.png'
 // import { sample } from './sample_q'
 import StartModel from '../../Components/StartModel/StartModel'
 import GameOver from '../../Components/GameOver/GameOver'
-import GSheetReader from '../../Gsheet/GSheet'
+import WaterRisingData from '../../api/WaterRisingData'
 
 const WaterRising = () => {
 
-  const sample = GSheetReader;
+  const sample = WaterRisingData;
   console.log(sample, 24);
   const [qNo, setQNo] = useState(0);
   const [waterHeight, setWaterHeight] = useState(90);
