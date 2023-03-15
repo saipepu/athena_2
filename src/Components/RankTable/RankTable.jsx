@@ -29,11 +29,11 @@ const RankTable = () => {
         <Tbody>
           <Tr>
             <Td><Box display="flex" flexDirection="row" justifyContent={'center'} alignItems={'center'} gap="22px"><Text>1</Text><Image src={rank1_avatar} alt="avatar" /></Box></Td>
-            <Td>6512345</Td>
-            <Td>Geo</Td>
-            <Td>Marketing</Td>
-            <Td>General</Td>
-            <Td>120 exp</Td>
+            <Td textAlign="left">6512345</Td>
+            <Td textAlign="left">Geo</Td>
+            <Td textAlign="left">Marketing</Td>
+            <Td textAlign="left">General</Td>
+            <Td textAlign="left">120 exp</Td>
           </Tr>
         </Tbody>
       </Table>

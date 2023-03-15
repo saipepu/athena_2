@@ -21,9 +21,10 @@ export default GSheetReader(options, results => {
         point: x[2],
       }
       item.option[index] = obj;
+      return "";
     })
     data.push(item);
-    return "";
+    return data;
   })
   console.log(data);
 }, error => {
