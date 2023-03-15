@@ -1,10 +1,12 @@
-import { Box, HStack, Grid, GridItem, Text, IconButton, Input, InputGroup, InputRightElement, VStack, Card, Image, CardBody, Heading, AspectRatio, CardFooter, Badge, Progress } from '@chakra-ui/react'
+import { Box, HStack, Text, IconButton, Input, InputGroup, InputRightElement, VStack, Card, Image, CardBody, Heading, AspectRatio, CardFooter, Badge, Progress } from '@chakra-ui/react'
 import React from 'react'
 import Layout from './Layout'
 import { PlusSquareIcon, SearchIcon } from "@chakra-ui/icons"
 import "../index.css"
+import { useNavigate } from 'react-router-dom'
 
 const Training = () => {
+  const navigation = useNavigate();
   return (
     <Layout>
       <VStack
@@ -18,9 +20,15 @@ const Training = () => {
         maxWidth="100%" padding='0' justifyContent="flex-start">
           <InputGroup maxWidth="200px">
             <Input
-            p="6px" placeholder="keyword"/>
+            p="6px" placeholder="keyword"
+            style={{
+              backgroundColor: 'white',
+              fontSize: '18px',
+              borderRadius: '5px',
+              border: '0.8px solid #cbcbcb'
+            }}/>
             <InputRightElement>
-              <IconButton size="sm" icon={<SearchIcon size="18px"/>} />
+              <IconButton aria-label='Search database' icon={<SearchIcon />} />
             </InputRightElement>
           </InputGroup>
           <Box>Bookmark</Box>
@@ -32,14 +40,14 @@ const Training = () => {
           <HStack width="full" gap="12px" overflow="scroll" padding={'0px 100px 12px 10px'}>
             {[0,1,2,3,4,5].map((item, index) => {
               return (
-                <Box minWidth="200px" key={index}>
-                  <Card direction={'column'} minWidth="full" overflow="hidden">
+                <Box key={index}>
+                  <Card width="300px" onClick={() => navigation(`/course-detail/${index}`)} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
                     <AspectRatio ratio={2/1}>
                       <Image  src={'https://source.unsplash.com/random/'+index} objectFit="cover" />
                     </AspectRatio>
                     <CardBody width="full" p='12px'>
-                      <HStack width="full" justifyContent="space-between">
-                        <Heading size="md" fontSize="18px" width="100%">The Perfect Title</Heading>
+                      <HStack width="full" justifyContent="space-between" alignItems="flex-start">
+                        <Heading size="md" fontSize="18px" width="100%" textAlign="left">Human Relations Movement: 5 Steps To better Management</Heading>
                         <IconButton icon={<PlusSquareIcon />} size="sm" />
                       </HStack>
                     </CardBody>
@@ -59,16 +67,16 @@ const Training = () => {
         <VStack maxWidth="1200px" padding="0" justifyContent="flex-start" alignItems="flex-start" paddingBottom="20px">
           <Text as="h1" textAlign="left" fontSize="32px" fontWeight="bold">In Progress</Text>
           <HStack width="full" gap="12px" overflow="scroll" padding={'0px 100px 12px 10px'}>
-            {[0,1,2,3,4,5].map((item, index) => {
+            {[0,1,2].map((item, index) => {
               return (
-                <Box minWidth="200px" key={index}>
-                  <Card direction={'column'} minWidth="full" overflow="hidden">
+                <Box key={index}>
+                  <Card onClick={() => navigation(`/course-details/${index}`)} width="300px" cursor="pointer" direction={'column'} minWidth="full" overflow="hidden">
                     <AspectRatio ratio={2/1}>
                       <Image  src={'https://source.unsplash.com/random/'+index+index} objectFit="cover" />
                     </AspectRatio>
                     <CardBody width="full" p='12px'>
-                      <HStack width="full" justifyContent="space-between">
-                        <Heading size="md" fontSize="18px" width="100%">The Perfect Title</Heading>
+                      <HStack width="full" justifyContent="space-between" alignItems="flex-start">
+                        <Heading size="md" fontSize="18px" width="100%" textAlign="left">Human Relations Movement: 5 Steps To better Management</Heading>
                         <IconButton icon={<PlusSquareIcon />} size="sm" />
                       </HStack>
                       <HStack width="full" justifyContent="space-between">
@@ -92,16 +100,16 @@ const Training = () => {
         <VStack maxWidth="1200px" padding="0" justifyContent="flex-start" alignItems="flex-start" paddingBottom="20px">
           <Text as="h1" textAlign="left" fontSize="32px" fontWeight="bold">Completed</Text>
           <HStack width="full" gap="12px" overflow="scroll" padding={'0px 100px 12px 10px'}>
-            {[0,1,2,3,4,5].map((item, index) => {
+            {[0,1].map((item, index) => {
               return (
-                <Box minWidth="200px" key={index}>
-                  <Card direction={'column'} minWidth="full" overflow="hidden">
+                <Box key={index}>
+                  <Card width="300px" onClick={() => navigation('/course-detail')} cursor="pointer" direction={'column'} minWidth="full" overflow="hidden">
                     <AspectRatio ratio={2/1}>
                       <Image  src={'https://source.unsplash.com/random/'+index+index+index} objectFit="cover" />
                     </AspectRatio>
                     <CardBody width="full" p='12px'>
-                      <HStack width="full" justifyContent="space-between">
-                        <Heading size="md" fontSize="18px" width="100%">The Perfect Title</Heading>
+                      <HStack width="full" justifyContent="space-between" alignItems="flex-start">
+                        <Heading size="md" fontSize="18px" width="100%" textAlign="left">Human Relations Movement: 5 Steps To better Management</Heading>
                         <IconButton icon={<PlusSquareIcon />} size="sm" />
                       </HStack>
                       <HStack width="full" justifyContent="space-between">

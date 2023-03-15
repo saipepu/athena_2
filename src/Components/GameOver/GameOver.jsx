@@ -1,8 +1,12 @@
 import React from "react";
 import "./GameOver.css";
 import treasure_chest from "../../assets/treasure_chest.png";
+import { useNavigate } from "react-router-dom";
 
 const GameOver = ({ setGameOver, gameOver, win }) => {
+
+  const navigation = useNavigate();
+
   return (
     <div className="model_wrapper">
       <div className="gameOver">
@@ -34,7 +38,10 @@ const GameOver = ({ setGameOver, gameOver, win }) => {
           ) : (
             <button
               className="go_to_home"
-              onClick={() => setGameOver(!gameOver)}
+              onClick={() => {
+                setGameOver(!gameOver)
+                navigation('/dashboard')
+              }}
             >
               Go to Home
             </button>

@@ -1,16 +1,14 @@
-import { Card, CardBody, CardHeader, Container, Heading, HStack, Image, Stack, Text, VStack } from '@chakra-ui/react'
+import { Card, CardBody, Heading, HStack, Image, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
-import Header from '../Components/Header/Header'
-import Sidebar from '../Components/Sidebar/Sidebar'
 import red_clock from '../assets/red_clock.png'
 import token from '../assets/token.png'
 import book from '../assets/book.png'
 import RankTable from '../Components/RankTable/RankTable'
-import { useMediaQuery } from '@chakra-ui/react'
 import Layout from './Layout'
+// import { useMediaQuery } from '@chakra-ui/react'
 
 const Dashboard = () => {
-  const [isSmallScreen] = useMediaQuery("(max-width: 758px)")
+  // const [isSmallScreen] = useMediaQuery("(max-width: 758px)")
   return (
     <Layout>
       <VStack
