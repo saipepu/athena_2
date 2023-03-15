@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/athena_2/static/css/main.ad51b827.css",
-    "main.js": "/athena_2/static/js/main.81c9ddfb.js",
+    "main.css": "/athena_2/static/css/main.acd592df.css",
+    "main.js": "/athena_2/static/js/main.daf6dc0a.js",
     "static/media/third_scene_backgorund.png": "/athena_2/static/media/third_scene_backgorund.e15bc8b8e8650e234793.png",
     "static/media/water_game_background.png": "/athena_2/static/media/water_game_background.ed75cac84074dda243de.png",
     "static/media/talky_talky_startscreen.png": "/athena_2/static/media/talky_talky_startscreen.d80d4a678f6fc54e8e8d.png",
@@ -24,11 +24,11 @@
     "static/media/pole1.png": "/athena_2/static/media/pole1.0ea51c0ba0752f262a00.png",
     "static/media/pole4.png": "/athena_2/static/media/pole4.e8c1c5bdcb238d3772c0.png",
     "index.html": "/athena_2/index.html",
-    "main.ad51b827.css.map": "/athena_2/static/css/main.ad51b827.css.map",
-    "main.81c9ddfb.js.map": "/athena_2/static/js/main.81c9ddfb.js.map"
+    "main.acd592df.css.map": "/athena_2/static/css/main.acd592df.css.map",
+    "main.daf6dc0a.js.map": "/athena_2/static/js/main.daf6dc0a.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad51b827.css",
-    "static/js/main.81c9ddfb.js"
+    "static/css/main.acd592df.css",
+    "static/js/main.daf6dc0a.js"
   ]
 }
