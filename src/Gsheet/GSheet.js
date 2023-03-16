@@ -1,5 +1,8 @@
 import GSheetReader from 'g-sheets-api'
 
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 const options = {
   apiKey: process.env.REACT_APP_GOOGLESHEETAPI,
   sheetId: '1ydjnm6UyE5pm5-onpFT-w3KdBSNzxU-fsj6KAvtb9mA',
