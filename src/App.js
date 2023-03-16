@@ -6,6 +6,8 @@ import WaterRising from './Games/WaterRising/WaterRising';
 import StoryBased from './Games/StoryBased/StoryBased';
 import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
+import React, { useState } from 'react';
+
 // import google from 'gapi-client';
 // import StoryBasedSheet from './Gsheet/StoryBasedSheet'
 // import GoogleSheetGo from './api/Registeration';
@@ -57,6 +59,7 @@ function App() {
   //   console.log(getRows.data, 27)
   // }
   // GoogleSheetGo();
+
   return (
     <div className="App">
       <HashRouter>

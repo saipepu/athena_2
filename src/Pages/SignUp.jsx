@@ -3,6 +3,7 @@ import React from 'react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 
+
 const SignUp = () => {
 
   const navigation = useNavigate();
@@ -28,11 +29,25 @@ const SignUp = () => {
     exp: 0,
   }
 
+  async function registerUser(values) {
+    const response = await fetch("http://localhost:8080/api/register", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(values)
+    })
+    const data = await response.json();
+    console.log("response" + data)
+  }
+
   const formik = useFormik({
     initialValues: model,
     onSubmit: async(values) => {
+      await registerUser(values);
       console.log(values, 'submitted')
-      navigation('/sign-in')
+      // navigation('/sign-in')
     }
   })
 

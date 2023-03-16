@@ -2,8 +2,24 @@ import { Button, Container, HStack, Input, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+
+import PropTypes from 'prop-types';
+
+async function loginUser(credentials) {
+  return fetch("http://localhost:8080/login", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  }).then(data => data.json())
+}
 
 const SignIn = () => {
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   
   const navigation = useNavigate();
 
@@ -25,8 +41,11 @@ const SignIn = () => {
   const formik = useFormik({
     initialValues: model,
     onSubmit: async(values) => {
+      const token = await loginUser(
+        model
+      );
       console.log(values, 'submitted')
-      navigation('/dashboard')
+      // navigation('/dashboard')
     }
   })
 
