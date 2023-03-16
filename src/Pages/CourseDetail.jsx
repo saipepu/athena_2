@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Image, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Image, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from './Layout'
@@ -12,14 +12,14 @@ const CourseDetail = () => {
 
   useEffect(() => {
     console.log(id);
-    if(id%2 == 0) {
+    if(id%2 === 0) {
       setGame('water-rising')
     } else {
       setGame('story-based')
     }
   }, [id])
 
-  const course = {
+  var course = {
     author: "",
     image_url: "https://miro.medium.com/v2/resize:fit:1400/0*sEFwlPrVqLc0SlBp",
     title: "Human Relations Movement: 5 Steps To better Management",
@@ -40,23 +40,23 @@ const CourseDetail = () => {
           Author
         </Box>
         <Text width="full" textAlign={'left'} fontSize="32px" fontWeight="bold">
-          {course.title}
+          {course?.title}
         </Text>
         <Box width="full">
           <Text width="full" fontSize="20px" color="#6c6c6c" textAlign={'left'}>
-            {course.intro}
+            {course?.intro}
           </Text>
         </Box>
         <Box padding="20px" width="100%" display="grid">
-          <Image src={course.image_url} alt="image" width="600px" height="300px" margin="auto" objectFit="cover"/>
+          <Image src={course?.image_url} alt="image" width="600px" height="300px" margin="auto" objectFit="cover"/>
         </Box>
         <Box width="full">
           <Text width="full" textAlign={'left'} fontSize="20px" color="#6c6c6c">
-            {course.description}
+            {course?.description}
           </Text>
         </Box>
         <Box padding="50px 0px">
-          {course.video_url}
+          {course?.video_url}
         </Box>
         <Text>The End</Text>
         <Box width="full" display="flex">

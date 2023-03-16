@@ -1,4 +1,4 @@
-import { Box, defineStyleConfig, extendTheme, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import React from 'react'
 import rank1_avatar from '../../assets/rank1_avatar.png'
 
@@ -6,15 +6,18 @@ const RankTable = () => {
 
   const ThStyle = {
     textAlign: 'left',
-    // padding: '12px 0px',
     color: 'white'
   }
 
   return (
     <TableContainer
       // bgColor="red"
-      minWidth="800px" width="100%" maxWidth="1000px" padding="0px 24px">
-      <Table variant="simple" width="100%" overflow="visible">
+      minWidth="800px" width="100%" maxWidth="1000px" padding="0px 24px"
+      style={{ overflow: 'visible'}}>
+      <Table
+      className="table"
+      cellSpacing="0"
+      variant="simple" width="100%" overflow="visible">
         <TableCaption>Employee Ranks</TableCaption>
         <Thead oveflow="visible" borderRadius="12px" width="100%">
           <Tr className="table_head">
