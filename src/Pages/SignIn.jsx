@@ -1,4 +1,4 @@
-import { Button, Container, HStack, Input, Text } from '@chakra-ui/react'
+import { Box, Button, HStack, Input, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
@@ -50,10 +50,9 @@ const SignIn = () => {
   })
 
   return (
-    <Container width="100vw" height="100vh" bgColor="blue.100">
-      <HStack width="100%" height="100%">
-        <Container height="100%" display="grid" bgColor="blue.500" flex="1">
-          <svg style={{ margin: 'auto' }} height="100" viewBox="0 0 1238 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <HStack width="full" height="full">
+        <Box margin='0' width="full" height="full" display="grid" flex="1">
+          <svg style={{ margin: 'auto' }} height="100px" viewBox="0 0 1238 225" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_1606_8)">
             <path d="M784.8 0.300049H628.8V30.3H784.8V0.300049Z" fill="black"/>
             <path d="M751.8 93.3H628.8V123.3H751.8V93.3Z" fill="black"/>
@@ -70,8 +69,8 @@ const SignIn = () => {
             </clipPath>
             </defs>
           </svg>
-        </Container>
-        <Container height="100%" display="grid" bgColor="white" flex="1">
+        </Box>
+        <Box margin='0' width="full" height="full" display="grid" flex="1">
           <form onSubmit={formik.handleSubmit}
             style={formStyle}>
             <Text fontSize="32px" fontWeight="bold">SignIn</Text>
@@ -113,11 +112,10 @@ const SignIn = () => {
             />
 
             <Button style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
-            <Text fontSize="18px" color="#cbcbcb" fontWeight="regular">Don't have an account yet? <a href="/#/sign-up" style={{ textDecorationLine: 'underline'}}>Sign Up</a></Text>
+            <Text fontSize="18px" color="#cbcbcb" fontWeight="normal">Don't have an account yet? <a href="/#/sign-up" style={{ textDecorationLine: 'underline'}}>Sign Up</a></Text>
           </form>
-        </Container>
+        </Box>
       </HStack>
-    </Container>
   )
 }
 

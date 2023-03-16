@@ -1,8 +1,12 @@
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Button, Container, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 // import athena_logo from '../assets/athena_logo.svg'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import avatar from '../../assets/avatar.png'
 
 const Header = () => {
+
+  const navigation = useNavigate();
 
   return (
     <Container maxW='full' minHeight={'85'} padding="0px 64px" bgColor={'white'} display='flex' flexDirection='row' justifyContent='space-between' alignItems='center' boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.1)">
@@ -25,9 +29,24 @@ const Header = () => {
           </defs>
         </svg>
       </Box>
-      <Box justifyContent='center' alignItems='center' color="black">
-        profile 
-        {/* put more content */}
+      <Box height="100%" display="flex" justifyContent='center' alignItems='flex-end' color="black">
+        <Box height="full" display="flex" flexDirection="column" justifyContent='flex-end'>
+          <Text fontSize="12px" fontWeight="normal">5 Token</Text>
+          <Text fontSize="24px" fontWeight="bold" lineHeight={'100%'}>Geo</Text>
+        </Box>
+        <Menu bgColor="red">
+          {/* <MenuButton as={Button} backgroundColor="red" borderRadius="1000px">
+            <Image src={avatar} alt="avatar" width="65px" />
+          </MenuButton> */}
+            
+          <MenuButton bgColor="transparent" height="65px" width="65px" borderRadius="100%" as={Button} rightIcon={<Image src={avatar} alt="avatar" height="50px" />}>
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={() => navigation('/sign-in')}>
+            Sign Out
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </Box>
     </Container>
   )

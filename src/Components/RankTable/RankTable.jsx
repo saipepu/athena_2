@@ -27,8 +27,13 @@ const RankTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td><Box display="flex" flexDirection="row" justifyContent={'center'} alignItems={'center'} gap="22px"><Text>1</Text><Image src={rank1_avatar} alt="avatar" /></Box></Td>
+          <Tr height='40px' minHeight={'40px'}>
+            <Td>
+              <Box display="flex" flexDirection="row" justifyContent={'center'} alignItems={'center'} gap="22px">
+                <Text>1</Text>
+                <Image src={rank1_avatar} alt="avatar" height="30px" />
+              </Box>
+            </Td>
             <Td textAlign="left">6512345</Td>
             <Td textAlign="left">Geo</Td>
             <Td textAlign="left">Marketing</Td>
