@@ -29,7 +29,7 @@ const Header = () => {
           </defs>
         </svg>
       </Box>
-      <Box height="100%" display="flex" justifyContent='center' alignItems='flex-end' color="black">
+      <Box height="100%" display="flex" justifyContent='center' alignItems='flex-end' color="black" paddingBottom="12px">
         <Box height="full" display="flex" flexDirection="column" justifyContent='flex-end'>
           <Text fontSize="12px" fontWeight="normal">5 Token</Text>
           <Text fontSize="24px" fontWeight="bold" lineHeight={'100%'}>Geo</Text>

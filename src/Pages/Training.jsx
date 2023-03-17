@@ -50,7 +50,7 @@ const Training = () => {
 
         <VStack maxWidth="100%" padding="0" justifyContent="flex-start" alignItems="flex-start" paddingBottom="20px">
           <Text as="h1" textAlign="left" fontSize="32px" fontWeight="bold">Recommend</Text>
-          <HStack maxWidth="100%" gap="12px" overflow="scroll" padding={'0px 100px 12px 10px'}>
+          <HStack maxWidth="100%" gap="12px" overflow="scroll" padding={'0px 50px 12px 10px'}>
                 <Box>
                   <Card height="270px" width="300px" onClick={() => navigation(`/course-detail/${1}`)} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
                     <AspectRatio ratio={2/1}>
@@ -96,9 +96,9 @@ const Training = () => {
           </HStack>
         </VStack>
 
-        <VStack maxWidth="1200px" padding="0" justifyContent="flex-start" alignItems="flex-start" paddingBottom="20px">
+        <VStack maxWidth="100%" padding="0" justifyContent="flex-start" alignItems="flex-start" paddingBottom="20px">
           <Text as="h1" textAlign="left" fontSize="32px" fontWeight="bold">In Progress</Text>
-          <HStack maxWidth="100%" gap="12px" overflow="scroll" padding={'0px 100px 12px 10px'}>
+          <HStack maxWidth="100%" gap="12px" overflow="scroll" padding={'0px 50px 12px 10px'}>
             {[0,1,2].map((item, index) => {
               return (
                 <Box key={index}>
@@ -138,9 +138,9 @@ const Training = () => {
           </HStack>
         </VStack>
 
-        <VStack maxWidth="1200px" padding="0" justifyContent="flex-start" alignItems="flex-start" paddingBottom="20px">
+        <VStack maxWidth="100%" padding="0" justifyContent="flex-start" alignItems="flex-start" paddingBottom="20px">
           <Text as="h1" textAlign="left" fontSize="32px" fontWeight="bold">Completed</Text>
-          <HStack maxWidth="100%" gap="12px" overflow="scroll" padding={'0px 100px 12px 10px'}>
+          <HStack maxWidth="100%" gap="12px" overflow="scroll" padding={'0px 50px 12px 10px'}>
             {[0,1].map((item, index) => {
               return (
                 <Box key={index}>

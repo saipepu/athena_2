@@ -29,7 +29,7 @@ const CourseDetail = () => {
     game: game,
     game_url: ""
   }
-
+  
   return (
     <Layout>
       <VStack
