@@ -1,12 +1,14 @@
 import { Box, Button, Container, HStack, Input, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import { useSignup } from '../hooks/useSignup'
 
 
 const SignUp = () => {
 
   const navigation = useNavigate();
+  const {signup, error, isLoading} = useSignup()
 
   const formStyle = {
     margin: "auto",
@@ -29,24 +31,25 @@ const SignUp = () => {
     exp: 0,
   }
 
-  async function registerUser(values) {
-    const response = await fetch("http://localhost:8080/api/register", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(values)
-    })
-    const data = await response.json();
-    console.log("response" + data)
-  }
+  // async function registerUser(values) {
+  //   const response = await fetch("http://localhost:8000/api/register", {
+  //     method: "POST",
+  //     headers: {
+  //       "Accept": "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify(values)
+  //   })
+  //   const data = await response.json();
+  //   console.log("response" + data)
+  // }
 
   const formik = useFormik({
     initialValues: model,
     onSubmit: async(values) => {
-      await registerUser(values);
-      console.log(values, 'submitted')
+      await signup(values.name, values.email, values.password, values.department, values.position)
+      // await registerUser(values);
+      // console.log(values, 'submitted')
       // navigation('/sign-in')
     }
   })
@@ -171,8 +174,9 @@ const SignUp = () => {
               }}
             />
 
-            <Button style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
+            <Button disabled={isLoading} style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
             <Text fontSize="18px" color="#cbcbcb" fontWeight="normal">Already have an account? <a href="/#/sign-in" style={{ textDecorationLine: 'underline'}}>Sign In</a></Text>
+            {error && <div>{error}</div>}
           </form>
         </Box>
       </HStack>

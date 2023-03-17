@@ -25,10 +25,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  position: {
-    type: String,
-    required: true,
-  },
   exp: {
     type: Number,
   },
