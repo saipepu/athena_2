@@ -9,8 +9,10 @@ import SignUp from './Pages/SignUp';
 import Avatar from './Pages/Avatar';
 import Rewards from './Pages/Rewards';
 import CourseDetail from './Pages/CourseDetail';
+import GSheetReader from './api/StoryBasedData'
 
 function App() {
+  console.log(GSheetReader)
   return (
     <div className="App">
       <HashRouter>

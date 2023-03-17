@@ -70,16 +70,16 @@ const WaterRising = () => {
   const IncreaseTheBotScores = () => {
     var boolean = false;
     //player1
-    boolean = Math.floor((Math.random() * 10)) % 2 === 0 ? false : true;
+    boolean = Math.floor((Math.random(Math.random()) * 10)) % 2 === 0 ? false : true;
     score["score1"] = boolean ? score["score1"] - scale : score["score1"];
     //player2
-    boolean = Math.floor((Math.random() * 10)) % 2 === 0 ? false : true;
+    boolean = Math.floor((Math.random(Math.random()) * 10)) % 2 === 0 ? false : true;
     score["score2"] = boolean ? score["score2"] - scale : score["score2"];
     //player3
-    boolean = Math.floor((Math.random() * 10)) % 2 === 0 ? false : true;
+    boolean = Math.floor((Math.random(Math.random()) * 10)) % 2 === 0 ? false : true;
     score["score3"] = boolean ? score["score3"] - scale : score["score3"];
     //player5
-    boolean = Math.floor((Math.random() * 10)) % 2 === 0 ? false : true;
+    boolean = Math.floor((Math.random(Math.random()) * 10)) % 2 === 0 ? false : true;
     score["score5"] = boolean ? score["score5"] - scale : score["score5"];
   }
 
