@@ -7,6 +7,7 @@ const options = {
   sheetName: "Sheet1", // if sheetName is supplied, this will take precedence over sheetNumber
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function () {
   return new Promise((resolve, reject) => {
     const data = [];
