@@ -33,7 +33,7 @@
   height: 523px;
   left: -154px;
   top: 75px;
-  background: url('../../assets/speakbubble.png');
+  background: url("../../assets/speakbubble.png");
 }
 
 .customerSpeakbubble {
@@ -42,7 +42,7 @@
   height: 523px;
   left: 303px;
   top: 102px;
-  background: url('../../assets/speakbubble.png');
+  background: url("../../assets/speakbubble.png");
 }
 
 .startingscenemodel {
@@ -218,6 +218,7 @@ button:hover {
   z-index: 10;
   right: 10px;
   top: 10px;
+  transition: none;
 }
 
 .back_btn {
@@ -244,6 +245,7 @@ button:hover {
   font-weight: 600;
   color: white;
   z-index: 10;
+  transition: none;
 }
 
 input[type="radio"] {
