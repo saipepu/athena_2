@@ -19,6 +19,11 @@ const RankTable = ({ setNumberOfEmployee}) => {
 
   console.log(employeeList)
 
+  // let sortEmployeeList = [];
+  // function sortEmployeeList() {
+
+  // }
+
   const ThStyle = {
     textAlign: 'left',
     color: 'white'
@@ -59,7 +64,7 @@ const RankTable = ({ setNumberOfEmployee}) => {
               <Td textAlign="left">120 exp</Td>
             </Tr> */}
           </>
-            {employeeList?.map((employee,index) => {
+            {employeeList.sort()?.map((employee,index) => {
               return (
                 <Tr height='40px' minHeight={'40px'} key={index}>
                   <Td width="180px">
