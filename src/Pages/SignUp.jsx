@@ -1,14 +1,15 @@
-import { Box, Button, Container, HStack, Input, Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Box, Button, FormControl, FormLabel, HStack, Input, Switch, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
-import { useSignup } from '../hooks/useSignup'
-
+import { signUp } from '../api/Registeration'
 
 const SignUp = () => {
 
   const navigation = useNavigate();
-  const {signup, error, isLoading} = useSignup()
+  const [response, setResponse] = useState();
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [isHR, setIsHR] = useState(false);
 
   const formStyle = {
     margin: "auto",
@@ -20,9 +21,8 @@ const SignUp = () => {
     alignItems: 'flex-start',
   }
 
-  const model = {
+  const Employee = {
     rank: 0,
-    id: "",
     name: "",
     email: "",
     password: "",
@@ -30,29 +30,39 @@ const SignUp = () => {
     position: "",
     exp: 0,
   }
-
-  // async function registerUser(values) {
-  //   const response = await fetch("http://localhost:8000/api/register", {
-  //     method: "POST",
-  //     headers: {
-  //       "Accept": "application/json",
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify(values)
-  //   })
-  //   const data = await response.json();
-  //   console.log("response" + data)
-  // }
+  const HR = {
+    name: "",
+    email: "",
+    password: ""
+  }
 
   const formik = useFormik({
-    initialValues: model,
+    initialValues: isHR ? HR : Employee,
     onSubmit: async(values) => {
-      await signup(values.name, values.email, values.password, values.department, values.position)
-      // await registerUser(values);
-      // console.log(values, 'submitted')
+      console.log(values, 'submitted')
+      signUp(values, setResponse, isHR);
+      console.log(response)
       // navigation('/sign-in')
     }
   })
+
+  useEffect(() => {
+
+    if(localStorage.getItem('athena-token') != null) {
+      navigation('/dashboard')
+    }
+
+    console.log(response);
+    if(response?.signUpSuccess) {
+      navigation('/sign-in')
+    } else {
+      setErrorMessage(response?.message);
+    }
+  }, [response, navigation])
+
+  const handleSwitch = () => {
+    setIsHR(!isHR);
+  }
 
   return (
       <HStack width="100%" height="100%">
@@ -79,6 +89,15 @@ const SignUp = () => {
           <form onSubmit={formik.handleSubmit}
             style={formStyle}>
             <Text fontSize="32px" fontWeight="bold">SignUp</Text>
+
+            <FormControl variant="unstyled" padding="12px 0px" display="flex" justifyContent='flex-start' alignItems="center" gap="12px">
+              <Switch id="switch" colorScheme="green" border="none" padding="0px" margin="0px"
+                onChange={() => handleSwitch()}
+                isChecked={isHR}
+              />
+              <FormLabel variant="unstyled" padding="0px" margin="0px" border="none" htmlFor="switch">Sign Up as HR</FormLabel>
+            </FormControl>
+
             <label htmlFor="name" style={{ color: '#cbcbcb', width: '100%', borderRadius: 0, textAlign: 'left', border: 'none', marginBottom: '0px', padding: 0, fontSize: '20px'}}>Name</label>
             <Input
               id="name"
@@ -136,47 +155,54 @@ const SignUp = () => {
               }}
             />
 
-            <label htmlFor="department" style={{ color: '#cbcbcb', width: '100%', borderRadius: 0, textAlign: 'left', border: 'none', marginBottom: '0px', padding: 0, fontSize: '20px'}}>Department</label>
-            <Input
-              id="department"
-              name="department"
-              type="department"
-              onChange={formik.handleChange}
-              required
-              value={formik.values.department}
-              style={{
-                width: '100%',
-                backgroundColor: 'white',
-                fontSize: '18px',
-                padding: '12px',
-                borderRadius: '5px',
-                border: '0.8px solid #4d4d4d',
-                marginBottom: '12px'
-              }}
-            />
+            {!isHR ? (
+              <>
+                <label htmlFor="department" style={{ color: '#cbcbcb', width: '100%', borderRadius: 0, textAlign: 'left', border: 'none', marginBottom: '0px', padding: 0, fontSize: '20px'}}>Department</label>
+                <Input
+                  id="department"
+                  name="department"
+                  type="department"
+                  onChange={formik.handleChange}
+                  required
+                  value={formik.values.department}
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'white',
+                    fontSize: '18px',
+                    padding: '12px',
+                    borderRadius: '5px',
+                    border: '0.8px solid #4d4d4d',
+                    marginBottom: '12px'
+                  }}
+                />
 
-            <label htmlFor="position" style={{ color: '#cbcbcb', width: '100%', borderRadius: 0, textAlign: 'left', border: 'none', marginBottom: '0px', padding: 0, fontSize: '20px'}}>Position</label>
-            <Input
-              id="position"
-              name="position"
-              type="position"
-              onChange={formik.handleChange}
-              required
-              value={formik.values.position}
-              style={{
-                width: '100%',
-                backgroundColor: 'white',
-                fontSize: '18px',
-                padding: '12px',
-                borderRadius: '5px',
-                border: '0.8px solid #4d4d4d',
-                marginBottom: '12px'
-              }}
-            />
+                <label htmlFor="position" style={{ color: '#cbcbcb', width: '100%', borderRadius: 0, textAlign: 'left', border: 'none', marginBottom: '0px', padding: 0, fontSize: '20px'}}>Position</label>
+                <Input
+                  id="position"
+                  name="position"
+                  type="position"
+                  onChange={formik.handleChange}
+                  required
+                  value={formik.values.position}
+                  style={{
+                    width: '100%',
+                    backgroundColor: 'white',
+                    fontSize: '18px',
+                    padding: '12px',
+                    borderRadius: '5px',
+                    border: '0.8px solid #4d4d4d',
+                    marginBottom: '12px'
+                  }}
+                />
+            </>
+            ) : (
+              ""
+            )}
+            
 
             <Button disabled={isLoading} style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
             <Text fontSize="18px" color="#cbcbcb" fontWeight="normal">Already have an account? <a href="/#/sign-in" style={{ textDecorationLine: 'underline'}}>Sign In</a></Text>
-            {error && <div>{error}</div>}
+            <Text fontSize="18px" color="red">{errorMessage}</Text>
           </form>
         </Box>
       </HStack>

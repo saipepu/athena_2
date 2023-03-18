@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./GameOver.css";
 import treasure_chest from "../../assets/treasure_chest.png";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../api/server_api";
+import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
 
-const GameOver = ({ setGameOver, gameOver, win }) => {
+const GameOver = ({ setGameOver, gameOver, win, role, id }) => {
 
   const navigation = useNavigate();
+  const [employee, setEmployee] = useState();
+  const [response, setResponse] = useState();
+
+  useEffect(() => {
+    fetchOneEmployee(id, setEmployee);
+  }, [])
+
+  const updateEmployeeScore = async () => {
+    const toUpdate = {};
+    toUpdate.ATH = employee.ATH + 1;
+    toUpdate.exp = employee.exp + 10;
+    updateEmployee(role, id, toUpdate, setResponse);
+  }
+
+  useEffect(() => {
+    console.log(response);
+    if(response?.updateSuccess) {
+      setGameOver(!gameOver)
+      navigation(`/dashboard/${role}/${id}`)
+    } else {
+      console.log('Error Updating Employee Data . . .')
+    }
+  }, [response, navigation, id , role, gameOver, setGameOver])
 
   return (
     <div className="model_wrapper">
@@ -31,7 +56,9 @@ const GameOver = ({ setGameOver, gameOver, win }) => {
           {win ? (
             <button
               className="claim_reward"
-              onClick={() => setGameOver(!gameOver)}
+              onClick={() => {
+                updateEmployeeScore();
+              }}
             >
               Claim Reward
             </button>
@@ -40,7 +67,7 @@ const GameOver = ({ setGameOver, gameOver, win }) => {
               className="go_to_home"
               onClick={() => {
                 setGameOver(!gameOver)
-                navigation('/dashboard')
+                navigation(`/dashboard/${role}/${id}`)
               }}
             >
               Go to Home

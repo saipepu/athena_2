@@ -9,6 +9,15 @@ import { useParams } from 'react-router-dom'
 import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
 
 const StoryBased = () => {
+
+  const [scenes, setScenes] = useState([])
+  console.log(scenes)
+
+  useEffect(() => {
+    console.log('Getting data from local storage')
+    setScenes(JSON.parse(localStorage.getItem("StoryBasedData")));
+  }, [])
+
   const [progressCount, setProgressCount] = useState(0);
   const [nextSceneCount, setNextSceneCount] = useState(0);
   const [start, setStart] = useState(true);

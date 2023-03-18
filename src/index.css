@@ -84,14 +84,42 @@ button:focus-visible {
   overflow: visible;
   color: white;
 }
+table {
+  overflow: visible;
+  cellspacing: 0;
+}
 tr {
   padding: 5px;
+  position: relative;
+  gap: 0px;
 }
 th, td {
   padding-left: 10px;
 }
-.table_head::after {
-  content: '';
+.table_head {
+  overflow: visible;
+  position: relative;
+  /* background-color: var(--theme-color); */
+  border-radius: 8px;
+}
+th:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+th:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+th {
+  background: var(--theme-color);
+}
+.table {
+  border-spacing: 0;
+  cellspacing: 0 !important;
+  border-collapse: collapse;
+}
+/* tr:after {
+  content: "";
   display: block;
   position: absolute;
   top: 50%;
@@ -102,7 +130,7 @@ th, td {
   height: 120%;
   border-radius: 8px;
   z-index: -1;
-}
+} */
 *::-webkit-scrollbar {
   width: 0px;
   height: 0px;

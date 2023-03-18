@@ -1,20 +1,8 @@
-import { Box, Button, HStack, Input, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Button, FormControl, FormLabel, HStack, Input, Switch, Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react';
-
-import PropTypes from 'prop-types';
-
-async function loginUser(credentials) {
-  return fetch("http://localhost:8000/api/user/login", {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  }).then(data => data.json())
-}
+import { signIn } from '../api/Registeration'
 
 const SignIn = () => {
 
@@ -22,6 +10,9 @@ const SignIn = () => {
   const [password, setPassword] = useState();
   
   const navigation = useNavigate();
+  const [response, setResponse] = useState()
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isHR, setIsHR] = useState(false);
 
   const formStyle = {
     margin: "auto",
@@ -45,9 +36,30 @@ const SignIn = () => {
         model
       );
       console.log(values, 'submitted')
-      // navigation('/dashboard')
+      signIn(values, setResponse, isHR)
     }
   })
+
+  useEffect(() => {
+
+    if(localStorage.getItem('athena-token') != null) {
+      // navigation('/dashboard')
+    }
+
+    console.log(response);
+    if(response?.signInSuccess) {
+      localStorage.setItem('athena-token', JSON.stringify(response.message))
+      const [role, data] = Object.entries(response.message)[0]
+      console.log(role, data._id);
+      navigation(`/dashboard/${role}/${data._id}}`)
+    } else {
+      setErrorMessage(response?.error);
+    }
+  }, [response, navigation])
+
+  const handleSwitch = () => {
+    setIsHR(!isHR);
+  }
 
   return (
       <HStack width="full" height="full">
@@ -74,6 +86,14 @@ const SignIn = () => {
           <form onSubmit={formik.handleSubmit}
             style={formStyle}>
             <Text fontSize="32px" fontWeight="bold">SignIn</Text>
+
+            <FormControl variant="unstyled" padding="12px 0px" display="flex" justifyContent='flex-start' alignItems="center" gap="12px">
+              <Switch id="switch" colorScheme="green" border="none" padding="0px" margin="0px"
+                onChange={() => handleSwitch()}
+                isChecked={isHR}
+              />
+              <FormLabel variant="unstyled" padding="0px" margin="0px" border="none" htmlFor="switch">Sign Up as HR</FormLabel>
+            </FormControl>
 
             <label htmlFor="email" style={{ color: '#cbcbcb', width: '100%', borderRadius: 0, textAlign: 'left', border: 'none', marginBottom: '0px', padding: 0, fontSize: '20px'}}>Email</label>
             <Input
@@ -113,6 +133,7 @@ const SignIn = () => {
 
             <Button style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
             <Text fontSize="18px" color="#cbcbcb" fontWeight="normal">Don't have an account yet? <a href="/#/sign-up" style={{ textDecorationLine: 'underline'}}>Sign Up</a></Text>
+            <Text fontSize="18px" color="red" fontWeight="normal">{errorMessage}</Text>
           </form>
         </Box>
       </HStack>
