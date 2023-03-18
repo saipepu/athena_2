@@ -5,6 +5,8 @@ import "./StoryBased.css";
 import treasure_chest from "../../assets/treasure_chest.png";
 import { useNavigate } from "react-router-dom";
 import getSheetData from "../../api/StoryBasedData";
+import { useParams } from 'react-router-dom'
+import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
 
 const StoryBased = () => {
   const [progressCount, setProgressCount] = useState(0);
@@ -14,8 +16,11 @@ const StoryBased = () => {
   const [gameOver, setGameOver] = useState(false);
   const [click, setClick] = useState(false);
   const [blockNextScene, setBlockNextScene] = useState(false);
+  const [employee, setEmployee] = useState();
 
   const [scenes, setScenes] = useState([]);
+
+  const { role, id } = useParams();
   const navigation = useNavigate();
 
   useEffect(() => {
@@ -23,7 +28,8 @@ const StoryBased = () => {
       const data = await getSheetData();
       setScenes(data);
     }
-  
+
+    fetchOneEmployee(id, setEmployee);
     fetchScenes();
   }, []);
 
@@ -35,7 +41,7 @@ const StoryBased = () => {
     if (nextSceneCount === scenes.length - 1) {
       setTimeout(() => {
         setGameOver((gameOver) => (gameOver = true));
-        
+
         if (score <= 30) {
           setScore(5);
         } else if (score >= 30) {
@@ -45,23 +51,21 @@ const StoryBased = () => {
     }
 
     if (scenes[nextSceneCount].scene === "question") {
-      setClick(false)
+      setClick(false);
 
       if (click === true) {
         setBlockNextScene((blockNextScene) => (blockNextScene = false));
       } else {
         setBlockNextScene((blockNextScene) => (blockNextScene = true));
       }
-      setBlockNextScene(true)
+      setBlockNextScene(true);
     }
-
   }, [nextSceneCount]);
 
   const nextScene = () => {
     if (scenes[nextSceneCount].goTo) {
       return setNextSceneCount(Number(scenes[nextSceneCount].goTo));
-    }
-    else if (nextSceneCount === scenes.length - 1) {
+    } else if (nextSceneCount === scenes.length - 1) {
       return nextSceneCount;
     } else {
       if (scenes[nextSceneCount].scene === "question") {
@@ -75,7 +79,6 @@ const StoryBased = () => {
     setStart(false);
   };
 
-  
   const backScene = (scene) => {
     function isNumber(n) {
       return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
@@ -108,9 +111,20 @@ const StoryBased = () => {
     return true;
   }
 
+  function isGameOver() {
+    if (gameOver) {
+      const updateScoreOnDatabase = async () => {
+        const toUpdate = {ATH: employee.ATH + 1, exp: employee.exp + score}
+        updateEmployee(role, id, toUpdate);
+      }
+    }
+  }
+
+  isGameOver();
+
   let isLast = nextSceneCount == scenes?.length - 1;
 
-  console.log(score)
+  console.log(score);
 
   return (
     <div className="wrapper">
@@ -162,7 +176,7 @@ const StoryBased = () => {
                 <img src={exp_img} alt="exp" className="exp_img" />
                 <div className="progress_bar">
                   <div className="bar" id="bar"></div>
-                  <div className="xp">XP</div>
+                  <div className="xp">{score} XP</div>
                 </div>
               </div>
             </div>
@@ -264,7 +278,10 @@ const StoryBased = () => {
                                 <input type="radio" id={index} name="radio" />
                                 <label
                                   onClick={() =>
-                                    submitAnswer(element.goToQuestionSceneID, element.point)
+                                    submitAnswer(
+                                      element.goToQuestionSceneID,
+                                      element.point
+                                    )
                                   }
                                   className="correctanswer"
                                   htmlFor={index}
