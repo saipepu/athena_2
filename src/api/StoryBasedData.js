@@ -16,23 +16,23 @@ export default function () {
         // console.log(results);
         results.map((item, index) => {
           // console.log(item);
-          item.option = item?.option?.split("\\");
-          item?.option?.map((x, index) => {
+          item.options = item?.options?.split("\\");
+          item?.options?.map((x, index) => {
             x = x.split("@");
             // console.log(x);
             const obj = {
               option: x[0],
-              goToQuestionSceneID: x[1],
-              point: x[2],
+              goToQuestionSceneID: Number(x[1]),
+              point: Number(x[2]),
             };
-            item.option[index] = obj;
+            item.options[index] = obj;
             return "";
           });
           data.push(item);
           return data;
         });
         resolve(data);
-        console.log(data);
+        // console.log(data);
       },
       (error) => {
         reject(error);
