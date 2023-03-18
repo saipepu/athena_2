@@ -5,9 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { signIn } from '../api/Registeration'
 
 const SignIn = () => {
-
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   
   const navigation = useNavigate();
   const [response, setResponse] = useState()
@@ -32,9 +29,6 @@ const SignIn = () => {
   const formik = useFormik({
     initialValues: model,
     onSubmit: async(values) => {
-      const token = await loginUser(
-        model
-      );
       console.log(values, 'submitted')
       signIn(values, setResponse, isHR)
     }

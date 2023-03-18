@@ -200,7 +200,7 @@ const SignUp = () => {
             )}
             
 
-            <Button disabled={isLoading} style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
+            <Button style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
             <Text fontSize="18px" color="#cbcbcb" fontWeight="normal">Already have an account? <a href="/#/sign-in" style={{ textDecorationLine: 'underline'}}>Sign In</a></Text>
             <Text fontSize="18px" color="red">{errorMessage}</Text>
           </form>
