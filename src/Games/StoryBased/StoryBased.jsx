@@ -113,6 +113,7 @@ const StoryBased = () => {
 
   function isGameOver() {
     if (gameOver) {
+      console.log("Game over")
       const updateScoreOnDatabase = async () => {
         const toUpdate = {ATH: employee.ATH + 1, exp: employee.exp + score}
         updateEmployee(role, id, toUpdate);
@@ -206,7 +207,7 @@ const StoryBased = () => {
                     className="go_to_home"
                     onClick={() => {
                       setGameOver(!gameOver);
-                      navigation("/dashboard");
+                      navigation(`/dashboard/${role}/${id}`);
                     }}
                   >
                     Go to Home
@@ -215,7 +216,7 @@ const StoryBased = () => {
                     className="claim_reward"
                     onClick={() => {
                       setGameOver(!gameOver);
-                      navigation("/dashboard");
+                      navigation(`/dashboard/${role}/${id}`);
                     }}
                   >
                     Claim Reward
