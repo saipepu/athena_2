@@ -19,23 +19,23 @@ const StoryBased = () => {
   const navigation = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      return await getSheetData();
-    };
-    fetchData().then((data) => {
+    async function fetchScenes() {
+      const data = await getSheetData();
       setScenes(data);
-    });
+    }
+  
+    fetchScenes();
   }, []);
 
   useEffect(() => {
-    if (typeof scenes === "undefined") return;
-    if (scenes.length === 0) return;
+    if (!scenes || !scenes.length) return;
     const bar = document.getElementById("bar");
     bar.style.width = progressCount * 12.5 + "%";
 
     if (nextSceneCount === scenes.length - 1) {
       setTimeout(() => {
-        setGameOver(() => (gameOver = true));
+        setGameOver((gameOver) => (gameOver = true));
+        
         if (score <= 30) {
           setScore(5);
         } else if (score >= 30) {
