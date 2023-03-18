@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Header from '../Components/Header/Header'
 import Sidebar from '../Components/Sidebar/Sidebar'
 import { useMediaQuery } from '@chakra-ui/react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { fetchOneEmployee } from '../api/server_routes'
 
-const Dashboard = ({children}) => {
+const Layout = ({children}) => {
+
+  const navigation = useNavigate();
 
   const { role, id } = useParams();
   console.log(role, id);
@@ -14,6 +16,9 @@ const Dashboard = ({children}) => {
   const [employee, setEmployee] = useState();
   useEffect(() => {
     fetchOneEmployee(id, setEmployee);
+    if(!localStorage.getItem('athena-token')) {
+      navigation('/sign-in')
+    }
   }, [])
   console.log(employee);
 
@@ -32,4 +37,4 @@ const Dashboard = ({children}) => {
   )
 }
 
-export default Dashboard
+export default Layout
