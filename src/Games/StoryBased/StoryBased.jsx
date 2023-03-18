@@ -10,12 +10,8 @@ const StoryBased = () => {
   const [progressCount, setProgressCount] = useState(0);
   const [nextSceneCount, setNextSceneCount] = useState(0);
   const [start, setStart] = useState(true);
-  const [next, setNext] = useState(false);
-  const [buttonColor, setButtonColor] = useState("");
   const [score, setScore] = useState(0);
-  const [endScore, setEndScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [win, setWin] = useState(true);
   const [click, setClick] = useState(false);
   const [blockNextScene, setBlockNextScene] = useState(false);
 
@@ -39,7 +35,7 @@ const StoryBased = () => {
 
     if (nextSceneCount === scenes.length - 1) {
       setTimeout(() => {
-        setGameOver((gameOver) => (gameOver = true));
+        setGameOver(() => (gameOver = true));
         if (score <= 30) {
           setScore(5);
         } else if (score >= 30) {
@@ -113,6 +109,8 @@ const StoryBased = () => {
   }
 
   let isLast = nextSceneCount == scenes?.length - 1;
+
+  console.log(score)
 
   return (
     <div className="wrapper">
