@@ -19,6 +19,8 @@ const RankTable = ({ setNumberOfEmployee}) => {
 
   console.log(employeeList)
 
+  employeeList.sort((a, b) => a.value - b.value);
+
   // let sortEmployeeList = [];
   // function sortEmployeeList() {
 
