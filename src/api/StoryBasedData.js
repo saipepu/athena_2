@@ -9,6 +9,7 @@ const options = {
 const fetchData = async () => {
   const data = [];
   await GSheetReader(options, results => {
+    // eslint-disable-next-line array-callback-return
     results.map((item, index) => {
       item.option = item?.option?.split("\\");
       item?.option?.map((x, index) => {

@@ -4,13 +4,15 @@ import dashboard from '../../assets/dashboard.png'
 import training from '../../assets/training.png'
 import avatar from '../../assets/user.png'
 import rewards from '../../assets/wallet.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Sidebar = () => {
 
+  const { role, id } = useParams();
   const [hover, setHover] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const [currentUrl, setCurrentURL] =  useState(window.location.href.split('/').slice(-1).toString());
+  const [currentUrl, setCurrentURL] =  useState(window.location.href.split('#/')[1].split("/")[0]);
+  console.log(currentUrl);
 
   const navigate = useNavigate();
   const navigation = (path) => {
@@ -44,7 +46,7 @@ const Sidebar = () => {
         <Button
           width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
           onMouseOver={() => setHover('dashboard')} onMouseLeave={() => setHover("")}
-          onClick={() => navigation('dashboard')}
+          onClick={() => navigation(`dashboard/${role}/${id}`)}
           id="button" leftIcon={<Image src={dashboard} width="28px" />} bgColor="white" style={currentUrl === 'dashboard' ? ButtonTarget : hover === 'dashboard' ? ButtonHoverStyle : ButtonStyle}>
           <Text as="a" fontSize={'20px'} color={currentUrl === 'dashboard' ? 'white': 'black'}>
             Dashboard
@@ -53,7 +55,7 @@ const Sidebar = () => {
         <Button
           width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
           onMouseOver={() => setHover('training')} onMouseLeave={() => setHover("")}
-          onClick={() => navigation('training')}
+          onClick={() => navigation(`training/${role}/${id}`)}
           id="button" leftIcon={<Image src={training} width="28px" />} bgColor="white" style={currentUrl === 'training' ? ButtonTarget : hover === 'training' ? ButtonHoverStyle : ButtonStyle}>
           <Text as="a" fontSize={'20px'} color={currentUrl === 'training' ? 'white': 'black'}>
             Training
@@ -62,7 +64,7 @@ const Sidebar = () => {
         <Button
           width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
           onMouseOver={() => setHover('avatar')} onMouseLeave={() => setHover("")}
-          onClick={() => navigation('avatar')}
+          onClick={() => navigation(`avatar/${role}/${id}`)}
           id="button" leftIcon={<Image src={avatar} width="28px" />} bgColor="white" style={currentUrl === 'avatar' ? ButtonTarget : hover === 'avatar' ? ButtonHoverStyle : ButtonStyle}>
           <Text as="a" fontSize={'20px'} color={currentUrl === 'avatar' ? 'white': 'black'}>
             Avatar
@@ -71,7 +73,7 @@ const Sidebar = () => {
         <Button
           width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
           onMouseOver={() => setHover('rewards')} onMouseLeave={() => setHover("")}
-          onClick={() => navigation('rewards')}
+          onClick={() => navigation(`rewards/${role}/${id}`)}
           id="button" leftIcon={<Image src={rewards} width="28px" />} bgColor="white" style={currentUrl === 'rewards' ? ButtonTarget : hover === 'rewards' ? ButtonHoverStyle : ButtonStyle}>
           <Text as="a" fontSize={'20px'} color={currentUrl === 'rewards' ? 'white': 'black'}>
             Rewards

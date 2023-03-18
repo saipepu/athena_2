@@ -1,23 +1,16 @@
 import { Box, Button, Image, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Layout from './Layout'
 
 const CourseDetail = () => {
 
+  const { state } = useLocation();
+  const { course_id, role, id } = useParams();
+  console.log(state);
   const [game, setGame] = useState("");
-  const { id } = useParams();
-  console.log(id);
   const navigation = useNavigate();
 
-  useEffect(() => {
-    console.log(id);
-    if(id%2 === 0) {
-      setGame('water-rising')
-    } else {
-      setGame('story-based')
-    }
-  }, [id])
 
   var course = {
     author: "",
@@ -29,6 +22,7 @@ const CourseDetail = () => {
     game: game,
     game_url: ""
   }
+  course = state;
   
   return (
     <Layout>
@@ -55,12 +49,12 @@ const CourseDetail = () => {
             {course?.description}
           </Text>
         </Box>
-        <Box padding="50px 0px">
-          {course?.video_url}
+        <Box padding="50px 0px" dangerouslySetInnerHTML={{ __html: course?.video_url }}>
+          
         </Box>
         <Text>The End</Text>
         <Box width="full" display="flex">
-          <Button onClick={() => navigation(`/${course.game}`)} style={{ marginLeft: 'auto', backgroundColor: 'var(--theme-color)', color: 'white'}}>Play Quiz Game</Button>
+          <Button onClick={() => navigation(`/${role}/${id}/${course.game_type}`)} style={{ marginLeft: 'auto', backgroundColor: 'var(--theme-color)', color: 'white'}}>Play Quiz Game</Button>
         </Box>
       </VStack>
     </Layout>

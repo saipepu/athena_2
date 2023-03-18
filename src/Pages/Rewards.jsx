@@ -11,7 +11,7 @@ import blue_tshirt from '../assets/blue_tshirt.png'
 import star from '../assets/star.png'
 import hat from '../assets/hat.png'
 import avatar_with_hat from '../assets/avatar_with_hat.png'
-import { ArrowBackIcon, ArrowForwardIcon, ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons'
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 
 const Rewards = () => {
 
@@ -141,6 +141,7 @@ const Rewards = () => {
                   {itemPages[itemPageNo]?.map((item, index) => {
                     return (
                       <GridItem
+                      key={index}
                         cursor={'pointer'}
                         minWidth="200px" borderRadius="20px" padding="12px" display="flex" flexDirection="column" justifyContent='space-between' alignItems="center" gap="12px" position="relative"
                         onClick={() => {

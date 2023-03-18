@@ -3,9 +3,11 @@ import React from 'react'
 import Layout from './Layout'
 import { CheckCircleIcon, CheckIcon, MinusIcon, PlusSquareIcon, SearchIcon } from "@chakra-ui/icons"
 import "../index.css"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Training = () => {
+
+  const { role, id } = useParams();
   const navigation = useNavigate();
 
 
@@ -15,9 +17,9 @@ const Training = () => {
     intro: "Successful negotiation is not about getting to yes,It’s about mastering no and understanding what path to an agreement is.",
     description: "There are many variables in every negotiation, which means there is no silver bullet or magic erase you can use to win. The idea of “Winning” changes depending on the situation, the key to success is been able to identify the type of negotiation and use a strategy that gets you what you want.",
     image_url: "https://bigthink.com/wp-content/uploads/2020/08/origin-122.jpg",
-    video_url: "",
+    video_url: '<iframe width="560" height="300" src="https://www.youtube.com/embed/Jp9b2Hf7QWg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     game_type: "water-rising",
-    game_data: "",
+    game_id: "1ydjnm6UyE5pm5-onpFT-w3KdBSNzxU-fsj6KAvtb9mA",
   }
 
 
@@ -52,7 +54,7 @@ const Training = () => {
           <Text as="h1" textAlign="left" fontSize="32px" fontWeight="bold">Recommend</Text>
           <HStack maxWidth="100%" gap="12px" overflow="scroll" padding={'0px 50px 12px 10px'}>
                 <Box>
-                  <Card height="270px" width="300px" onClick={() => navigation(`/course-detail/${1}`)} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
+                  <Card height="270px" width="300px" onClick={() => navigation(`/course-detail/${1}/${role}/${id}`, { state: blog1 })} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
                     <AspectRatio ratio={2/1}>
                       <Image  src={blog1.image_url} objectFit="cover" />
                     </AspectRatio>
@@ -73,7 +75,7 @@ const Training = () => {
             {[1,2,3,4,5].map((item, index) => {
               return (
                 <Box key={index}>
-                  <Card height="270px" width="300px" onClick={() => navigation(`/course-detail/${index}`)} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
+                  <Card height="270px" width="300px" onClick={() => console.log('click')} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
                     <AspectRatio ratio={2/1}>
                       <Image  src={'https://source.unsplash.com/random/'+index} objectFit="cover" />
                     </AspectRatio>

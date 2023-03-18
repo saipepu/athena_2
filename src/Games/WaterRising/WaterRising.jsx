@@ -13,22 +13,23 @@ import person4 from '../../assets/person4.png'
 import person5 from '../../assets/person5.png'
 import avatar from '../../assets/avatar.png'
 import exp_img from '../../assets/exp_img.png'
-// import { sample } from './sample_q'
 import StartModel from '../../Components/StartModel/StartModel'
 import GameOver from '../../Components/GameOver/GameOver'
 import WaterRisingData from '../../api/WaterRisingData'
+import { useParams } from 'react-router-dom'
 
 const WaterRising = () => {
 
+  const { role, id } = useParams();
   const sample = WaterRisingData;
   console.log(sample, 24);
   const [qNo, setQNo] = useState(0);
   const [waterHeight, setWaterHeight] = useState(90);
   const initialScore = {"score1": 80, "score2": 80, "score3": 80, "score4": 80, "score5": 80};
   const [score, setScore] = useState(initialScore)
-  const [answer, setAnswer] = useState("");
+  // const [answer, setAnswer] = useState("");
   const [correct, setCorrect] = useState(false);
-  const [playerScore, setPlayerScore] = useState(score.score4)
+  // const [playerScore, setPlayerScore] = useState(score.score4)
   const [start, setStart] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [win, setWin] = useState(false);
@@ -95,8 +96,7 @@ const WaterRising = () => {
     } else {
       setCorrect(false);
     }
-    // console.log(correct, 74)
-    setAnswer(ans);
+    // setAnswer(ans);
     
     setWaterHeight(waterHeight - 5);
 
@@ -139,18 +139,17 @@ const WaterRising = () => {
     if(correct) {
       score["score4"] = score["score4"] - scale;
       setScore({...score})
-      // console.log('correct')
     } else {
       console.log('not correct for score4', 144)
     }
-    // console.log("run");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correct])
 
   // Increase Progress bar
   useEffect(() => {
       const bar = document.getElementById("bar");
       bar.style.width = qNo * 12.5 + "%";
-    // }
+
   }, [qNo, gameOver])
 
   return (
@@ -193,6 +192,7 @@ const WaterRising = () => {
             {/* game screen layer */}
               <div className="pole_container" >
                 {participant.map((player, index) => {
+
                   // console.log(player.score - waterHeight);
                   return (
                       <div key={index.toString()} className="p_container"
@@ -228,6 +228,7 @@ const WaterRising = () => {
                 </div>
                 <form className="answers">
                   {sample[qNo].options.map((item,index) => (
+                    // eslint-disable-next-line
                     <>
                       <input
                         style={{ display: 'none'}}
@@ -250,7 +251,7 @@ const WaterRising = () => {
           {/* Game Over */}
           {gameOver ? (
             <>
-              <GameOver setGameOver={setGameOver} gameOver={gameOver} win={win} />
+              <GameOver setGameOver={setGameOver} gameOver={gameOver} win={win} role={role} id={id} />
             </>
           ): (
             <>

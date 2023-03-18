@@ -2,8 +2,9 @@
   "name": "athena_v2",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://saipepu.github.io/athena_2/#",
+  "homepage": "https://saipepu.github.io/athena_2/#/sign-in",
   "dependencies": {
+    "@chakra-ui/anatomy": "^2.1.2",
     "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",

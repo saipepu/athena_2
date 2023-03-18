@@ -9,23 +9,21 @@ import SignUp from './Pages/SignUp';
 import Avatar from './Pages/Avatar';
 import Rewards from './Pages/Rewards';
 import CourseDetail from './Pages/CourseDetail';
-import GSheetReader from './api/StoryBasedData'
 
 function App() {
-  console.log(GSheetReader)
   return (
     <div className="App">
       <HashRouter>
         <Routes>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/training" element={<Training />} />
-          <Route path="/course-detail/:id" element={<CourseDetail />} />
-          <Route path="/avatar" element={<Avatar />} />
-          <Route path="/rewards" element={<Rewards />} />
-          <Route path="/water-rising" element={<WaterRising />} />
-          <Route path="/story-based" element={<StoryBased />} />
+          <Route path="/dashboard/:role/:id" element={<Dashboard />} />
+          <Route path="/training/:role/:id" element={<Training />} />
+          <Route path="/course-detail/:course_id/:role/:id" element={<CourseDetail />} />
+          <Route path="/avatar/:role/:id" element={<Avatar />} />
+          <Route path="/rewards/:role/:id" element={<Rewards />} />
+          <Route path="/:role/:id/water-rising" element={<WaterRising />} />
+          <Route path="/:role/:id/story-based" element={<StoryBased />} />
         </Routes>
       </HashRouter>
     </div>

@@ -1,15 +1,30 @@
 import { Box, Button, Container, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 // import athena_logo from '../assets/athena_logo.svg'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { signOut } from '../../api/Registeration'
 import avatar from '../../assets/avatar.png'
 
-const Header = () => {
+const Header = ({ role, id }) => {
 
+  const [response, setResponse] = useState()
+  const [errorMessage, setErrorMessage] = useState();
   const navigation = useNavigate();
 
+  const handleSignOut = async () => {
+    localStorage.removeItem('athena-token')
+    await signOut(setResponse, role);
+  }
+
+  useEffect(() => {
+    console.log(response)
+    if(response?.signOutSuccess) {
+      navigation('/sign-in')
+    }
+  }, [response, navigation])
+
   return (
-    <Container maxW='full' minHeight={'85'} padding="0px 64px" bgColor={'white'} display='flex' flexDirection='row' justifyContent='space-between' alignItems='center' boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.1)">
+    <Container position="relative" maxW='full' minHeight={'85'} padding="0px 64px" bgColor={'white'} display='flex' flexDirection='row' justifyContent='space-between' alignItems='center' boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.1)">
       <Box display="flex" justifyContent='flex-start' alignItems='center'>
         <svg height="35" viewBox="0 0 1238 225" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_1606_8)">
@@ -29,6 +44,7 @@ const Header = () => {
           </defs>
         </svg>
       </Box>
+      <div style={{ position: 'absolute', color: 'red', top: '110%', right: '20px'}}>{errorMessage}</div>
       <Box height="100%" display="flex" justifyContent='center' alignItems='flex-end' color="black" paddingBottom="12px">
         <Box height="full" display="flex" flexDirection="column" justifyContent='flex-end'>
           <Text fontSize="12px" fontWeight="normal">5 Token</Text>
@@ -42,7 +58,7 @@ const Header = () => {
           <MenuButton bgColor="transparent" height="65px" width="65px" borderRadius="100%" as={Button} rightIcon={<Image src={avatar} alt="avatar" height="50px" />}>
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => navigation('/sign-in')}>
+            <MenuItem onClick={() => handleSignOut()}>
             Sign Out
             </MenuItem>
           </MenuList>
