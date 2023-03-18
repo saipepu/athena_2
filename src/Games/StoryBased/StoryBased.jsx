@@ -114,10 +114,8 @@ const StoryBased = () => {
   function isGameOver() {
     if (gameOver) {
       console.log("Game over")
-      const updateScoreOnDatabase = async () => {
         const toUpdate = {ATH: employee.ATH + 1, exp: employee.exp + score}
         updateEmployee(role, id, toUpdate);
-      }
     }
   }
 
