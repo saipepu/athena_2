@@ -5,19 +5,17 @@ import rank1_avatar from '../../assets/rank1_avatar.png'
 
 const RankTable = ({ setNumberOfEmployee}) => {
 
-  const [employeeList, setEmployeeList ] = useState([]);
+  let [employeeList, setEmployeeList ] = useState([]);
   
   useEffect(() => {
     fetchAllEmployee(setEmployeeList, employeeList)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     setNumberOfEmployee(employeeList.length);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeList])
 
-  console.log(employeeList)
+  employeeList.sort((a, b) => a.exp - b.exp);
 
   const ThStyle = {
     textAlign: 'left',
@@ -59,7 +57,7 @@ const RankTable = ({ setNumberOfEmployee}) => {
               <Td textAlign="left">120 exp</Td>
             </Tr> */}
           </>
-            {employeeList?.map((employee,index) => {
+            {employeeList.reverse()?.map((employee,index) => {
               return (
                 <Tr height='40px' minHeight={'40px'} key={index}>
                   <Td width="180px">
