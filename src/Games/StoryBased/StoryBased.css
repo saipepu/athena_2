@@ -298,6 +298,7 @@ label {
 } */
 label {
   outline: 0px solid #d8febb;
+  text-align: left;
 }
 input:checked + label {
   outline-width: 5px;
