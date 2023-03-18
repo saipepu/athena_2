@@ -218,6 +218,8 @@ button:hover {
   z-index: 10;
   right: 10px;
   top: 10px;
+  transition: none;
+
 }
 
 .back_btn {
@@ -244,6 +246,7 @@ button:hover {
   font-weight: 600;
   color: white;
   z-index: 10;
+  transition: none;
 }
 
 input[type="radio"] {

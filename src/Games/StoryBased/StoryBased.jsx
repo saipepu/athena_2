@@ -49,7 +49,8 @@ const StoryBased = () => {
     }
 
     if (scenes[nextSceneCount].scene === "question") {
-      console.log("Question scene");
+      setClick(false)
+
       if (click === true) {
         setBlockNextScene((blockNextScene) => (blockNextScene = false));
       } else {
@@ -75,7 +76,6 @@ const StoryBased = () => {
         setNextSceneCount(nextSceneCount + 1);
       }
     }
-    console.log("Next scene: ", nextSceneCount)
     setStart(false);
   };
 
@@ -103,8 +103,6 @@ const StoryBased = () => {
       } else if (reward === 1) {
         setScore((score) => (score += 10));
       }
-      console.log("Goto: ", nextSceneCount)
-      console.log("Point: ", score)
     }, 1000);
   };
 
@@ -118,8 +116,6 @@ const StoryBased = () => {
 
   return (
     <div className="wrapper">
-      {console.log("Before render: ",   nextSceneCount)}
-      {console.log(scenes[nextSceneCount])}
       {ScenesCheck() ? (
         <div
           style={{
@@ -134,7 +130,7 @@ const StoryBased = () => {
               className="start_btn"
               onClick={nextScene}
             >
-              {isLast ? "Done!" : start ? "Start!" : "Next!"}
+              Start!
             </button>
           ) : (
             <button className="next_btn" onClick={nextScene}></button>
