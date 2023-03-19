@@ -1,5 +1,5 @@
 import { Card, CardBody, Heading, HStack, Image, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import red_clock from '../assets/red_clock.png'
 import token from '../assets/token.png'
 import book from '../assets/book.png'
@@ -10,16 +10,13 @@ import { fetchOneEmployee } from '../api/server_routes'
 // import { useMediaQuery } from '@chakra-ui/react'
 
 const Dashboard = () => {
-
   const { role, id } = useParams();
-  console.log(role, id);
   const [numberOfEmployee, setNumberOfEmployee] = useState([]);
   const [employee, setEmployee] = useState();
 
   useEffect(() => {
     fetchOneEmployee(id, setEmployee);
   }, [])
-  console.log(employee);
 
   const EmployeeDashboard = () => {
 
