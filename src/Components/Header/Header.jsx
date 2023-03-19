@@ -17,7 +17,6 @@ const Header = ({ role, id }) => {
   }
 
   useEffect(() => {
-    console.log(response)
     if(response?.signOutSuccess) {
       navigation('/sign-in')
     }

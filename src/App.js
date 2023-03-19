@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, HashRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter, Navigate, useParams } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard';
 import Training from './Pages/Training';
 import WaterRising from './Games/WaterRising/WaterRising';
@@ -9,8 +9,10 @@ import SignUp from './Pages/SignUp';
 import Avatar from './Pages/Avatar';
 import Rewards from './Pages/Rewards';
 import CourseDetail from './Pages/CourseDetail';
+import PageNotFound from './Pages/PageNotFound';
 
 function App() {
+
   return (
     <div className="App">
       <HashRouter>
@@ -24,6 +26,8 @@ function App() {
           <Route path="/rewards/:role/:id" element={<Rewards />} />
           <Route path="/:role/:id/water-rising" element={<WaterRising />} />
           <Route path="/:role/:id/story-based" element={<StoryBased />} />
+          <Route path="/404" element={<PageNotFound />} />
+          <Route path="*" element={<Navigate to="/404"/>} />
         </Routes>
       </HashRouter>
     </div>

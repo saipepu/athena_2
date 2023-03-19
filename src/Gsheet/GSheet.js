@@ -16,7 +16,7 @@ GSheetReader(options, results => {
     data.push(item);
     return "";
   })
-  console.log(data);
+  // console.log(data);
 }, error => {
   console.log(error);
 })

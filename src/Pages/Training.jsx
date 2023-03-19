@@ -14,10 +14,8 @@ const Training = () => {
   const [response, setResponse] = useState();
 
   useEffect(() => {
-    fetchOneEmployee(id, setEmployee);
+    fetchOneEmployee(role, id, setEmployee);
   }, [role, id])
-  console.log(employee);
-
 
   const blog1 = {
     author: "Chirst Voss, Dan Shapiro & more!",
@@ -41,20 +39,17 @@ const Training = () => {
   }
 
   const handleClick = (blog) => {
-    console.log('click');
     const obj = {
       course_id: blog,
       reading: false,
       video: false,
       quiz: false
     }
-    let existed = false;
     let list = [];
     for(let x in employee?.inProgress) {
       list.push(employee?.inProgress[x].course_id);
     }
     if(!list.includes(blog)) {
-      console.log(list, blog);
       employee?.inProgress.push(obj);
       updateEmployee(role, id, employee, setResponse);
     }

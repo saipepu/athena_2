@@ -5,22 +5,25 @@ import Sidebar from '../Components/Sidebar/Sidebar'
 import { useMediaQuery } from '@chakra-ui/react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchOneEmployee } from '../api/server_routes'
+import { isAuth } from '../auth/isAuth'
 
 const Layout = ({children}) => {
 
   const navigation = useNavigate();
 
   const { role, id } = useParams();
-  console.log(role, id);
+  console.log('layout', role, id);
   
   const [employee, setEmployee] = useState();
   useEffect(() => {
-    fetchOneEmployee(id, setEmployee);
-    if(!localStorage.getItem('athena-token')) {
+    if(!isAuth(role, id)) {
+      console.log('no auth')
       navigation('/sign-in')
+    } else {
+      fetchOneEmployee(role, id, setEmployee);
     }
-  }, [])
-  console.log(employee);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [role, id])
 
   const [isSmallScreen] = useMediaQuery("(max-width: 758px)")
 

@@ -12,14 +12,12 @@ import { fetchOneEmployee } from '../api/server_routes'
 const Dashboard = () => {
 
   const { role, id } = useParams();
-  console.log(role, id);
   const [numberOfEmployee, setNumberOfEmployee] = useState([]);
   const [employee, setEmployee] = useState();
 
   useEffect(() => {
-    fetchOneEmployee(id, setEmployee);
+    fetchOneEmployee(role, id, setEmployee);
   }, [])
-  console.log(employee);
 
   const EmployeeDashboard = () => {
 

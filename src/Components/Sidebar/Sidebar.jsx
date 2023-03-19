@@ -12,7 +12,6 @@ const Sidebar = () => {
   const [hover, setHover] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [currentUrl, setCurrentURL] =  useState(window.location.href.split('#/')[1].split("/")[0]);
-  console.log(currentUrl);
 
   const navigate = useNavigate();
   const navigation = (path) => {
