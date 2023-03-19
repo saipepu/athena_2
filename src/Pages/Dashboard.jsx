@@ -15,7 +15,7 @@ const Dashboard = () => {
   const [employee, setEmployee] = useState();
 
   useEffect(() => {
-    fetchOneEmployee(id, setEmployee);
+    fetchOneEmployee(role, id, setEmployee);
   }, [])
 
   const EmployeeDashboard = () => {

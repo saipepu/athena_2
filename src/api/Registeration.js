@@ -3,7 +3,6 @@ import { api } from './server_api'
 export const signUp = async(values, setResponse, isHR) => {
   console.log('sign up registration')
   let type = isHR ? 'admin' : 'employee';
-  console.log(type);
   await fetch(`${api}/${type}/signup`, {
     method: 'POST',
     headers: {
@@ -18,7 +17,6 @@ export const signUp = async(values, setResponse, isHR) => {
 export const signIn = async(values, setResponse, isHR) => {
   console.log('sign in registration')
   let type = isHR ? 'admin' : 'employee';
-  console.log(type);
   await fetch(`${api}/${type}/signin`, {
     method: 'POST',
     headers: {

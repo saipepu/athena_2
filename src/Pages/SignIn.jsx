@@ -29,7 +29,6 @@ const SignIn = () => {
   const formik = useFormik({
     initialValues: model,
     onSubmit: async(values) => {
-      console.log(values, 'submitted')
       signIn(values, setResponse, isHR)
     }
   })
@@ -43,7 +42,6 @@ const SignIn = () => {
       navigation(`/dashboard/${role}/${data._id}`)
     }
 
-    console.log(response);
     if(response?.signInSuccess) {
       localStorage.setItem('athena-token', JSON.stringify(response.message))
       const [role, data] = Object.entries(response.message)[0]

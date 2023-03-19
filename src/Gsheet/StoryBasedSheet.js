@@ -8,13 +8,10 @@ const options = {
 }
 const data = [];
 export default GSheetReader(options, results => {
-  console.log(results);
   results.map((item, index) => {
-    console.log(item);
     item.option = item?.option?.split("\\");
     item?.option?.map((x, index) => {
       x = x.split('@');
-      console.log(x);
       const obj = {
         option: x[0],
         goto: x[1],
@@ -26,7 +23,6 @@ export default GSheetReader(options, results => {
     data.push(item);
     return data;
   })
-  console.log(data);
 }, error => {
   console.log(error);
 })

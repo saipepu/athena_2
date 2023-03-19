@@ -71,7 +71,6 @@ const Avatar = () => {
     }
     itemPages.push(arr);
   }
-  console.log(itemPages);
 
   const handlePagination = (action) => {
     if(action === 'back') {

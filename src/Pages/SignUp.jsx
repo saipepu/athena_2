@@ -39,9 +39,7 @@ const SignUp = () => {
   const formik = useFormik({
     initialValues: isHR ? HR : Employee,
     onSubmit: async(values) => {
-      console.log(values, 'submitted')
       signUp(values, setResponse, isHR);
-      console.log(response)
       // navigation('/sign-in')
     }
   })
@@ -50,11 +48,9 @@ const SignUp = () => {
     let signUp = JSON.parse(localStorage.getItem('athena-token'));
     if( signUp != null) {
       const [role, data] = Object.entries(signUp)[0]
-      console.log(role, data._id);
       navigation(`/dashboard/${role}/${data._id}`)
     }
 
-    console.log(response);
     if(response?.signUpSuccess) {
       navigation('/sign-in')
     } else {

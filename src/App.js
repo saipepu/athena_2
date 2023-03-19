@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, HashRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter, Navigate, useParams } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard';
 import Training from './Pages/Training';
 import WaterRising from './Games/WaterRising/WaterRising';
@@ -31,7 +31,7 @@ function App() {
             <Route path="/:role/:id/story-based" element={<StoryBased />} />
           </Routes>
         </HashRouter>
-      </TimerContext.Provider>
+        </TimerContext.Provider>
     </div>
   );
 }

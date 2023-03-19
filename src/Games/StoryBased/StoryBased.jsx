@@ -122,8 +122,6 @@ const StoryBased = () => {
 
   let isLast = nextSceneCount == scenes?.length - 1;
 
-  console.log(score);
-
   return (
     <div className="wrapper">
       {ScenesCheck() ? (

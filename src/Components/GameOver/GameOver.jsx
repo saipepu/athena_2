@@ -7,23 +7,24 @@ import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
 
 const GameOver = ({ setGameOver, gameOver, win, role, id }) => {
 
+  console.log(role, id);
   const navigation = useNavigate();
   const [employee, setEmployee] = useState();
   const [response, setResponse] = useState();
 
   useEffect(() => {
-    fetchOneEmployee(id, setEmployee);
-  }, [])
+    fetchOneEmployee(role, id, setEmployee);
+  }, [role, id])
+  console.log(employee);
 
   const updateEmployeeScore = async () => {
     const toUpdate = {};
-    toUpdate.ATH = employee.ATH + 1;
-    toUpdate.exp = employee.exp + 10;
+    toUpdate.ATH = employee?.ATH + 1;
+    toUpdate.exp = employee?.exp + 10;
     updateEmployee(role, id, toUpdate, setResponse);
   }
 
   useEffect(() => {
-    console.log(response);
     if(response?.updateSuccess) {
       setGameOver(!gameOver)
       navigation(`/dashboard/${role}/${id}`)

@@ -5,7 +5,6 @@ import { CheckCircleIcon, CheckIcon, MinusIcon, PlusSquareIcon, SearchIcon } fro
 import "../index.css"
 import { useNavigate, useParams } from 'react-router-dom'
 import { TimerContext } from '../context/TimerContext'
-
 import { fetchOneEmployee, updateEmployee } from '../api/server_routes'
 
 const Training = () => {
@@ -13,14 +12,18 @@ const Training = () => {
   const [timerInterval, setTimerInterval] = useState(null);
   const [totalSeconds, setTotalSeconds] = useState(0);
 
-
   const { stopTimer } = useContext(TimerContext)
 
   console.log(stopTimer)
 
-
   const { role, id } = useParams();
   const navigation = useNavigate();
+  const [employee, setEmployee] = useState();
+  const [response, setResponse] = useState();
+
+  useEffect(() => {
+    fetchOneEmployee(role, id, setEmployee);
+  }, [role, id])
 
   const blog1 = {
     author: " Chirst Voss, Dan Shapiro & more!",
@@ -33,6 +36,23 @@ const Training = () => {
     game_id: "1ydjnm6UyE5pm5-onpFT-w3KdBSNzxU-fsj6KAvtb9mA",
   }
 
+  const handleClick = (blog) => {
+    const obj = {
+      course_id: blog,
+      reading: false,
+      video: false,
+      quiz: false
+    }
+    let list = [];
+    for(let x in employee?.inProgress) {
+      list.push(employee?.inProgress[x].course_id);
+    }
+    if(!list.includes(blog)) {
+      employee?.inProgress.push(obj);
+      updateEmployee(role, id, employee, setResponse);
+    }
+    navigation(`/course-detail/${blog}/${role}/${id}`, { state: blog1 })
+  }
   useEffect(() => {
     console.log("startTimerClicked: ", startTimerClicked)
     console.log("stopTimer: ", stopTimer)

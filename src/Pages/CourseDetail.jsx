@@ -7,7 +7,6 @@ const CourseDetail = () => {
 
   const { state } = useLocation();
   const { course_id, role, id } = useParams();
-  console.log(state);
   const [game, setGame] = useState("");
   const navigation = useNavigate();
 
