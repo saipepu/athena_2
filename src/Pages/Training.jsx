@@ -4,17 +4,10 @@ import Layout from './Layout'
 import { CheckCircleIcon, CheckIcon, MinusIcon, PlusSquareIcon, SearchIcon } from "@chakra-ui/icons"
 import "../index.css"
 import { useNavigate, useParams } from 'react-router-dom'
-import { TimerContext } from '../context/TimerContext'
+// import { TimerContext } from '../context/TimerContext'
 import { fetchOneEmployee, updateEmployee } from '../api/server_routes'
 
 const Training = () => {
-  const [startTimerClicked, setStartTimerClicked] = useState(false);
-  const [timerInterval, setTimerInterval] = useState(null);
-  const [totalSeconds, setTotalSeconds] = useState(0);
-
-  const { stopTimer } = useContext(TimerContext)
-
-  console.log(stopTimer)
 
   const { role, id } = useParams();
   const navigation = useNavigate();
@@ -44,48 +37,45 @@ const Training = () => {
       quiz: false
     }
     let list = [];
-    for(let x in employee?.inProgress) {
+    for (let x in employee?.inProgress) {
       list.push(employee?.inProgress[x].course_id);
     }
-    if(!list.includes(blog)) {
+    if (!list.includes(blog)) {
       employee?.inProgress.push(obj);
       updateEmployee(role, id, employee, setResponse);
     }
     navigation(`/course-detail/${blog}/${role}/${id}`, { state: blog1 })
   }
-  useEffect(() => {
-    console.log("startTimerClicked: ", startTimerClicked)
-    console.log("stopTimer: ", stopTimer)
-    // console.log(!startTimerClicked || stopTimer)
-    if (!startTimerClicked || stopTimer) return;
-    console.log("HERE")
-
-    const interval = setInterval(() => {
-      ++totalSeconds;
-      console.log(totalSeconds);
-
-      if (stopTimer) {
-        clearInterval(interval);
-      }
-    }, 1000);
-
-    setTimerInterval(interval);
-
-    return () => clearInterval(interval);
-  }, [stopTimer, startTimerClicked]);
-
-  console.log(totalSeconds);
 
 
-  const startTimer = () => {
-    // if (stopTimer) return
-    // setInterval(() => {
-    //   ++totalSeconds;
-    //   console.log(totalSeconds)
-    // }, 1000);
-    console.log("RUNNING")
-    setStartTimerClicked(true);
-  }
+  // useEffect(() => {
+  //   console.log("startTimerClicked: ", startTimerClicked)
+  //   console.log("stopTimer: ", stopTimer)
+  //   // console.log(!startTimerClicked || stopTimer)
+  //   if (!startTimerClicked || stopTimer) return;
+  //   console.log("HERE")
+
+  //   const interval = setInterval(() => {
+  //     setTotalSeconds((totalSeconds) => totalSeconds + 1)
+  //     console.log(totalSeconds);
+
+  //     if (stopTimer) {
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
+
+  //   setTimerInterval(interval);
+
+  //   return () => clearInterval(interval);
+  // }, [stopTimer, startTimerClicked]);
+
+  // console.log(totalSeconds);
+
+
+  // const startTimer = () => {
+  //   console.log("RUNNING")
+  //   setStartTimerClicked(true);
+  // }
 
   return (
     <Layout>
@@ -112,7 +102,7 @@ const Training = () => {
           </InputGroup>
           <Box>Bookmark</Box>
           <Box>Popular</Box>
-          <Box>{totalSeconds}</Box>
+          {/* <Box>{totalSeconds}</Box> */}
         </HStack>
 
         <VStack maxWidth="100%" padding="0" justifyContent="flex-start" alignitems="flex-start" paddingBottom="20px">
@@ -121,8 +111,8 @@ const Training = () => {
             <Box>
               <Card height="270px" width="300px" onClick={() => {
                 console.log("Click")
-                startTimer();
-                // navigation(`/course-detail/${1}/${role}/${id}`, { state: blog1 })
+                // startTimer();
+                navigation(`/course-detail/${1}/${role}/${id}`, { state: blog1 })
               }
               } cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
                 <AspectRatio ratio={2 / 1}>

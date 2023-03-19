@@ -1,13 +1,48 @@
 import { Box, Button, Image, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Layout from './Layout'
+import { TimerContext } from '../context/TimerContext'
+
 
 const CourseDetail = () => {
+  const [startTimerClicked, setStartTimerClicked] = useState(true);
+  const [timerInterval, setTimerInterval] = useState(null);
+  const { stopTimer, totalSeconds, setTotalSeconds } = useContext(TimerContext)
+
+  const startTime = new Date().getTime();
+  localStorage.setItem('startTime', startTime);
+
+
+  // useEffect(() => {
+  //   console.log("startTimerClicked: ", startTimerClicked)
+  //   console.log("stopTimer: ", stopTimer)
+  //   // console.log(!startTimerClicked || stopTimer)
+  //   if (!startTimerClicked || stopTimer) return;
+  //   console.log("HERE")
+
+  //   const interval = setInterval(() => {
+  //     setTotalSeconds((totalSeconds) => totalSeconds + 1)
+  //     console.log(totalSeconds);
+
+  //     if (stopTimer) {
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
+
+  //   setTimerInterval(interval);
+
+  //   return () => clearInterval(interval);
+  // }, [stopTimer]);
+
+  // console.log(totalSeconds);
+
 
   const { state } = useLocation();
   const { course_id, role, id } = useParams();
   const [game, setGame] = useState("");
+
+
   const navigation = useNavigate();
 
 

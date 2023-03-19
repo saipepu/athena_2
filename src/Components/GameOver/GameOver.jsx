@@ -12,26 +12,39 @@ const GameOver = ({ setGameOver, gameOver, win, role, id }) => {
   const [employee, setEmployee] = useState();
   const [response, setResponse] = useState();
 
+  let setMiliToHour = 0;
+  function miliToHour(mili) {
+    return ((mili / 1000 / 60 / 60) % 24).toFixed(3);
+  }
+
   useEffect(() => {
     fetchOneEmployee(role, id, setEmployee);
   }, [role, id])
   console.log(employee);
 
   const updateEmployeeScore = async () => {
+
+    const startTime = localStorage.getItem('startTime');
+    const endTime = new Date().getTime();
+    const elapsedTime = endTime - startTime;
+    console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
+    setMiliToHour = miliToHour(elapsedTime)
+
     const toUpdate = {};
     toUpdate.ATH = employee?.ATH + 1;
     toUpdate.exp = employee?.exp + 10;
+    toUpdate.hr_of_training = employee?.hr_of_training + setMiliToHour;
     updateEmployee(role, id, toUpdate, setResponse);
   }
 
   useEffect(() => {
-    if(response?.updateSuccess) {
+    if (response?.updateSuccess) {
       setGameOver(!gameOver)
       navigation(`/dashboard/${role}/${id}`)
     } else {
       console.log('Error Updating Employee Data . . .')
     }
-  }, [response, navigation, id , role, gameOver, setGameOver])
+  }, [response, navigation, id, role, gameOver, setGameOver])
 
   return (
     <div className="model_wrapper">

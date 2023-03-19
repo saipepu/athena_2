@@ -24,12 +24,17 @@ const StoryBased = () => {
   const navigation = useNavigate();
 
   useEffect(() => {
+    fetchOneEmployee(role, id, setEmployee);
+  }, [role, id])
+
+  useEffect(() => {
     async function fetchScenes() {
       const data = await getSheetData();
       setScenes(data);
     }
 
-    fetchOneEmployee(id, setEmployee);
+    console.log("RUNNING")
+    // fetchOneEmployee(id, setEmployee);
     fetchScenes();
   }, []);
 
@@ -111,10 +116,24 @@ const StoryBased = () => {
     return true;
   }
 
-  function isGameOver() {
+  // console.log(employee)
+  // console.log(role, id)
+
+  let setMiliToHour = 0;
+  function miliToHour(mili) {
+    return ((mili / 1000 / 60 / 60) % 24).toFixed(3);
+  }
+
+  async function isGameOver() {
     if (gameOver) {
-        const toUpdate = {ATH: employee.ATH + 1, exp: employee.exp + score}
-        updateEmployee(role, id, toUpdate);
+      const startTime = localStorage.getItem('startTime');
+      const endTime = new Date().getTime();
+      const elapsedTime = endTime - startTime;
+      console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
+      setMiliToHour = miliToHour(elapsedTime)
+
+      const toUpdate = { ATH: employee.ATH + 1, exp: employee.exp + score, hr_of_training: employee.hr_of_training + setMiliToHour }
+      updateEmployee(role, id, toUpdate);
     }
   }
 
