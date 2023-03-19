@@ -1,5 +1,5 @@
 import { Box, Button, Checkbox, Image, Input, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect, useStatek, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { updateEmployee } from '../api/server_routes';
 import Layout from './Layout'
