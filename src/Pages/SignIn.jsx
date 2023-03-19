@@ -36,8 +36,11 @@ const SignIn = () => {
 
   useEffect(() => {
 
-    if(localStorage.getItem('athena-token') != null) {
-      // navigation('/dashboard')
+    let signIn = JSON.parse(localStorage.getItem('athena-token'));
+    if( signIn != null) {
+      const [role, data] = Object.entries(signIn)[0]
+      console.log(role, data._id);
+      navigation(`/dashboard/${role}/${data._id}`)
     }
 
     console.log(response);

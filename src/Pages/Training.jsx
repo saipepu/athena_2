@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { TimerContext } from '../context/TimerContext'
 
 
+import { fetchOneEmployee, updateEmployee } from '../api/server_routes'
 
 const Training = () => {
   const [startTimerClicked, setStartTimerClicked] = useState(false);
@@ -26,7 +27,7 @@ const Training = () => {
   const blog1 = {
     author: " Chirst Voss, Dan Shapiro & more!",
     title: "How to win a negotiation",
-    intro: "Successful negotiation is not about getting to yes,It’s about mastering no and understanding what path to an agreement is.",
+    intro: "Successful negotiation is not about getting to yes,It's about mastering no and understanding what path to an agreement is.",
     description: "There are many variables in every negotiation, which means there is no silver bullet or magic erase you can use to win. The idea of “Winning” changes depending on the situation, the key to success is been able to identify the type of negotiation and use a strategy that gets you what you want.",
     image_url: "https://bigthink.com/wp-content/uploads/2020/08/origin-122.jpg",
     video_url: '<iframe width="560" height="300" src="https://www.youtube.com/embed/Jp9b2Hf7QWg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
