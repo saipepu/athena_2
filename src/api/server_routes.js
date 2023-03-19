@@ -8,7 +8,7 @@ export const fetchAllEmployee = async (set, get) => {
 }
 
 export const fetchOneEmployee = async (id,setEmployee) => {
-  console.log('Getting Employee with id -> ' , id)
+  // console.log('Getting Employee with id -> ' , id)
   await fetch(`${api}/employee/getOne/${id}`, {
     method: 'GET'
   })

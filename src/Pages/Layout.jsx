@@ -11,7 +11,7 @@ const Layout = ({children}) => {
   const navigation = useNavigate();
 
   const { role, id } = useParams();
-  console.log(role, id);
+  // console.log(role, id);
   
   const [employee, setEmployee] = useState();
   useEffect(() => {
@@ -20,7 +20,7 @@ const Layout = ({children}) => {
       navigation('/sign-in')
     }
   }, [])
-  console.log(employee);
+  // console.log(employee);
 
   const [isSmallScreen] = useMediaQuery("(max-width: 758px)")
 
