@@ -26,7 +26,7 @@ const CourseDetail = () => {
   return (
     <Layout>
       <VStack
-        width="full" height="full" justifyContent='flex-start' alignItem='flex-start' overflow="scroll"
+        width="full" height="full" justifyContent='flex-start' alignitem='flex-start' overflow="scroll"
         padding="50px 150px" paddingBottom={'120px'}
       >
         <Box width="full" textAlign={'left'}>

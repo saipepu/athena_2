@@ -12,7 +12,7 @@ const Layout = ({children}) => {
   const navigation = useNavigate();
 
   const { role, id } = useParams();
-  console.log('layout', role, id);
+  // console.log(role, id);
   
   const [employee, setEmployee] = useState();
   useEffect(() => {
@@ -22,8 +22,8 @@ const Layout = ({children}) => {
     } else {
       fetchOneEmployee(role, id, setEmployee);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [role, id])
+  }, [role, id, navigation])
+  // console.log(employee);
 
   const [isSmallScreen] = useMediaQuery("(max-width: 758px)")
 

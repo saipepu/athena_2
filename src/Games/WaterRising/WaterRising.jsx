@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './WaterRising.css'
 import water_level from '../../assets/water_level.png'
 import pole1 from '../../assets/pole1.png'
@@ -17,8 +17,11 @@ import StartModel from '../../Components/StartModel/StartModel'
 import GameOver from '../../Components/GameOver/GameOver'
 import WaterRisingData from '../../api/WaterRisingData'
 import { useParams } from 'react-router-dom'
+import { TimerContext } from '../../context/TimerContext'
 
 const WaterRising = () => {
+
+  const {setStopTimer} = useContext(TimerContext)
 
   const { role, id } = useParams();
   const sample = WaterRisingData;
@@ -151,6 +154,11 @@ const WaterRising = () => {
       bar.style.width = qNo * 12.5 + "%";
 
   }, [qNo, gameOver])
+
+  if (gameOver) {
+    console.log("Game over")
+    setStopTimer(true)
+  }
 
   return (
     <>
