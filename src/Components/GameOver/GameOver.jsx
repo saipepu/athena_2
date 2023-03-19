@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../api/server_api";
 import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
 
-const GameOver = ({ setGameOver, gameOver, win, role, id }) => {
+const GameOver = ({ setGameOver, gameOver, win, role, id, employee, course_id }) => {
 
   console.log(role, id);
   const navigation = useNavigate();
-  const [employee, setEmployee] = useState();
   const [response, setResponse] = useState();
 
   let setMiliToHour = 0;
@@ -17,12 +16,9 @@ const GameOver = ({ setGameOver, gameOver, win, role, id }) => {
     return ((mili / 1000 / 60 / 60) % 24).toFixed(3);
   }
 
-  useEffect(() => {
-    fetchOneEmployee(role, id, setEmployee);
-  }, [role, id])
-  console.log(employee);
+  console.log(employee, course_id);
 
-  const updateEmployeeScore = async () => {
+  const updateEmployeeScore = () => {
 
     const startTime = localStorage.getItem('startTime');
     const endTime = new Date().getTime();
@@ -30,11 +26,17 @@ const GameOver = ({ setGameOver, gameOver, win, role, id }) => {
     console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
     setMiliToHour = miliToHour(elapsedTime)
 
-    const toUpdate = {};
-    toUpdate.ATH = employee?.ATH + 1;
-    toUpdate.exp = employee?.exp + 10;
-    toUpdate.hr_of_training = employee?.hr_of_training + setMiliToHour;
-    updateEmployee(role, id, toUpdate, setResponse);
+    employee.ATH = employee?.ATH + 1;
+    employee.exp = employee?.exp + 10;
+    employee.hr_of_training = parseInt(employee?.hr_of_training + setMiliToHour);
+    for(let x in employee?.inProgress) {
+      // eslint-disable-next-line eqeqeq
+      if(course_id == employee?.inProgress[x].course_id) {
+        employee.inProgress[x].quiz = true
+      }
+    }
+    console.log(employee);
+    updateEmployee(role, id, employee, setResponse);
   }
 
   useEffect(() => {

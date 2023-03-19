@@ -16,26 +16,27 @@ import exp_img from '../../assets/exp_img.png'
 import StartModel from '../../Components/StartModel/StartModel'
 import GameOver from '../../Components/GameOver/GameOver'
 import WaterRisingData from '../../api/WaterRisingData'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
 // import { TimerContext } from '../../context/TimerContext'
 
 const WaterRising = () => {
 
   // const {setStopTimer} = useContext(TimerContext)
-  const [employee, setEmployee] = useState();
+  // const [employee, setEmployee] = useState();
   const [response, setResponse] = useState();
 
   const { role, id } = useParams();
+  const { state  } = useLocation();
+  const course_id = state?.course_id;
+  const employee = state?.employee;
+  console.log(state);
   const sample = WaterRisingData;
-  // console.log(sample, 24);
   const [qNo, setQNo] = useState(0);
   const [waterHeight, setWaterHeight] = useState(90);
   const initialScore = { "score1": 80, "score2": 80, "score3": 80, "score4": 80, "score5": 80 };
   const [score, setScore] = useState(initialScore)
-  // const [answer, setAnswer] = useState("");
   const [correct, setCorrect] = useState(false);
-  // const [playerScore, setPlayerScore] = useState(score.score4)
   const [start, setStart] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [win, setWin] = useState(false);
@@ -158,23 +159,6 @@ const WaterRising = () => {
 
   }, [qNo, gameOver])
 
-  // function miliToHour(mili) {
-  //   return (mili / 1000 / 60 / 60) % 24;
-  // }
-
-  // if (gameOver) {
-  //   console.log("Game over")
-  //   const startTime = localStorage.getItem('startTime');
-  //   const endTime = new Date().getTime();
-  //   const elapsedTime = endTime - startTime;
-  //   console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
-
-  //   const toUpdate = {hr_of_training: employee?.hr_of_training + miliToHour(elapsedTime)};
-  //   updateEmployee(role, id, toUpdate, setResponse);
-  //   console.log(response);
-  // }
-
-
   return (
     <>
       <div className="wrapper">
@@ -274,7 +258,7 @@ const WaterRising = () => {
             {/* Game Over */}
             {gameOver ? (
               <>
-                <GameOver setGameOver={setGameOver} gameOver={gameOver} win={win} role={role} id={id} />
+                <GameOver setGameOver={setGameOver} gameOver={gameOver} win={win} role={role} id={id} employee={employee} course_id={course_id}/>
               </>
             ) : (
               <>

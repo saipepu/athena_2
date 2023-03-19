@@ -4,7 +4,6 @@ import Layout from './Layout'
 import { CheckIcon, MinusIcon, PlusSquareIcon } from "@chakra-ui/icons"
 import "../index.css"
 import { useNavigate, useParams } from 'react-router-dom'
-import { TimerContext } from '../context/TimerContext'
 import { fetchOneEmployee, updateEmployee } from '../api/server_routes'
 
 const Training = () => {
@@ -39,53 +38,28 @@ const Training = () => {
     game_id: "1q0gdTTfZnGJuieaCY3DdHPaVOPJq1Qg35zlfPMGjy8s",
   }
   const blogList = [blog1, blog2]
+
   const handleClick = (blog) => {
-    console.log('click', blog, blogList[blog-1]);
-    const obj = {
-      course_id: blog,
-      reading: false,
-      video: false,
-      quiz: false
+    if(employee) {
+      console.log('click', blog, blogList[blog-1]);
+      const obj = {
+        course_id: blog,
+        reading: false,
+        video: false,
+        quiz: false
+      }
+      let list = [];
+      for (let x in employee?.inProgress) {
+        list.push(employee?.inProgress[x].course_id);
+      }
+      if (!list.includes(blog)) {
+        employee?.inProgress.push(obj);
+        updateEmployee(role, id, employee, setResponse);
+      }
+      console.log(employee, 58);
+      navigation(`/course-detail/${blog}/${role}/${id}`, { state: { blog: blogList[blog-1], employee: employee} })
     }
-    let list = [];
-    for (let x in employee?.inProgress) {
-      list.push(employee?.inProgress[x].course_id);
-    }
-    if (!list.includes(blog)) {
-      employee?.inProgress.push(obj);
-      updateEmployee(role, id, employee, setResponse);
-    }
-    navigation(`/course-detail/${blog}/${role}/${id}`, { state: { blog: blogList[blog-1], employee: employee} })
   }
-
-  // useEffect(() => {
-  //   console.log("startTimerClicked: ", startTimerClicked)
-  //   console.log("stopTimer: ", stopTimer)
-  //   // console.log(!startTimerClicked || stopTimer)
-  //   if (!startTimerClicked || stopTimer) return;
-  //   console.log("HERE")
-
-  //   const interval = setInterval(() => {
-  //     setTotalSeconds((totalSeconds) => totalSeconds + 1)
-  //     console.log(totalSeconds);
-
-  //     if (stopTimer) {
-  //       clearInterval(interval);
-  //     }
-  //   }, 1000);
-
-  //   setTimerInterval(interval);
-
-  //   return () => clearInterval(interval);
-  // }, [stopTimer, startTimerClicked]);
-
-  // console.log(totalSeconds);
-
-
-  // const startTimer = () => {
-  //   console.log("RUNNING")
-  //   setStartTimerClicked(true);
-  // }
 
   return (
     <Layout>
@@ -173,28 +147,28 @@ const Training = () => {
                             </AspectRatio>
                               <CardBody width="full" p='12px'>
                                 <HStack width="full" marginBottom="6px" justifyContent="space-between" alignItems="flex-start">
-                                  <Heading size="md" fontSize="18px" width="100%" textAlign="left" isTruncated>{data.title}</Heading>
+                                  <Heading size="md" fontSize="18px" width="100%" textAlign="left" isTruncated>{item.title}</Heading>
                                 </HStack>
                                 <HStack width="full" display="flex" justifyContent="flex-start" alignItems="flex-start">
-                                  <Box flex="1" maxWidth="105px" bgColor={data.reading ? 'green.500' : 'gray.100'} color="gray.500" gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                  <Box flex="1" maxWidth="105px" bgColor={item.reading ? 'green.500' : 'gray.100'} color={item.reading ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
                                     <Text fontSize="14px" fontWeight="bold">Reading</Text>
-                                    {data.reading ? (
+                                    {item.reading ? (
                                       <CheckIcon boxSize="14px" stroke="1px solid black"/>
                                     ) : (
                                       <MinusIcon boxSize="14px" stroke="1px solid black"/>
                                     )}
                                   </Box>
-                                  <Box bgColor={data.video ? 'green.500' : 'gray.100'} color="gray.500" gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                  <Box bgColor={item.video ? 'green.500' : 'gray.100'} color={item.video ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
                                     <Text fontSize="14px" fontWeight="bold">Video</Text>
-                                    {data.video ? (
+                                    {item.video ? (
                                       <CheckIcon boxSize="14px" stroke="1px solid black"/>
                                     ) : (
                                       <MinusIcon boxSize="14px" stroke="1px solid black"/>
                                     )}
                                   </Box>
-                                  <Box bgColor={data.quiz ? 'green.500' : 'gray.100'} color="gray.500" gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                  <Box bgColor={item.quiz ? 'green.500' : 'gray.100'} color={item.quiz ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
                                     <Text fontSize="14px" fontWeight="bold">Quiz</Text>
-                                    {data.quiz ? (
+                                    {item.quiz ? (
                                       <CheckIcon boxSize="14px" stroke="1px solid black"/>
                                     ) : (
                                       <MinusIcon boxSize="14px" stroke="1px solid black"/>
