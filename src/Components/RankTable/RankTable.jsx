@@ -43,20 +43,6 @@ const RankTable = ({ setNumberOfEmployee}) => {
           </Tr>
         </Thead>
         <Tbody>
-          <>
-                      {/* <Tr height='40px' minHeight={'40px'}>
-              <Td >
-                <Box display="flex" flexDirection="row" justifyContent={'center'} alignItems={'center'} gap="22px">
-                  <Text>1</Text>
-                  <Image src={rank1_avatar} alt="avatar" height="30px" />
-                </Box>
-              </Td>
-              <Td textAlign="left">Geo</Td>
-              <Td textAlign="left">Marketing</Td>
-              <Td textAlign="left">General</Td>
-              <Td textAlign="left">120 exp</Td>
-            </Tr> */}
-          </>
             {employeeList.reverse()?.map((employee,index) => {
               return (
                 <Tr height='40px' minHeight={'40px'} key={index}>
