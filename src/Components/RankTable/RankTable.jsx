@@ -2,11 +2,19 @@ import { Box, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, T
 import React, { useEffect, useState } from 'react'
 import { fetchAllEmployee } from '../../api/server_routes';
 import rank1_avatar from '../../assets/rank1_avatar.png'
+import { fetchOneEmployee } from "../../api/server_routes";
 
-const RankTable = ({ setNumberOfEmployee}) => {
 
-  let [employeeList, setEmployeeList ] = useState([]);
-  
+const RankTable = ({ role, id, setNumberOfEmployee }) => {
+
+  let [employeeList, setEmployeeList] = useState([]);
+
+  const [oneEmployee, setOneEmployee] = useState();
+
+  useEffect(() => {
+    fetchOneEmployee(role, id, setOneEmployee);
+  }, [role, id])
+
   useEffect(() => {
     fetchAllEmployee(setEmployeeList, employeeList)
   }, [])
@@ -22,15 +30,17 @@ const RankTable = ({ setNumberOfEmployee}) => {
     color: 'white'
   }
 
+  console.log(oneEmployee?._id)
+
   return (
     <TableContainer
       // bgColor="red"
       minWidth="800px" width="100%" maxWidth="1000px" padding="0px 24px 200px 24px"
-      style={{ overflow: 'visible'}}>
+      style={{ overflow: 'visible' }}>
       <Table
-      className="table"
-      cellSpacing="0"
-      variant="simple" width="100%" overflow="visible">
+        className="table"
+        cellSpacing="0"
+        variant="simple" width="100%" overflow="visible">
         <TableCaption>Employee Ranks</TableCaption>
         <Thead oveflow="visible" borderRadius="12px" width="100%">
           <Tr className="table_head">

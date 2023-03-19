@@ -10,15 +10,11 @@ import Avatar from './Pages/Avatar';
 import Rewards from './Pages/Rewards';
 import PageNotFound from './Pages/PageNotFound'
 import CourseDetail from './Pages/CourseDetail';
-import { TimerContext } from './context/TimerContext';
-import { useState } from 'react';
 
 function App() {
-  const [stopTimer, setStopTimer] = useState(false)
 
   return (
     <div className="App">
-      <TimerContext.Provider value={{ stopTimer, setStopTimer }}>
         <HashRouter>
           <Routes>
             <Route path="/sign-up" element={<SignUp />} />
@@ -34,7 +30,6 @@ function App() {
             <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
         </HashRouter>
-        </TimerContext.Provider>
     </div>
   );
 }

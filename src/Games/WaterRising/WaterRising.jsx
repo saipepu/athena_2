@@ -17,18 +17,21 @@ import StartModel from '../../Components/StartModel/StartModel'
 import GameOver from '../../Components/GameOver/GameOver'
 import WaterRisingData from '../../api/WaterRisingData'
 import { useParams } from 'react-router-dom'
-import { TimerContext } from '../../context/TimerContext'
+import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
+// import { TimerContext } from '../../context/TimerContext'
 
 const WaterRising = () => {
 
-  const {setStopTimer} = useContext(TimerContext)
+  // const {setStopTimer} = useContext(TimerContext)
+  const [employee, setEmployee] = useState();
+  const [response, setResponse] = useState();
 
   const { role, id } = useParams();
   const sample = WaterRisingData;
-  console.log(sample, 24);
+  // console.log(sample, 24);
   const [qNo, setQNo] = useState(0);
   const [waterHeight, setWaterHeight] = useState(90);
-  const initialScore = {"score1": 80, "score2": 80, "score3": 80, "score4": 80, "score5": 80};
+  const initialScore = { "score1": 80, "score2": 80, "score3": 80, "score4": 80, "score5": 80 };
   const [score, setScore] = useState(initialScore)
   // const [answer, setAnswer] = useState("");
   const [correct, setCorrect] = useState(false);
@@ -94,13 +97,13 @@ const WaterRising = () => {
     const human = document.getElementById("human");
     const water_level = document.getElementById("water_level");
 
-    if(ans === sample[qNo].answer) {
+    if (ans === sample[qNo].answer) {
       setCorrect(true);
     } else {
       setCorrect(false);
     }
     // setAnswer(ans);
-    
+
     setWaterHeight(waterHeight - 5);
 
     IncreaseTheBotScores();
@@ -108,7 +111,7 @@ const WaterRising = () => {
     // Time Out after Answering One Question && Check if the Player is Drawn
     setTimeout(() => {
 
-      if(qNo < 7) {
+      if (qNo < 7) {
         setQNo(qNo + 1);
       } else {
         setWin(true);
@@ -126,7 +129,7 @@ const WaterRising = () => {
       const offset = water_level_top - human_top;
       // console.log(offset);
 
-      if(offset < 10) {
+      if (offset < 10) {
         setGameOver(!gameOver);
         setWin(false);
         setWaterHeight(90);
@@ -139,135 +142,147 @@ const WaterRising = () => {
 
   // Increase the Employee Score
   useEffect(() => {
-    if(correct) {
+    if (correct) {
       score["score4"] = score["score4"] - scale;
-      setScore({...score})
+      setScore({ ...score })
     } else {
-      console.log('not correct for score4', 144)
+      // console.log('not correct for score4', 144)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correct])
 
   // Increase Progress bar
   useEffect(() => {
-      const bar = document.getElementById("bar");
-      bar.style.width = qNo * 12.5 + "%";
+    const bar = document.getElementById("bar");
+    bar.style.width = qNo * 12.5 + "%";
 
   }, [qNo, gameOver])
 
-  if (gameOver) {
-    console.log("Game over")
-    setStopTimer(true)
-  }
+  // function miliToHour(mili) {
+  //   return (mili / 1000 / 60 / 60) % 24;
+  // }
+
+  // if (gameOver) {
+  //   console.log("Game over")
+  //   const startTime = localStorage.getItem('startTime');
+  //   const endTime = new Date().getTime();
+  //   const elapsedTime = endTime - startTime;
+  //   console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
+
+  //   const toUpdate = {hr_of_training: employee?.hr_of_training + miliToHour(elapsedTime)};
+  //   updateEmployee(role, id, toUpdate, setResponse);
+  //   console.log(response);
+  // }
+
 
   return (
     <>
-    <div className="wrapper">
-      <div className="container">
-        {/* <p>Game</p> */}
-        <div className="water_container" id="container">
-          <div className="progress_wrapper">
-            <div className="info">
-              <div className="name_container">
-                <p className="rank">A</p>
-                <p className="name">5 ATHENA</p>
+      <div className="wrapper">
+        <div className="container">
+          {/* <p>Game</p> */}
+          <div className="water_container" id="container">
+            <div className="progress_wrapper">
+              <div className="info">
+                <div className="name_container">
+                  <p className="rank">A</p>
+                  <p className="name">5 ATHENA</p>
+                </div>
+                <div className="avatar">
+                  <img src={avatar} alt="avatar" className="avatar_img" />
+                </div>
               </div>
-              <div className="avatar">
-                <img src={avatar} alt="avatar" className="avatar_img" />
-              </div>
-            </div>
-            <div className="progress_container">
-              <div className="title">
-                Experience Bar
-              </div>
-              <div className="progress">
-                <img src={exp_img} alt="exp" className="exp_img" />
-                <div className="progress_bar">
-                  <div className="bar" id="bar"></div>
-                  <div className="xp">XP</div>
+              <div className="progress_container">
+                <div className="title">
+                  Experience Bar
+                </div>
+                <div className="progress">
+                  <img src={exp_img} alt="exp" className="exp_img" />
+                  <div className="progress_bar">
+                    <div className="bar" id="bar"></div>
+                    <div className="xp">XP</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          {/* Game Scene */}
-          {!start ? (
-            <>
-            {/* pop layer */}
-              <StartModel setStart={setStart} start={start}/>
-            </>
-          ): (
-            <>
-            {/* game screen layer */}
-              <div className="pole_container" >
-                {participant.map((player, index) => {
+            {/* Game Scene */}
+            {!start ? (
+              <>
+                {/* pop layer */}
+                <StartModel setStart={setStart} start={start} />
+              </>
+            ) : (
+              <>
+                {/* game screen layer */}
+                <div className="pole_container" >
+                  {participant.map((player, index) => {
 
-                  // console.log(player.score - waterHeight);
-                  return (
+                    // console.log(player.score - waterHeight);
+                    return (
                       <div key={index.toString()} className="p_container"
-                            style={{
-                              transform: `translateY(${player.score}%)`,
-                              opacity: player.score - waterHeight >= 0 ? 0 : "100%"
-                            }}
-                        >
-                          {player.human ? (
-                            <div className="human_pole">
-                              <div className="triangle"></div>
-                              <img src={player.player} alt="human" className="human_img" />
-                            </div>
-                          ) : (
-                            <img src={player.player} alt="person" className="person_img"/>
-                          )}
-                          <img src={player.pole} alt="pole" className="pole" id={player.human ? "human" : "bot"} />
+                        style={{
+                          transform: `translateY(${player.score}%)`,
+                          opacity: player.score - waterHeight >= 0 ? 0 : "100%"
+                        }}
+                      >
+                        {player.human ? (
+                          <div className="human_pole">
+                            <div className="triangle"></div>
+                            <img src={player.player} alt="human" className="human_img" />
+                          </div>
+                        ) : (
+                          <img src={player.player} alt="person" className="person_img" />
+                        )}
+                        <img src={player.pole} alt="pole" className="pole" id={player.human ? "human" : "bot"} />
                       </div>
-                  )
-                })}
-                <img
-                  src={water_level}
-                  alt="water_level"
-                  className="water_level"
-                  id="water_level"
-                  style={{transform: `translateY(${waterHeight}%)`}}
-                />
-              </div>
-              {/* question layer */}
-              <div className="question_container">
-                <div className="question">
-                  <p>{sample[qNo].question}</p>
+                    )
+                  })}
+                  <img
+                    src={water_level}
+                    alt="water_level"
+                    className="water_level"
+                    id="water_level"
+                    style={{ transform: `translateY(${waterHeight}%)` }}
+                  />
                 </div>
-                <form className="answers">
-                  {sample[qNo].options.map((item,index) => (
-                    // eslint-disable-next-line
-                    <>
-                      <input
-                        style={{ display: 'none'}}
-                        type="radio"
-                        key={index.toString()}
-                        id={index}
-                        onClick={(e) => submitAnswer(e,item)}
-                        name="radio"/>
-                      <label 
-                        className={item === sample[qNo].answer ? "ans correct" : "ans wrong"} 
-                        htmlFor={index}>
-                        {item}
-                      </label>
-                    </>
-                  ))}
-                </form>
-              </div>
-            </>
-          )}
-          {/* Game Over */}
-          {gameOver ? (
-            <>
-              <GameOver setGameOver={setGameOver} gameOver={gameOver} win={win} role={role} id={id} />
-            </>
-          ): (
-            <>
-            </>
-          )}
+                {/* question layer */}
+                <div className="question_container">
+                  <div className="question">
+                    <p>{sample[qNo].question}</p>
+                  </div>
+                  <form className="answers">
+                    {sample[qNo].options.map((item, index) => (
+                      // eslint-disable-next-line
+                      <>
+                        <input
+                          style={{ display: 'none' }}
+                          type="radio"
+                          key={index.toString()}
+                          id={index}
+                          onClick={(e) => submitAnswer(e, item)}
+                          name="radio" />
+                        <label
+                          className={item === sample[qNo].answer ? "ans correct" : "ans wrong"}
+                          htmlFor={index}>
+                          {item}
+                        </label>
+                      </>
+                    ))}
+                  </form>
+                </div>
+              </>
+            )}
+            {/* Game Over */}
+            {gameOver ? (
+              <>
+                <GameOver setGameOver={setGameOver} gameOver={gameOver} win={win} role={role} id={id} />
+              </>
+            ) : (
+              <>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
     </>
   )
 }

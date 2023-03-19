@@ -1,10 +1,43 @@
 import { Box, Button, Checkbox, Image, Input, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useStatek, useContext } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { updateEmployee } from '../api/server_routes';
 import Layout from './Layout'
+import { TimerContext } from '../context/TimerContext'
+
 
 const CourseDetail = () => {
+  const [startTimerClicked, setStartTimerClicked] = useState(true);
+  const [timerInterval, setTimerInterval] = useState(null);
+  const { stopTimer, totalSeconds, setTotalSeconds } = useContext(TimerContext)
+
+  const startTime = new Date().getTime();
+  localStorage.setItem('startTime', startTime);
+
+
+  // useEffect(() => {
+  //   console.log("startTimerClicked: ", startTimerClicked)
+  //   console.log("stopTimer: ", stopTimer)
+  //   // console.log(!startTimerClicked || stopTimer)
+  //   if (!startTimerClicked || stopTimer) return;
+  //   console.log("HERE")
+
+  //   const interval = setInterval(() => {
+  //     setTotalSeconds((totalSeconds) => totalSeconds + 1)
+  //     console.log(totalSeconds);
+
+  //     if (stopTimer) {
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
+
+  //   setTimerInterval(interval);
+
+  //   return () => clearInterval(interval);
+  // }, [stopTimer]);
+
+  // console.log(totalSeconds);
+
 
   const { state } = useLocation();
   console.log(state);

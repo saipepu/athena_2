@@ -4,6 +4,7 @@ import Layout from './Layout'
 import { CheckIcon, MinusIcon, PlusSquareIcon } from "@chakra-ui/icons"
 import "../index.css"
 import { useNavigate, useParams } from 'react-router-dom'
+import { TimerContext } from '../context/TimerContext'
 import { fetchOneEmployee, updateEmployee } from '../api/server_routes'
 
 const Training = () => {
@@ -47,16 +48,44 @@ const Training = () => {
       quiz: false
     }
     let list = [];
-    for(let x in employee?.inProgress) {
+    for (let x in employee?.inProgress) {
       list.push(employee?.inProgress[x].course_id);
     }
-    if(!list.includes(blog)) {
+    if (!list.includes(blog)) {
       employee?.inProgress.push(obj);
       updateEmployee(role, id, employee, setResponse);
     }
     navigation(`/course-detail/${blog}/${role}/${id}`, { state: { blog: blogList[blog-1], employee: employee} })
   }
 
+  // useEffect(() => {
+  //   console.log("startTimerClicked: ", startTimerClicked)
+  //   console.log("stopTimer: ", stopTimer)
+  //   // console.log(!startTimerClicked || stopTimer)
+  //   if (!startTimerClicked || stopTimer) return;
+  //   console.log("HERE")
+
+  //   const interval = setInterval(() => {
+  //     setTotalSeconds((totalSeconds) => totalSeconds + 1)
+  //     console.log(totalSeconds);
+
+  //     if (stopTimer) {
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
+
+  //   setTimerInterval(interval);
+
+  //   return () => clearInterval(interval);
+  // }, [stopTimer, startTimerClicked]);
+
+  // console.log(totalSeconds);
+
+
+  // const startTimer = () => {
+  //   console.log("RUNNING")
+  //   setStartTimerClicked(true);
+  // }
 
   return (
     <Layout>
@@ -64,6 +93,7 @@ const Training = () => {
       maxHeight="100%" width={'100%'} justifyContent={'flex-start'} alignItems={'flex-start'} overflow="scroll"
       padding="24px 0px 300px 24px"
       >
+
 
         <Tabs variant="soft-rounded" colorScheme='blue'>
           <TabList>
