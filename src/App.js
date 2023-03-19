@@ -27,7 +27,7 @@ function App() {
             <Route path="/:role/:id/water-rising" element={<WaterRising />} />
             <Route path="/:role/:id/story-based" element={<StoryBased />} />
             <Route path="/404" element={<PageNotFound />} />
-            <Route path="*" element={<Navigate to="/404" />}></Route>
+            <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
         </HashRouter>
     </div>
