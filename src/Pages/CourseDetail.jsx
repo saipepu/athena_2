@@ -1,6 +1,7 @@
-import { Box, Button, Image, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect, useState, useContext } from 'react'
+import { Box, Button, Checkbox, Image, Input, Text, VStack } from '@chakra-ui/react'
+import React, { useEffect, useStatek, useContext } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { updateEmployee } from '../api/server_routes';
 import Layout from './Layout'
 import { TimerContext } from '../context/TimerContext'
 
@@ -39,12 +40,14 @@ const CourseDetail = () => {
 
 
   const { state } = useLocation();
+  console.log(state);
   const { course_id, role, id } = useParams();
   const [game, setGame] = useState("");
-
-
+  const [watch, setWatched] = useState(false);
+  const [read, setRead] = useState(false);
+  const [quiz, setQuiz] = useState(false);
+  const [response, setResponse] = useState();
   const navigation = useNavigate();
-
 
   var course = {
     author: "",
@@ -56,7 +59,39 @@ const CourseDetail = () => {
     game: game,
     game_url: ""
   }
-  course = state;
+  course = state?.blog;
+  var employee = state?.employee
+  console.log(employee);
+
+  const handleChange = (action) => {
+    console.log(action);
+    switch(action) {
+      // eslint-disable-next-line no-lone-blocks
+      case "watched": {
+        setWatched(!watch);
+        break;
+      };
+      // eslint-disable-next-line no-lone-blocks
+      case "read": {
+        setRead(!read);
+        break;
+      };
+      case "won": {
+        setQuiz(true);
+        break;
+      }
+      default: break
+    }
+    const obj = {
+      reading: read,
+      video: watch,
+      quiz: quiz
+    }
+    if(action != "") {
+      console.log(employee);
+      // updateEmployee(role, id, employee, setResponse);
+    }
+  }
   
   return (
     <Layout>
@@ -65,7 +100,7 @@ const CourseDetail = () => {
         padding="50px 150px" paddingBottom={'120px'}
       >
         <Box width="full" textAlign={'left'}>
-          Author
+          By - {course?.author}
         </Box>
         <Text width="full" textAlign={'left'} fontSize="32px" fontWeight="bold">
           {course?.title}
@@ -83,10 +118,17 @@ const CourseDetail = () => {
             {course?.description}
           </Text>
         </Box>
-        <Box padding="50px 0px" dangerouslySetInnerHTML={{ __html: course?.video_url }}>
-          
+        <Box padding="50px 0px 0px 0px" dangerouslySetInnerHTML={{ __html: course?.video_url }}>
+        </Box>
+        <Box cursor={'pointer'} onClick={() => handleChange('watched')} width="560px" display="flex" justifyContent={'flex-end'} gap="12px">
+          <input type="checkbox" id="checkbox" checked={watch} readOnly/>
+          <text htmlFor="checkbox">Mark as Watched</text>
         </Box>
         <Text>The End</Text>
+        <Box cursor={'pointer'} onClick={() => handleChange('read')} width="560px" display="flex" justifyContent={'flex-end'} gap="12px">
+          <input type="checkbox" id="checkbox" checked={read} readOnly/>
+          <text htmlFor="checkbox">Mark as Read</text>
+        </Box>
         <Box width="full" display="flex">
           <Button onClick={() => navigation(`/${role}/${id}/${course.game_type}`)} style={{ marginLeft: 'auto', backgroundColor: 'var(--theme-color)', color: 'white'}}>Play Quiz Game</Button>
         </Box>
