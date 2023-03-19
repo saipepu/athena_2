@@ -6,12 +6,12 @@ import "../index.css"
 import { useNavigate, useParams } from 'react-router-dom'
 import { TimerContext } from '../context/TimerContext'
 
-
 import { fetchOneEmployee, updateEmployee } from '../api/server_routes'
 
 const Training = () => {
   const [startTimerClicked, setStartTimerClicked] = useState(false);
   const [timerInterval, setTimerInterval] = useState(null);
+  const [totalSeconds, setTotalSeconds] = useState(0);
 
 
   const { stopTimer } = useContext(TimerContext)
@@ -21,8 +21,6 @@ const Training = () => {
 
   const { role, id } = useParams();
   const navigation = useNavigate();
-
-  let totalSeconds = 0;
 
   const blog1 = {
     author: " Chirst Voss, Dan Shapiro & more!",
@@ -36,28 +34,28 @@ const Training = () => {
   }
 
   useEffect(() => {
-  console.log("startTimerClicked: ", startTimerClicked)
-  console.log("stopTimer: ", stopTimer)
+    console.log("startTimerClicked: ", startTimerClicked)
+    console.log("stopTimer: ", stopTimer)
     // console.log(!startTimerClicked || stopTimer)
     if (!startTimerClicked || stopTimer) return;
     console.log("HERE")
-  
+
     const interval = setInterval(() => {
       ++totalSeconds;
       console.log(totalSeconds);
-  
+
       if (stopTimer) {
         clearInterval(interval);
       }
     }, 1000);
-  
-    setTimerInterval(interval); 
-  
+
+    setTimerInterval(interval);
+
     return () => clearInterval(interval);
   }, [stopTimer, startTimerClicked]);
 
   console.log(totalSeconds);
-  
+
 
   const startTimer = () => {
     // if (stopTimer) return
@@ -67,8 +65,6 @@ const Training = () => {
     // }, 1000);
     console.log("RUNNING")
     setStartTimerClicked(true);
-    // if (!startTimerClicked || stopTimer) return;
-    console.log("AS", startTimerClicked)
   }
 
   return (
@@ -96,6 +92,7 @@ const Training = () => {
           </InputGroup>
           <Box>Bookmark</Box>
           <Box>Popular</Box>
+          <Box>{totalSeconds}</Box>
         </HStack>
 
         <VStack maxWidth="100%" padding="0" justifyContent="flex-start" alignitems="flex-start" paddingBottom="20px">
@@ -105,7 +102,7 @@ const Training = () => {
               <Card height="270px" width="300px" onClick={() => {
                 console.log("Click")
                 startTimer();
-                navigation(`/course-detail/${1}/${role}/${id}`, { state: blog1 })
+                // navigation(`/course-detail/${1}/${role}/${id}`, { state: blog1 })
               }
               } cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
                 <AspectRatio ratio={2 / 1}>
