@@ -4,8 +4,16 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signOut } from '../../api/Registeration'
 import avatar from '../../assets/avatar.png'
+import { fetchOneEmployee } from "../../api/server_routes";
+
 
 const Header = ({ role, id }) => {
+
+  const [employee, setEmployee] = useState();
+
+  useEffect(() => {
+    fetchOneEmployee(role, id, setEmployee);
+  }, [role, id])
 
   const [response, setResponse] = useState()
   const [errorMessage, setErrorMessage] = useState();
@@ -47,8 +55,8 @@ const Header = ({ role, id }) => {
       <div style={{ position: 'absolute', color: 'red', top: '110%', right: '20px'}}>{errorMessage}</div>
       <Box height="100%" display="flex" justifyContent='center' alignItems='flex-end' color="black" paddingBottom="12px">
         <Box height="full" display="flex" flexDirection="column" justifyContent='flex-end'>
-          <Text fontSize="12px" fontWeight="normal">5 Token</Text>
-          <Text fontSize="24px" fontWeight="bold" lineHeight={'100%'}>Geo</Text>
+          <Text fontSize="12px" fontWeight="normal">{employee?.ATH} Token</Text>
+          <Text fontSize="24px" fontWeight="bold" lineHeight={'100%'}>{employee?.name}</Text>
         </Box>
         <Menu bgColor="red">
           {/* <MenuButton as={Button} backgroundColor="red" borderRadius="1000px">

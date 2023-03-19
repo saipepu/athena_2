@@ -80,7 +80,7 @@ const Dashboard = () => {
           className="scroll_container"
           style={{ color: 'black'}} height="100%" width={'100%'} justifyContent={'flex-start'} alignItems={'flex-start'} overflow="scroll">
           {role === 'admin' ? <AdminDashboard /> : <EmployeeDashboard />}
-          <RankTable setNumberOfEmployee={setNumberOfEmployee}/>
+          <RankTable id={id} role={role} setNumberOfEmployee={setNumberOfEmployee}/>
         </VStack>
     </Layout>
   )
