@@ -61,33 +61,40 @@ const Sidebar = ({ role, id}) => {
             Dashboard
           </Text>
         </Button>
-        <Button
-          width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
-          onMouseOver={() => setHover('training')} onMouseLeave={() => setHover("")}
-          onClick={() => navigation(`training/${role}/${id}`)}
-          id="button" leftIcon={<Image src={training} width="28px" />} bgColor="white" style={currentUrl === 'training' ? ButtonTarget : hover === 'training' ? ButtonHoverStyle : ButtonStyle}>
-          <Text as="a" fontSize={'20px'} color={currentUrl === 'training' ? 'white': 'black'}>
-            Training
-          </Text>
-        </Button>
-        <Button
-          width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
-          onMouseOver={() => setHover('avatar')} onMouseLeave={() => setHover("")}
-          onClick={() => navigation(`avatar/${role}/${id}`)}
-          id="button" leftIcon={<Image src={avatar} width="28px" />} bgColor="white" style={currentUrl === 'avatar' ? ButtonTarget : hover === 'avatar' ? ButtonHoverStyle : ButtonStyle}>
-          <Text as="a" fontSize={'20px'} color={currentUrl === 'avatar' ? 'white': 'black'}>
-            Avatar
-          </Text>
-        </Button>
-        <Button
-          width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
-          onMouseOver={() => setHover('rewards')} onMouseLeave={() => setHover("")}
-          onClick={() => navigation(`rewards/${role}/${id}`)}
-          id="button" leftIcon={<Image src={rewards} width="28px" />} bgColor="white" style={currentUrl === 'rewards' ? ButtonTarget : hover === 'rewards' ? ButtonHoverStyle : ButtonStyle}>
-          <Text as="a" fontSize={'20px'} color={currentUrl === 'rewards' ? 'white': 'black'}>
-            Rewards
-          </Text>
-        </Button>
+        {role == 'employee' ? (
+          <>
+            <Button
+            width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
+            onMouseOver={() => setHover('training')} onMouseLeave={() => setHover("")}
+            onClick={() => navigation(`training/${role}/${id}`)}
+            id="button" leftIcon={<Image src={training} width="28px" />} bgColor="white" style={currentUrl === 'training' ? ButtonTarget : hover === 'training' ? ButtonHoverStyle : ButtonStyle}>
+            <Text as="a" fontSize={'20px'} color={currentUrl === 'training' ? 'white': 'black'}>
+              Training
+            </Text>
+          </Button>
+          <Button
+            width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
+            onMouseOver={() => setHover('avatar')} onMouseLeave={() => setHover("")}
+            onClick={() => navigation(`avatar/${role}/${id}`)}
+            id="button" leftIcon={<Image src={avatar} width="28px" />} bgColor="white" style={currentUrl === 'avatar' ? ButtonTarget : hover === 'avatar' ? ButtonHoverStyle : ButtonStyle}>
+            <Text as="a" fontSize={'20px'} color={currentUrl === 'avatar' ? 'white': 'black'}>
+              Avatar
+            </Text>
+          </Button>
+          <Button
+            width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
+            onMouseOver={() => setHover('rewards')} onMouseLeave={() => setHover("")}
+            onClick={() => navigation(`rewards/${role}/${id}`)}
+            id="button" leftIcon={<Image src={rewards} width="28px" />} bgColor="white" style={currentUrl === 'rewards' ? ButtonTarget : hover === 'rewards' ? ButtonHoverStyle : ButtonStyle}>
+            <Text as="a" fontSize={'20px'} color={currentUrl === 'rewards' ? 'white': 'black'}>
+              Rewards
+            </Text>
+          </Button>
+          </>
+        ) : (
+          ""
+        )}
+        
         {/* <Button
           width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
           onMouseOver={() => setHover('setting')} onMouseLeave={() => setHover("")}

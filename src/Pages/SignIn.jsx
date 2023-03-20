@@ -10,6 +10,8 @@ const SignIn = () => {
   const [response, setResponse] = useState()
   const [errorMessage, setErrorMessage] = useState(null);
   const [isHR, setIsHR] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const [first, setFirst] = useState(true);
 
   const formStyle = {
     margin: "auto",
@@ -29,7 +31,10 @@ const SignIn = () => {
   const formik = useFormik({
     initialValues: model,
     onSubmit: async(values) => {
-      signIn(values, setResponse, isHR)
+      setLoading(true);
+      setTimeout(() => {
+        signIn(values, setResponse, isHR)
+      }, 500)
     }
   })
 
@@ -55,6 +60,13 @@ const SignIn = () => {
   const handleSwitch = () => {
     setIsHR(!isHR);
   }
+
+  useEffect(() => {
+    if(!first) {
+      setLoading(false);
+    } setFirst(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response])
 
   return (
       <HStack width="full" height="full">
@@ -126,7 +138,9 @@ const SignIn = () => {
               }}
             />
 
-            <Button style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
+            <Button style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit"
+              isLoading={isLoading}
+            >Submit</Button>
             <Text fontSize="18px" color="#cbcbcb" fontWeight="normal">Don't have an account yet? <a href="/#/sign-up" style={{ textDecorationLine: 'underline'}}>Sign Up</a></Text>
             <Text fontSize="18px" color="red" fontWeight="normal">{errorMessage}</Text>
           </form>

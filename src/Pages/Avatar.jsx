@@ -90,9 +90,12 @@ const Avatar = () => {
       <HStack
         width="100%" height="100%"
         justifyContent="flex-start" alignItems="flex-start" overflow="scroll">
-        <Box flex="1" display="grid" height="100%" minWidth="300px">
+        <Box flex="1" display="grid" height="100%" minWidth="300px" position="relative">
           {selectedItem?.name === 'Hat' ? (
-            <Image margin="auto" src={avatar_with_hat} alt="avatar" width="100%" height="500px" objectFit="contain"/>
+            <>
+              <Image src={hat} alt="hat" style={{ zIndex: 10, objectFit: 'contain', position: 'absolute', width: '100px', height: '100px', top: '14%', left: '51.5%', transform: 'translateX(-50%)' }} />
+              <Image margin="auto" src={avatar} alt="avatar" width="100%" height="500px" objectFit="contain"/>
+            </>
           ) : (
             <Image margin="auto" src={avatar} alt="avatar" width="100%" height="500px" objectFit="contain"/>
           )}
@@ -121,6 +124,7 @@ const Avatar = () => {
                             setSelectedItem({})
                           }
                         }}
+                        style={{ borderStyle: "inset"}}
                         bgColor={selectedItem?.id === item.id ? 'green.100' : '#F0F0F0'}
                         border={selectedItem?.id === item.id? '2px solid green' : 'none'}
                       >

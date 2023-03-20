@@ -1,5 +1,5 @@
 import { Card, CardBody, Heading, HStack, Image, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import red_clock from '../assets/red_clock.png'
 import token from '../assets/token.png'
 import book from '../assets/book.png'
@@ -17,7 +17,8 @@ const Dashboard = () => {
   useEffect(() => {
     fetchOneEmployee(role, id, setEmployee);
     console.log('dashboard')
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [role, id])
 
   const EmployeeDashboard = () => {
 

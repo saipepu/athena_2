@@ -10,6 +10,8 @@ const SignUp = () => {
   const [response, setResponse] = useState();
   const [errorMessage, setErrorMessage] = useState(null)
   const [isHR, setIsHR] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const [first, setFirst] = useState(true);
 
   const formStyle = {
     margin: "auto",
@@ -39,8 +41,8 @@ const SignUp = () => {
   const formik = useFormik({
     initialValues: isHR ? HR : Employee,
     onSubmit: async(values) => {
+      setLoading(true);
       signUp(values, setResponse, isHR);
-      // navigation('/sign-in')
     }
   })
 
@@ -61,6 +63,12 @@ const SignUp = () => {
   const handleSwitch = () => {
     setIsHR(!isHR);
   }
+
+  useEffect(() => {
+    if(!first) {
+      setLoading(false);
+    } setFirst(false);
+  }, [response])
 
   return (
       <HStack width="100%" height="100%">
@@ -198,7 +206,9 @@ const SignUp = () => {
             )}
             
 
-            <Button style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit">Submit</Button>
+            <Button style={{ marginBottom: '6px', backgroundColor: "var(--theme-color)", color: 'white', fontSize: '20px', width: '100%', padding: '12px',}} type="submit"
+            isLoading={isLoading}
+            >Submit</Button>
             <Text fontSize="18px" color="#cbcbcb" fontWeight="normal">Already have an account? <a href="/#/sign-in" style={{ textDecorationLine: 'underline'}}>Sign In</a></Text>
             <Text fontSize="18px" color="red">{errorMessage}</Text>
           </form>

@@ -113,6 +113,9 @@ th:last-child {
 th {
   background: var(--theme-color);
 }
+.highlight {
+  background: #EE525320;
+}
 .table {
   border-spacing: 0;
   cellspacing: 0 !important;

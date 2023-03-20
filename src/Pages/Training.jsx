@@ -13,8 +13,9 @@ const Training = () => {
   const navigation = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [response, setResponse] = useState();
-  const [haveComplete, setHaveComplete] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [employee, setEmployee] = useState(state?.employee)
+  const [haveComplete, setHaveComplete] = useState(true);
   const [first, setFirst] = useState(true);
   const [changeTab, setChangeTab] = useState(false);
 
