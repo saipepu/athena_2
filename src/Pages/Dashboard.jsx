@@ -58,7 +58,7 @@ const Dashboard = () => {
               color="#A3AED0"
               whiteSpace="none !important"
             >
-              Hours of Training
+              Minutes of Training
             </Heading>
             <Text as="p" fontSize={"36px"} lineHeight="100%" whiteSpace="none">
               {employee?.hr_of_training}
