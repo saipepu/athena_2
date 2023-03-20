@@ -218,7 +218,7 @@ const Training = () => {
                 ) : (
                   <Text fontSize="20px" color="gray" padding="30px 0px">No Courses are currently In-Progress. Start Learning something new!.</Text>
                 )}
-                <Text fontSize="12px" color="#4d4d4d80">Please Refreach to See Changes!</Text>
+                <Text fontSize="12px" color="#4d4d4d80">Please refresh to See Changes!</Text>
               </VStack>
             </TabPanel>
 {/* Completed */}
