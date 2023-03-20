@@ -7,15 +7,16 @@ import RankTable from '../Components/RankTable/RankTable'
 import Layout from './Layout'
 import { useParams } from 'react-router-dom'
 import { fetchOneEmployee } from '../api/server_routes'
-// import { useMediaQuery } from '@chakra-ui/react'
 
 const Dashboard = () => {
+
   const { role, id } = useParams();
   const [numberOfEmployee, setNumberOfEmployee] = useState([]);
   const [employee, setEmployee] = useState();
 
   useEffect(() => {
     fetchOneEmployee(role, id, setEmployee);
+    console.log('dashboard')
   }, [])
 
   const EmployeeDashboard = () => {

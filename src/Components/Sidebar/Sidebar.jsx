@@ -1,23 +1,32 @@
 import { Button, ButtonGroup, Container, Image, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dashboard from '../../assets/dashboard.png'
 import training from '../../assets/training.png'
 import avatar from '../../assets/user.png'
 import rewards from '../../assets/wallet.png'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { fetchOneEmployee } from '../../api/server_routes'
 
-const Sidebar = () => {
-
-  const { role, id } = useParams();
-  const [hover, setHover] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [currentUrl, setCurrentURL] =  useState(window.location.href.split('#/')[1].split("/")[0]);
-  // console.log(currentUrl);
+const Sidebar = ({ role, id}) => {
 
   const navigate = useNavigate();
+  const [hover, setHover] = useState(false);
+  const [employee, setEmployee] = useState();
+
+  // eslint-disable-next-line no-unused-vars
+  const [currentUrl, setCurrentURL] =  useState(window.location.href.split('#/')[1].split("/")[0]);
+
   const navigation = (path) => {
-    navigate('/'+path)
+    if(employee) {
+      console.log('Passing from Sidebar -> ', employee)
+      navigate('/'+path, { state: { employee: employee }})
+    }
   }
+
+  useEffect(() => {
+    fetchOneEmployee(role, id, setEmployee);
+    console.log('Fetcted from Sidebar')
+  }, [role, id])
 
   const ButtonStyle = {
     transition: 'all 0.3s ease-in-out',

@@ -19,6 +19,7 @@ export const fetchOneEmployee = async (role, id, setEmployee) => {
 
 export const updateEmployee = async (role, id, obj, setResponse) => {
   console.log('updating employee data . . . ')
+  console.log(obj);
   await fetch(`${api}/${role}/updateInfo/${id}`, {
     method: 'POST',
     headers: {
@@ -28,7 +29,8 @@ export const updateEmployee = async (role, id, obj, setResponse) => {
     body: JSON.stringify(obj)
   })
     .then(result => result.json().then(data => {
+      console.log(data);
       setResponse(data)
     }))
-    .catch(error => error);
+    .catch(error => console.log(error));
 }

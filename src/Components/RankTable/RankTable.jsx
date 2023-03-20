@@ -9,18 +9,14 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
 
   let [employeeList, setEmployeeList] = useState([]);
 
-  const [oneEmployee, setOneEmployee] = useState();
-
-  useEffect(() => {
-    fetchOneEmployee(role, id, setOneEmployee);
-  }, [role, id])
-
   useEffect(() => {
     fetchAllEmployee(setEmployeeList, employeeList)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     setNumberOfEmployee(employeeList.length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeList])
 
   employeeList.sort((a, b) => a.exp - b.exp);
@@ -29,8 +25,6 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
     textAlign: 'left',
     color: 'white'
   }
-
-  console.log(oneEmployee?._id)
 
   return (
     <TableContainer

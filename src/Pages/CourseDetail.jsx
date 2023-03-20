@@ -8,9 +8,6 @@ import _ from 'lodash';
 
 
 const CourseDetail = () => {
-  const [startTimerClicked, setStartTimerClicked] = useState(true);
-  const [timerInterval, setTimerInterval] = useState(null);
-  const { stopTimer, totalSeconds, setTotalSeconds } = useContext(TimerContext)
 
   const startTime = new Date().getTime();
   localStorage.setItem('startTime', startTime);
@@ -23,6 +20,8 @@ const CourseDetail = () => {
   const [response, setResponse] = useState();
   const [trigger, setTrigger] = useState(false);
   const [first, setFirst] = useState(true);
+  const [load, setLoading] = useState(false);
+  const [changed, setChange] = useState(true);
   const navigation = useNavigate();
 
   var course = state?.blog;
@@ -30,6 +29,7 @@ const CourseDetail = () => {
   console.log(employee);
 
   const handleChange = (action) => {
+    setChange(true);
     console.log(action);
     switch(action) {
       // eslint-disable-next-line no-lone-blocks
@@ -49,6 +49,7 @@ const CourseDetail = () => {
       };
       // eslint-disable-next-line no-lone-blocks
       case "trigger": {
+        setLoading(true);
         setTimeout(() => {
           setTrigger(!trigger);
         }, 1000);
@@ -67,7 +68,6 @@ const CourseDetail = () => {
             console.log(watch, read, quiz);
             employee.inProgress[x].reading = read
             employee.inProgress[x].video = watch
-            employee.inProgress[x].quiz = quiz
           }
         }
           updateEmployee(role, id, employee, setResponse);
@@ -76,8 +76,13 @@ const CourseDetail = () => {
     } else {
       setFirst(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger])
   
+  useEffect(() => {
+    setLoading(false);
+    setChange(false);
+  }, [response])
 
   useEffect(() => {
     for(let x in employee?.inProgress) {
@@ -87,6 +92,7 @@ const CourseDetail = () => {
         setWatched(employee.inProgress[x].video)
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employee])
   
   return (
@@ -117,15 +123,17 @@ const CourseDetail = () => {
         <Box padding="50px 0px 0px 0px" dangerouslySetInnerHTML={{ __html: course?.video_url }}>
         </Box>
         <Box cursor={'pointer'} onClick={() => handleChange('watched')} width="560px" display="flex" justifyContent={'flex-end'} gap="12px">
-          <input type="checkbox" id="checkbox" checked={watch} readOnly/>
           <text htmlFor="checkbox">Mark as Watched</text>
+          <input type="checkbox" id="checkbox" checked={watch} readOnly/>
         </Box>
         <Box cursor={'pointer'} onClick={() => handleChange('read')} width="560px" display="flex" justifyContent={'flex-end'} gap="12px">
-          <input type="checkbox" id="checkbox" checked={read} readOnly/>
           <text htmlFor="checkbox">Mark as Read</text>
+          <input type="checkbox" id="checkbox" checked={read} readOnly/>
         </Box>
         <Box width="560px" display="flex">
-          <Button onClick={() => handleChange('trigger')} fontSize="12px" padding="2px 24px" style={{ marginLeft: 'auto', backgroundColor: 'blue.200', color: 'blue.500'}}>Save Progress</Button>
+          <Button onClick={() => handleChange('trigger')} fontSize="12px" padding="2px 24px" style={{ marginLeft: 'auto', backgroundColor: 'blue.200', color: 'blue.500'}}
+          isLoading={load}
+          >{response ? response?.updateSuccess === false ? "Try Again" : changed ? "Saved Progress" : "Saved" : "Save Progress"}</Button>
         </Box>
         <Text>The End</Text>
         <Box width="full" display="flex">

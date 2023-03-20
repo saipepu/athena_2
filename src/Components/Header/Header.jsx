@@ -4,16 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signOut } from '../../api/Registeration'
 import avatar from '../../assets/avatar.png'
-import { fetchOneEmployee } from "../../api/server_routes";
 
-
-const Header = ({ role, id }) => {
-
-  const [employee, setEmployee] = useState();
-
-  useEffect(() => {
-    fetchOneEmployee(role, id, setEmployee);
-  }, [role, id])
+const Header = ({ role, id, employee }) => {
 
   const [response, setResponse] = useState()
   const [errorMessage, setErrorMessage] = useState();

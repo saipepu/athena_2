@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import './WaterRising.css'
 import water_level from '../../assets/water_level.png'
 import pole1 from '../../assets/pole1.png'
@@ -17,14 +17,12 @@ import StartModel from '../../Components/StartModel/StartModel'
 import GameOver from '../../Components/GameOver/GameOver'
 import WaterRisingData from '../../api/WaterRisingData'
 import { useLocation, useParams } from 'react-router-dom'
-import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
 // import { TimerContext } from '../../context/TimerContext'
 
 const WaterRising = () => {
 
   // const {setStopTimer} = useContext(TimerContext)
   // const [employee, setEmployee] = useState();
-  const [response, setResponse] = useState();
 
   const { role, id } = useParams();
   const { state  } = useLocation();

@@ -3,12 +3,17 @@ import avatar from "../../assets/avatar.png";
 import exp_img from "../../assets/exp_img.png";
 import "./StoryBased.css";
 import treasure_chest from "../../assets/treasure_chest.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import getSheetData from "../../api/StoryBasedData";
 import { useParams } from 'react-router-dom'
-import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
+import { updateEmployee } from "../../api/server_routes";
 
 const StoryBased = () => {
+
+  const { state } = useLocation();
+  console.log(state);
+  const course_id = state?.course_id;
+  const employee = state?.employee
   const [progressCount, setProgressCount] = useState(0);
   const [nextSceneCount, setNextSceneCount] = useState(0);
   const [start, setStart] = useState(true);
@@ -16,7 +21,7 @@ const StoryBased = () => {
   const [gameOver, setGameOver] = useState(false);
   const [click, setClick] = useState(false);
   const [blockNextScene, setBlockNextScene] = useState(false);
-  const [employee, setEmployee] = useState();
+  const [response, setResponse] = useState();
 
   const [scenes, setScenes] = useState([]);
 
@@ -24,17 +29,10 @@ const StoryBased = () => {
   const navigation = useNavigate();
 
   useEffect(() => {
-    fetchOneEmployee(role, id, setEmployee);
-  }, [role, id])
-
-  useEffect(() => {
     async function fetchScenes() {
       const data = await getSheetData();
       setScenes(data);
     }
-
-    console.log("RUNNING")
-    // fetchOneEmployee(id, setEmployee);
     fetchScenes();
   }, []);
 
@@ -65,6 +63,7 @@ const StoryBased = () => {
       }
       setBlockNextScene(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nextSceneCount]);
 
   const nextScene = () => {
@@ -132,13 +131,23 @@ const StoryBased = () => {
       console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
       setMiliToHour = miliToHour(elapsedTime)
 
-      const toUpdate = { ATH: employee.ATH + 1, exp: employee.exp + score, hr_of_training: employee.hr_of_training + setMiliToHour }
-      updateEmployee(role, id, toUpdate);
+      // const toUpdate = { ATH: employee.ATH + 1, exp: employee.exp + score, hr_of_training: employee.hr_of_training + setMiliToHour }
+      employee.ATH = employee?.ATH + 1;
+      employee.exp = employee?.exp + score;
+      employee.hr_of_training = parseInt(employee?.hr_of_training + setMiliToHour);
+      for(let x in employee?.inProgress) {
+        // eslint-disable-next-line eqeqeq
+        if(course_id == employee?.inProgress[x].course_id) {
+          employee.inProgress[x].quiz = true
+        }
+      }
+      updateEmployee(role, id, employee, setResponse);
     }
   }
 
   isGameOver();
 
+  // eslint-disable-next-line eqeqeq
   let isLast = nextSceneCount == scenes?.length - 1;
 
   return (

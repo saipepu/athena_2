@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./GameOver.css";
 import treasure_chest from "../../assets/treasure_chest.png";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../api/server_api";
-import { fetchOneEmployee, updateEmployee } from "../../api/server_routes";
+import { updateEmployee } from "../../api/server_routes";
 
 const GameOver = ({ setGameOver, gameOver, win, role, id, employee, course_id }) => {
 

@@ -1,21 +1,30 @@
-import { Box, HStack, Text, IconButton, VStack, Card, Image, CardBody, Heading, AspectRatio, CardFooter, Badge, Progress, Tabs, TabList, Tab, TabPanels, TabPanel } from '@chakra-ui/react'
+import { Box, HStack, Text, VStack, Card, Image, CardBody, Heading, AspectRatio, CardFooter, Badge, Tabs, TabList, Tab, TabPanels, TabPanel } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Layout from './Layout'
-import { CheckIcon, MinusIcon, PlusSquareIcon } from "@chakra-ui/icons"
+import { CheckIcon, MinusIcon } from "@chakra-ui/icons"
 import "../index.css"
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { fetchOneEmployee, updateEmployee } from '../api/server_routes'
 
 const Training = () => {
 
   const { role, id } = useParams();
+  const { state } = useLocation();
   const navigation = useNavigate();
-  const [employee, setEmployee] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [response, setResponse] = useState();
+  const [haveComplete, setHaveComplete] = useState(true);
+  const [employee, setEmployee] = useState(state?.employee)
+  const [first, setFirst] = useState(true);
+  const [changeTab, setChangeTab] = useState(false);
 
   useEffect(() => {
-    fetchOneEmployee(role, id, setEmployee);
-  }, [response, role, id])
+    if(first) {
+      setFirst(false);
+      fetchOneEmployee(role, id, employee);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [changeTab, role, id])
 
   const blog1 = {
     author: "Chirst Voss, Dan Shapiro & more!",
@@ -27,6 +36,7 @@ const Training = () => {
     game_type: "water-rising",
     game_id: "1ydjnm6UyE5pm5-onpFT-w3KdBSNzxU-fsj6KAvtb9mA",
   }
+
   const blog2 = {
     author: "Patrick David",
     title: "How to handle customers",
@@ -61,6 +71,21 @@ const Training = () => {
     }
   }
 
+  useEffect(() => {
+    let count = 0;
+    for(let x=0; x<employee?.inProgress.length; x++) {
+      if(employee.inProgress[x].reading && employee.inProgress[x].video && employee.inProgress[x].quiz) {
+        count++;
+      }
+    }
+    if(count > 0){
+      setHaveComplete(true);
+    } else {
+      setHaveComplete(false);
+    }
+    console.log('Training')
+  }, [employee])
+
   return (
     <Layout>
       <VStack
@@ -68,12 +93,11 @@ const Training = () => {
       padding="24px 0px 300px 24px"
       >
 
-
         <Tabs variant="soft-rounded" colorScheme='blue'>
           <TabList>
-            <Tab>Recommend</Tab>
-            <Tab>In Progress</Tab>
-            <Tab>Completed</Tab>
+            <Tab onClick={() => setChangeTab(!changeTab)}>Recommend</Tab>
+            <Tab onClick={() => setChangeTab(!changeTab)}>In Progress</Tab>
+            <Tab onClick={() => setChangeTab(!changeTab)}>Completed</Tab>
           </TabList>
           <TabPanels>
 
@@ -139,90 +163,126 @@ const Training = () => {
                       if(item?.course_id === 2) {
                         data = blog2
                       }
-                      return (
-                        <Box key={index}>
-                          <Card width="350px" onClick={() => navigation(`/course-detail/${index}`)} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
-                            <AspectRatio ratio={4/1}>
-                              <Image src={data.image_url} objectFit="cover" />
-                            </AspectRatio>
-                              <CardBody width="full" p='12px'>
-                                <HStack width="full" marginBottom="6px" justifyContent="space-between" alignItems="flex-start">
-                                  <Heading size="md" fontSize="18px" width="100%" textAlign="left" isTruncated>{item.title}</Heading>
+                      if(item?.reading && item?.video && item?.quiz) {
+                        return "";
+                      } else {
+                        return (
+                          <Box key={index}>
+                            <Card width="350px" onClick={() => handleClick(item?.course_id)} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
+                              <AspectRatio ratio={4/1}>
+                                <Image src={data.image_url} objectFit="cover" />
+                              </AspectRatio>
+                                <CardBody width="full" p='12px'>
+                                  <HStack width="full" marginBottom="6px" justifyContent="space-between" alignItems="flex-start">
+                                    <Heading size="md" fontSize="18px" width="100%" textAlign="left" isTruncated>{item.title}</Heading>
+                                  </HStack>
+                                  <HStack width="full" display="flex" justifyContent="flex-start" alignItems="flex-start">
+                                    <Box flex="1" maxWidth="105px" bgColor={item.reading ? 'green.500' : 'gray.100'} color={item.reading ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                      <Text fontSize="14px" fontWeight="bold">Reading</Text>
+                                      {item.reading ? (
+                                        <CheckIcon boxSize="14px" stroke="1px solid black"/>
+                                      ) : (
+                                        <MinusIcon boxSize="14px" stroke="1px solid black"/>
+                                      )}
+                                    </Box>
+                                    <Box bgColor={item.video ? 'green.500' : 'gray.100'} color={item.video ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                      <Text fontSize="14px" fontWeight="bold">Video</Text>
+                                      {item.video ? (
+                                        <CheckIcon boxSize="14px" stroke="1px solid black"/>
+                                      ) : (
+                                        <MinusIcon boxSize="14px" stroke="1px solid black"/>
+                                      )}
+                                    </Box>
+                                    <Box bgColor={item.quiz ? 'green.500' : 'gray.100'} color={item.quiz ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                      <Text fontSize="14px" fontWeight="bold">Quiz</Text>
+                                      {item.quiz ? (
+                                        <CheckIcon boxSize="14px" stroke="1px solid black"/>
+                                      ) : (
+                                        <MinusIcon boxSize="14px" stroke="1px solid black"/>
+                                      )}                                  </Box>
+                                  </HStack>
+                                </CardBody>
+                                <CardFooter width="full" p="12px" pt="0px">
+                                <HStack width="full" justifyContent="flex-start">
+                                  <Badge fontSize="8px">UI/UX</Badge>
+                                  <Badge fontSize="8px" style={{ backgroundColor: 'var(--theme-color)', color: 'white'}}>Management</Badge>
                                 </HStack>
-                                <HStack width="full" display="flex" justifyContent="flex-start" alignItems="flex-start">
-                                  <Box flex="1" maxWidth="105px" bgColor={item.reading ? 'green.500' : 'gray.100'} color={item.reading ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
-                                    <Text fontSize="14px" fontWeight="bold">Reading</Text>
-                                    {item.reading ? (
-                                      <CheckIcon boxSize="14px" stroke="1px solid black"/>
-                                    ) : (
-                                      <MinusIcon boxSize="14px" stroke="1px solid black"/>
-                                    )}
-                                  </Box>
-                                  <Box bgColor={item.video ? 'green.500' : 'gray.100'} color={item.video ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
-                                    <Text fontSize="14px" fontWeight="bold">Video</Text>
-                                    {item.video ? (
-                                      <CheckIcon boxSize="14px" stroke="1px solid black"/>
-                                    ) : (
-                                      <MinusIcon boxSize="14px" stroke="1px solid black"/>
-                                    )}
-                                  </Box>
-                                  <Box bgColor={item.quiz ? 'green.500' : 'gray.100'} color={item.quiz ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
-                                    <Text fontSize="14px" fontWeight="bold">Quiz</Text>
-                                    {item.quiz ? (
-                                      <CheckIcon boxSize="14px" stroke="1px solid black"/>
-                                    ) : (
-                                      <MinusIcon boxSize="14px" stroke="1px solid black"/>
-                                    )}                                  </Box>
-                                </HStack>
-                              </CardBody>
-                              <CardFooter width="full" p="12px" pt="0px">
-                              <HStack width="full" justifyContent="flex-start">
-                                <Badge fontSize="8px">UI/UX</Badge>
-                                <Badge fontSize="8px" style={{ backgroundColor: 'var(--theme-color)', color: 'white'}}>Management</Badge>
-                              </HStack>
-                            </CardFooter>
-                          </Card>
-                        </Box>
-                      )
+                              </CardFooter>
+                            </Card>
+                          </Box>
+                        )    
+                      }
                     })}
                   </HStack>
                 ) : (
                   <Text fontSize="20px" color="gray" padding="30px 0px">No Courses are currently In-Progress. Start Learning something new!.</Text>
                 )}
+                <Text fontSize="12px" color="#4d4d4d80">Please Refreach to See Changes!</Text>
               </VStack>
             </TabPanel>
 {/* Completed */}
             <TabPanel>
               <VStack maxWidth="100%" padding="0" justifyContent="flex-start" alignItems="flex-start" paddingBottom="20px">
                 <Text as="h1" textAlign="left" fontSize="32px" fontWeight="bold">Completed</Text>
-                {employee?.completed.length > 0 ? (
+                {haveComplete ? (
                   <HStack maxWidth="100%" gap="12px" overflow="scroll" padding={'0px 50px 12px 10px'}>
-                    {employee?.completed.map((item, index) => {
-                      return (
-                        <Box key={index}>
-                          <Card width="200px" onClick={() => navigation('/course-detail')} cursor="pointer" direction={'column'} minWidth="full" overflow="hidden">
-                            <AspectRatio ratio={2/1}>
-                              <Image  src={'https://source.unsplash.com/random/'+index+index+index} objectFit="cover" />
-                            </AspectRatio>
-                            <CardBody width="full" p='12px'>
-                              <HStack width="full" justifyContent="space-between" alignItems="flex-start">
-                                <Heading size="md" fontSize="18px" width="100%" textAlign="left" isTruncated>Human Relations Movement: 5 Steps To better Management</Heading>
-                                <IconButton icon={<PlusSquareIcon />} size="sm" />
-                              </HStack>
-                              <HStack width="full" justifyContent="space-between">
-                                <Progress width="100%" height="5px" borderRadius="20px" value={100} size="md" colorScheme="green" />
-                                <Text fontSize={'12px'} color="green">Completed</Text>
-                              </HStack>
-                            </CardBody>
-                            <CardFooter width="full" p="12px" pt="0px">
-                              <HStack width="full" justifyContent="flex-start">
-                                <Badge>UI/UX</Badge>
-                                <Badge style={{ backgroundColor: 'var(--theme-color)', color: 'white'}}>Management</Badge>
-                              </HStack>
-                            </CardFooter>
-                          </Card>
-                        </Box>
-                      )
+                    {employee?.inProgress.map((item, index) => {
+                      let data;
+                      if(item?.course_id === 1) {
+                        data = blog1
+                      }
+                      if(item?.course_id === 2) {
+                        data = blog2
+                      }
+                      if(item?.reading && item?.video && item?.quiz) {
+                        return (
+                          <Box key={index}>
+                            <Card width="350px" onClick={() => handleClick(item?.course_id)} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
+                              <AspectRatio ratio={4/1}>
+                                <Image src={data.image_url} objectFit="cover" />
+                              </AspectRatio>
+                                <CardBody width="full" p='12px'>
+                                  <HStack width="full" marginBottom="6px" justifyContent="space-between" alignItems="flex-start">
+                                    <Heading size="md" fontSize="18px" width="100%" textAlign="left" isTruncated>{item.title}</Heading>
+                                  </HStack>
+                                  <HStack width="full" display="flex" justifyContent="flex-start" alignItems="flex-start">
+                                    <Box flex="1" maxWidth="105px" bgColor={item.reading ? 'green.500' : 'gray.100'} color={item.reading ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                      <Text fontSize="14px" fontWeight="bold">Reading</Text>
+                                      {item.reading ? (
+                                        <CheckIcon boxSize="14px" stroke="1px solid black"/>
+                                      ) : (
+                                        <MinusIcon boxSize="14px" stroke="1px solid black"/>
+                                      )}
+                                    </Box>
+                                    <Box bgColor={item.video ? 'green.500' : 'gray.100'} color={item.video ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                      <Text fontSize="14px" fontWeight="bold">Video</Text>
+                                      {item.video ? (
+                                        <CheckIcon boxSize="14px" stroke="1px solid black"/>
+                                      ) : (
+                                        <MinusIcon boxSize="14px" stroke="1px solid black"/>
+                                      )}
+                                    </Box>
+                                    <Box bgColor={item.quiz ? 'green.500' : 'gray.100'} color={item.quiz ? 'white' : 'gray.500'} gap="6px" padding="0px 12px" borderRadius="5px" display="flex" flexDir="row" alignItems={'center'}>
+                                      <Text fontSize="14px" fontWeight="bold">Quiz</Text>
+                                      {item.quiz ? (
+                                        <CheckIcon boxSize="14px" stroke="1px solid black"/>
+                                      ) : (
+                                        <MinusIcon boxSize="14px" stroke="1px solid black"/>
+                                      )}                                  </Box>
+                                  </HStack>
+                                </CardBody>
+                                <CardFooter width="full" p="12px" pt="0px">
+                                <HStack width="full" justifyContent="flex-start">
+                                  <Badge fontSize="8px">UI/UX</Badge>
+                                  <Badge fontSize="8px" style={{ backgroundColor: 'var(--theme-color)', color: 'white'}}>Management</Badge>
+                                </HStack>
+                              </CardFooter>
+                            </Card>
+                          </Box>
+                        )                        
+                      } else {
+                        return "";
+                      }
                     })}
                   </HStack>
                 ) : (
@@ -230,6 +290,7 @@ const Training = () => {
                 )}
               </VStack>
             </TabPanel>
+
           </TabPanels>
         </Tabs>
 
@@ -239,51 +300,3 @@ const Training = () => {
 }
 
 export default Training
-
-        // eslint-disable-next-line no-lone-blocks
-        {/* <HStack
-        marginBottom="12px"
-        maxWidth="100%" padding='0' justifyContent="flex-start">
-          <InputGroup maxWidth="200px">
-            <Input
-            p="6px" placeholder="keyword"
-            style={{
-              backgroundColor: 'white',
-              fontSize: '18px',
-              borderRadius: '5px',
-              border: '0.8px solid #cbcbcb'
-            }}/>
-            <InputRightElement>
-              <IconButton aria-label='Search database' icon={<SearchIcon />} />
-            </InputRightElement>
-          </InputGroup>
-        </HStack> */}
-// const thummyData = () => {
-//   return (
-//     <>
-//             {[1,2,3,4,5].map((item, index) => {
-//               return (
-//                 <Box key={index}>
-//                   <Card height="270px" width="300px" onClick={() => console.log('click')} cursor={'pointer'} direction={'column'} minWidth="full" overflow="hidden" borderRadius="10px">
-//                     <AspectRatio ratio={2/1}>
-//                       <Image  src={'https://source.unsplash.com/random/'+index} objectFit="cover" />
-//                     </AspectRatio>
-//                     <CardBody width="full" p='12px' height="90px">
-//                       <HStack width="full" justifyContent="space-between" alignItems="flex-start">
-//                         <Heading size="md" fontSize="18px" width="100%" textAlign="left">Human Relations Movement: 5 Steps To better Management</Heading>
-//                         {/* <IconButton icon={<PlusSquareIcon />} size="sm" /> */}
-//                       </HStack>
-//                     </CardBody>
-//                     <CardFooter width="full" p="12px" pt="0px">
-//                       <HStack width="full" justifyContent="flex-start">
-//                         <Badge fontSize="8px">UI/UX</Badge>
-//                         <Badge fontSize="8px" style={{ backgroundColor: 'var(--theme-color)', color: 'white'}}>Management</Badge>
-//                       </HStack>
-//                     </CardFooter>
-//                   </Card>
-//                 </Box>
-//               )
-//             })}
-//     </>
-//   )
-// }
