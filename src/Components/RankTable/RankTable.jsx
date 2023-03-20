@@ -32,8 +32,6 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeList]);
 
-  employeeList.sort((a, b) => a.exp - b.exp);
-
   const ThStyle = {
     textAlign: "left",
     color: "white",
@@ -69,7 +67,7 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {employeeList.reverse()?.map((employee, index) => {
+          {employeeList?.map((employee, index) => {
             return (
               <Tr height="40px" minHeight={"40px"} key={index}>
                 <Td

@@ -57,12 +57,12 @@ headers = {"Content-Type": "application/json"}
 
 
 for i in name:
-    random_exp = random.randint(0, 50)
+    random_exp = random.randint(50, 100)
     print(random_exp)
     payload = json.dumps(
         {
-            "name": f"!{i}",
-            "email": f"!{i}@athena.com",
+            "name": f"testing_________{i}",
+            "email": f"testing___________{i}@athena.com",
             "password": "12345",
             "department": "Chef",
             "position": "Assistant Chef",
