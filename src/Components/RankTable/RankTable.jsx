@@ -12,7 +12,7 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
 
   useEffect(() => {
     fetchAllEmployee(setEmployeeList, employeeList, page, limit)
-  }, [page])
+  }, [limit])
 
   useEffect(() => {
     setNumberOfEmployee(employeeList.length);
@@ -66,8 +66,7 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
             })}
         </Tbody>
       </Table>
-      <Text>Page {page}</Text>
-      <Button backgroundColor="#EE5253" color="white" onClick={() =>  setPage((page) => page + 1) }>Next</Button>
+      <Button backgroundColor="#EE5253" color="white" onClick={() =>  setLimit((limit) => limit + 15) }>Load More</Button>
     </TableContainer>
   )
 }
