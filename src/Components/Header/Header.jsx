@@ -34,7 +34,7 @@ const Header = ({ role, id, employee }) => {
       <Box height="100%" display="flex" justifyContent='center' alignItems='flex-end' color="black" paddingBottom="12px">
         <Box height="full" display="flex" flexDirection="column" justifyContent='flex-end'>
           <Text fontSize="12px" fontWeight="normal">{employee?.ATH} Token</Text>
-          <Text fontSize="24px" fontWeight="bold" lineHeight={'100%'}>{employee?.name}</Text>
+          <Text fontSize="24px" fontWeight="bold" lineHeight={'100%'}>{employee?.name.toUpperCase()}</Text>
         </Box>
         <Menu bgColor="red">
           {/* <MenuButton as={Button} backgroundColor="red" borderRadius="1000px">
