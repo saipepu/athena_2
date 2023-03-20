@@ -2,15 +2,13 @@ import { Box, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, T
 import React, { useEffect, useState } from 'react'
 import { fetchAllEmployee } from '../../api/server_routes';
 import rank1_avatar from '../../assets/rank1_avatar.png'
-import { fetchOneEmployee } from "../../api/server_routes";
-
 
 const RankTable = ({ role, id, setNumberOfEmployee }) => {
 
   let [employeeList, setEmployeeList] = useState([]);
 
   useEffect(() => {
-    fetchAllEmployee(setEmployeeList, employeeList)
+    fetchAllEmployee(setEmployeeList, employeeList, 1, 2)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -36,7 +34,7 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
         cellSpacing="0"
         variant="simple" width="100%" overflow="visible">
         <TableCaption>Employee Ranks</TableCaption>
-        <Thead oveflow="visible" borderRadius="12px" width="100%">
+        <Thead overflow="visible" borderRadius="12px" width="100%">
           <Tr className="table_head">
             <Th textAlign="right" color="white">Ranking</Th>
             <Th style={ThStyle}>id</Th>
@@ -50,17 +48,17 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
             {employeeList.reverse()?.map((employee,index) => {
               return (
                 <Tr height='40px' minHeight={'40px'} key={index}>
-                  <Td className={employee._id == id ? 'highlight' : ""} width="180px">
+                  <Td className={employee._id === id ? 'highlight' : ""} width="180px">
                     <Box display="flex" flexDirection="row" justifyContent={'flex-end'} alignItems={'center'} gap="22px">
                       <Text fontSize="12px">{index+1}</Text>
                       <Image src={rank1_avatar} alt="avatar" height="30px" />
                     </Box>
                   </Td>
-                  <Td className={employee._id == id ? 'highlight' : ""} textAlign="left">{employee._id.slice(-5)}</Td>
-                  <Td className={employee._id == id ? 'highlight' : ""} textAlign="left">{employee.name}</Td>
-                  <Td className={employee._id == id ? 'highlight' : ""} textAlign="left">{employee.department}</Td>
-                  <Td className={employee._id == id ? 'highlight' : ""} textAlign="left">{employee.position}</Td>
-                  <Td className={employee._id == id ? 'highlight' : ""} textAlign="left">{employee.exp} exp</Td>
+                  <Td className={employee._id === id ? 'highlight' : ""} textAlign="left">{employee._id.slice(-5)}</Td>
+                  <Td className={employee._id === id ? 'highlight' : ""} textAlign="left">{employee.name}</Td>
+                  <Td className={employee._id === id ? 'highlight' : ""} textAlign="left">{employee.department}</Td>
+                  <Td className={employee._id === id ? 'highlight' : ""} textAlign="left">{employee.position}</Td>
+                  <Td className={employee._id === id ? 'highlight' : ""} textAlign="left">{employee.exp} exp</Td>
                 </Tr>   
               )
             })}
