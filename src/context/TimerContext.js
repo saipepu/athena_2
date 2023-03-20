@@ -1,3 +1,3 @@
 import { createContext, useContext } from "react";
 
-export const TimerContext = createContext({})
+export const TimerContext = createContext({});

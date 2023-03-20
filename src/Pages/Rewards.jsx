@@ -1,14 +1,8 @@
-import React from 'react'
-import Layout from './Layout'
+import React from "react";
+import Layout from "./Layout";
 
 const Rewards = () => {
+  return <Layout>Rewards</Layout>;
+};
 
-  return (
-    <Layout>
-      Rewards
-    </Layout>
-  )
-  
-}
-
-export default Rewards
+export default Rewards;

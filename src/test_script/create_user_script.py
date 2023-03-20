@@ -1,5 +1,6 @@
 import requests
 import json
+import random
 
 url = "http://localhost:3500/api/employee/signup"
 
@@ -34,20 +35,38 @@ name = [
     "prfix_Theodore",
     "prfix_Jack",
     "prfix_Levi",
-    "prfix_Alexander",
+    "aprfix_Alexander",
+    "aprfix_James",
+    "aprfix_Robert",
+    "aprfix_Liam",
+    "aprfix_Noah",
+    "aprfix_Oliver",
+    "aprfix_Elijah",
+    "aprfix_James",
+    "aprfix_William",
+    "aprfix_Benjamin",
+    "aprfix_Lucas",
+    "aprfix_Henry",
+    "aprfix_Theodore",
+    "aprfix_Jack",
+    "aprfix_Levi",
+    "aprfix_Alexander",
 ]
 
 headers = {"Content-Type": "application/json"}
 
+
 for i in name:
+    random_exp = random.randint(0, 50)
+    print(random_exp)
     payload = json.dumps(
         {
-            "name": f"_{i}",
-            "email": f"_{i}@athena.com",
+            "name": f"!{i}",
+            "email": f"!{i}@athena.com",
             "password": "12345",
             "department": "Chef",
             "position": "Assistant Chef",
-            "exp": 0,
+            "exp": random_exp,
             "rank": 0,
         }
     )

@@ -5,15 +5,14 @@ import "./StoryBased.css";
 import treasure_chest from "../../assets/treasure_chest.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import getSheetData from "../../api/StoryBasedData";
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import { updateEmployee } from "../../api/server_routes";
 
 const StoryBased = () => {
-
   const { state } = useLocation();
   console.log(state);
   const course_id = state?.course_id;
-  const employee = state?.employee
+  const employee = state?.employee;
   const [progressCount, setProgressCount] = useState(0);
   const [nextSceneCount, setNextSceneCount] = useState(0);
   const [start, setStart] = useState(true);
@@ -63,7 +62,7 @@ const StoryBased = () => {
       }
       setBlockNextScene(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nextSceneCount]);
 
   const nextScene = () => {
@@ -126,20 +125,22 @@ const StoryBased = () => {
   async function isGameOver() {
     if (gameOver) {
       console.log("HELLO");
-      const startTime = localStorage.getItem('startTime');
+      const startTime = localStorage.getItem("startTime");
       const endTime = new Date().getTime();
       const elapsedTime = endTime - startTime;
       console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
-      setMiliToHour = miliToHour(elapsedTime)
+      setMiliToHour = miliToHour(elapsedTime);
 
       // const toUpdate = { ATH: employee.ATH + 1, exp: employee.exp + score, hr_of_training: employee.hr_of_training + setMiliToHour }
       employee.ATH = employee?.ATH + 1;
       employee.exp = employee?.exp + score;
-      employee.hr_of_training = parseInt(employee?.hr_of_training + setMiliToHour);
-      for(let x in employee?.inProgress) {
+      employee.hr_of_training = parseInt(
+        employee?.hr_of_training + setMiliToHour
+      );
+      for (let x in employee?.inProgress) {
         // eslint-disable-next-line eqeqeq
-        if(course_id == employee?.inProgress[x].course_id) {
-          employee.inProgress[x].quiz = true
+        if (course_id == employee?.inProgress[x].course_id) {
+          employee.inProgress[x].quiz = true;
         }
       }
       updateEmployee(role, id, employee, setResponse);
@@ -187,7 +188,7 @@ const StoryBased = () => {
             <div className="info">
               <div className="name_container">
                 {/* <p className="rank">A</p> */}
-                <p className="name">{employee.name.toUpperCase()}</p> 
+                <p className="name">{employee.name.toUpperCase()}</p>
               </div>
               <div className="avatar">
                 <img src={avatar} alt="avatar" className="avatar_img" />
