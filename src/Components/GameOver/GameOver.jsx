@@ -17,9 +17,9 @@ const GameOver = ({
   const navigation = useNavigate();
   const [response, setResponse] = useState();
 
-  let setMiliToHour = 0;
-  function miliToHour(mili) {
-    return ((mili / 1000 / 60 / 60) % 24).toFixed(3);
+  let setMiliToMinute = 0;
+  function miliToMinute(mili) {
+    return (mili /(1000*60))%60
   }
 
   console.log(employee, course_id);
@@ -28,13 +28,13 @@ const GameOver = ({
     const startTime = localStorage.getItem("startTime");
     const endTime = new Date().getTime();
     const elapsedTime = endTime - startTime;
-    console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
-    setMiliToHour = miliToHour(elapsedTime);
+    console.log(`Time spent on website: ${miliToMinute(elapsedTime)} ms`);
+    setMiliToMinute = miliToMinute(elapsedTime);
 
     employee.ATH = employee?.ATH + 1;
     employee.exp = employee?.exp + 10;
     employee.hr_of_training = parseInt(
-      employee?.hr_of_training + setMiliToHour
+      employee?.hr_of_training + setMiliToMinute
     );
     for (let x in employee?.inProgress) {
       // eslint-disable-next-line eqeqeq
