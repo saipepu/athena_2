@@ -125,6 +125,7 @@ const StoryBased = () => {
 
   async function isGameOver() {
     if (gameOver) {
+      console.log("HELLO");
       const startTime = localStorage.getItem('startTime');
       const endTime = new Date().getTime();
       const elapsedTime = endTime - startTime;
@@ -144,8 +145,6 @@ const StoryBased = () => {
       updateEmployee(role, id, employee, setResponse);
     }
   }
-
-  isGameOver();
 
   // eslint-disable-next-line eqeqeq
   let isLast = nextSceneCount == scenes?.length - 1;
@@ -238,6 +237,7 @@ const StoryBased = () => {
                   <button
                     className="claim_reward"
                     onClick={() => {
+                      isGameOver();
                       setGameOver(!gameOver);
                       navigation(`/dashboard/${role}/${id}`);
                     }}
