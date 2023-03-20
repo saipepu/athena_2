@@ -1,4 +1,4 @@
-import { Box, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { Button, ButtonGroup, Box, Image, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { fetchAllEmployee } from '../../api/server_routes';
 import rank1_avatar from '../../assets/rank1_avatar.png'
@@ -7,10 +7,12 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
 
   let [employeeList, setEmployeeList] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(15);
+
   useEffect(() => {
-    fetchAllEmployee(setEmployeeList, employeeList, 1, 2)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    fetchAllEmployee(setEmployeeList, employeeList, page, limit)
+  }, [page])
 
   useEffect(() => {
     setNumberOfEmployee(employeeList.length);
@@ -64,7 +66,8 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
             })}
         </Tbody>
       </Table>
-
+      <Text>Page {page}</Text>
+      <Button backgroundColor="#EE5253" color="white" onClick={() =>  setPage((page) => page + 1) }>Next</Button>
     </TableContainer>
   )
 }
