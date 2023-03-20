@@ -186,8 +186,8 @@ const StoryBased = () => {
           <div className="progress_wrapper">
             <div className="info">
               <div className="name_container">
-                <p className="rank">A</p>
-                <p className="name">5 ATHENA</p>
+                {/* <p className="rank">A</p> */}
+                <p className="name">{employee.name.toUpperCase()}</p> 
               </div>
               <div className="avatar">
                 <img src={avatar} alt="avatar" className="avatar_img" />
