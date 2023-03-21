@@ -19,7 +19,7 @@ const GameOver = ({
 
   let setMiliToMinute = 0;
   function miliToMinute(mili) {
-    return (mili /(1000*60))%60
+    return (mili / (1000 * 60)) % 60;
   }
 
   console.log(employee, course_id);

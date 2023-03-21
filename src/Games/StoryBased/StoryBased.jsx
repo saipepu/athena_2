@@ -120,7 +120,7 @@ const StoryBased = () => {
   let setMiliToHour = 0;
   function miliToHour(mili) {
     // return ((mili / 1000 / 60 / 60) % 24).toFixed(3);
-    return (mili /(1000*60))%60
+    return (mili / (1000 * 60)) % 60;
   }
 
   async function isGameOver() {
