@@ -232,7 +232,7 @@ const SignIn = () => {
           </Button>
           <Text fontSize="18px" color="#cbcbcb" fontWeight="normal">
             Don't have an account yet?{" "}
-            <a href="/athena-2/#/sign-up" style={{ textDecorationLine: "underline" }}>
+            <a href="/athena_2/#/sign-up" style={{ textDecorationLine: "underline" }}>
               Sign Up
             </a>
           </Text>
