@@ -10,7 +10,9 @@ import {
 import React, { useEffect, useState } from "react";
 import red_clock from "../assets/red_clock.png";
 import token from "../assets/token.png";
-import book from "../assets/book.png";
+import exp_img from "../assets/exp_img.png";
+import avatar from '../assets/rank1_avatar.png'
+import employee_img from '../assets/employee_img.png'
 import RankTable from "../Components/RankTable/RankTable";
 import Layout from "./Layout";
 import { useParams } from "react-router-dom";
@@ -18,8 +20,10 @@ import { fetchOneEmployee } from "../api/server_routes";
 
 const Dashboard = () => {
   const { role, id } = useParams();
+  const [worstPerformer, setWorstPerformer] = useState();
   const [numberOfEmployee, setNumberOfEmployee] = useState([]);
   const [employee, setEmployee] = useState();
+  const [totalMinute, setTotalMinute] = useState();
 
   useEffect(() => {
     fetchOneEmployee(role, id, setEmployee);
@@ -50,7 +54,7 @@ const Dashboard = () => {
           boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.15)"
           border="0.5px solid #00000010"
         >
-          <Image src={red_clock} objectFit="contain" alt="red_clock" />
+          <Image height="65px" src={red_clock} objectFit="contain" alt="red_clock" />
           <CardBody padding="12px">
             <Heading
               fontSize={"16px"}
@@ -78,7 +82,7 @@ const Dashboard = () => {
           boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.15)"
           border="0.5px solid #00000010"
         >
-          <Image src={token} objectFit="contain" alt="red_clock" />
+          <Image height="65px" src={token} objectFit="contain" alt="red_clock" />
           <CardBody padding="12px">
             <Heading
               fontSize={"16px"}
@@ -106,7 +110,7 @@ const Dashboard = () => {
           boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.15)"
           border="0.5px solid #00000010"
         >
-          <Image src={book} objectFit="contain" alt="red_clock" />
+          <Image height="65px" src={exp_img} objectFit="contain" alt="red_clock" />
           <CardBody padding="12px">
             <Heading
               fontSize={"16px"}
@@ -148,7 +152,7 @@ const Dashboard = () => {
           boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.15)"
           border="0.5px solid #00000010"
         >
-          <Image src={book} objectFit="contain" alt="red_clock" />
+          <Image height="65px" src={employee_img} objectFit="contain" alt="red_clock" />
           <CardBody padding="12px">
             <Heading
               fontSize={"16px"}
@@ -175,7 +179,22 @@ const Dashboard = () => {
           borderRadius="8px"
           boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.15)"
           border="0.5px solid #00000010"
-        ></Card>
+        >
+          <Image height="100%" src={red_clock} objectFit="contain" alt="red_clock" />
+          <CardBody padding="12px">
+            <Heading
+              fontSize={"16px"}
+              fontWeight="normal"
+              color="#A3AED0"
+              whiteSpace="nowrap"
+            >
+              Employees Training Time
+            </Heading>
+            <Text as="p" fontSize={"36px"} lineHeight="100%" whiteSpace="none">
+              {totalMinute} mins
+            </Text>
+          </CardBody>
+        </Card>
         <Card
           height="100%"
           bgColor="white"
@@ -188,7 +207,22 @@ const Dashboard = () => {
           borderRadius="8px"
           boxShadow="0px 6px 15px -5px rgba(0, 0, 0, 0.15)"
           border="0.5px solid #00000010"
-        ></Card>
+        >
+          <Image height="65px" src={avatar} objectFit="contain" alt="red_clock" />
+          <CardBody padding="12px">
+            <Heading
+              fontSize={"16px"}
+              fontWeight="normal"
+              color="#A3AED0"
+              whiteSpace="none"
+            >
+              Worst Performer
+            </Heading>
+            <Text as="p" fontSize={"36px"} lineHeight="100%" whiteSpace="none">
+              {worstPerformer?.name}
+            </Text>
+          </CardBody>
+        </Card>
       </HStack>
     );
   };
@@ -207,6 +241,8 @@ const Dashboard = () => {
       >
         {role === "admin" ? <AdminDashboard /> : <EmployeeDashboard />}
         <RankTable
+          setWorstPerformer={setWorstPerformer}
+          setTotalMinute={setTotalMinute}
           id={id}
           role={role}
           setNumberOfEmployee={setNumberOfEmployee}

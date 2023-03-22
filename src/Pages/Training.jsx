@@ -414,7 +414,7 @@ const Training = () => {
                                   width="full"
                                   justifyContent="flex-start"
                                 >
-                                  <Badge fontSize="8px">UI/UX</Badge>
+                                  <Badge fontSize="8px">Negotiation</Badge>
                                   <Badge
                                     fontSize="8px"
                                     style={{
@@ -603,7 +603,7 @@ const Training = () => {
                                   width="full"
                                   justifyContent="flex-start"
                                 >
-                                  <Badge fontSize="8px">UI/UX</Badge>
+                                  <Badge fontSize="8px">Negotiation</Badge>
                                   <Badge
                                     fontSize="8px"
                                     style={{
