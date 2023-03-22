@@ -112,29 +112,25 @@ const Avatar = () => {
         alignItems="flex-start"
         overflow="scroll"
       >
-          {selectedItem?.name === "Hat" ? (
-            <>
-            <Box
+          <Box
             flex="1"
             display="grid"
             height="100%"
             minWidth="300px"
             position="relative"
           >
-            <Image
-                src={hat}
-                alt="hat"
-                style={{
-                  zIndex: 10,
-                  objectFit: "contain",
-                  position: "absolute",
-                  width: "100px",
-                  height: "100px",
-                  top: "14%",
-                  left: "51.5%",
-                  transform: "translateX(-50%)",
-                }}
-              />
+            {selectedItem?.name === "Hat" ? (
+              <>
+              <Image
+                margin="auto"
+                src={avatar_with_hat}
+                alt="avatar"
+                width="100%"
+                height="500px"
+                objectFit="contain"
+                />
+              </>
+            ) : (
               <Image
                 margin="auto"
                 src={avatar}
@@ -143,27 +139,8 @@ const Avatar = () => {
                 height="500px"
                 objectFit="contain"
               />
+            )}
           </Box>
-              
-            </>
-          ) : (
-          <Box
-            flex="1"
-            display="grid"
-            height="100%"
-            minWidth="300px"
-            position="relative"
-          >
-            <Image
-              margin="auto"
-              src={avatar}
-              alt="avatar"
-              width="100%"
-              height="500px"
-              objectFit="contain"
-            />
-          </Box>
-          )}
         <Box flex="2" height="100%">
           <VStack
             padding="0px 52px 0px 52px"
