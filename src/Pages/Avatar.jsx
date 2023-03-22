@@ -112,7 +112,6 @@ const Avatar = () => {
         alignItems="flex-start"
         overflow="scroll"
       >
-
           {selectedItem?.name === "Hat" ? (
             <>
             <Box

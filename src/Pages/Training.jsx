@@ -42,15 +42,15 @@ const Training = () => {
   }, [changeTab, role, id]);
 
   const blog1 = {
-    author: "Chirst Voss, Dan Shapiro & more!",
-    title: "How to win a negotiation",
+    author: "Waiter Academy",
+    title: "The power of small talk, When to talk to Guest!?",
     intro:
-      "Successful negotiation is not about getting to yes,It's about mastering no and understanding what path to an agreement is.",
+      "To make guest comfortable, a good waiter must know how to talk and make guests feel at ease.",
     description:
-      "There are many variables in every negotiation, which means there is no silver bullet or magic erase you can use to win. The idea of “Winning” changes depending on the situation, the key to success is been able to identify the type of negotiation and use a strategy that gets you what you want.",
-    image_url: "https://bigthink.com/wp-content/uploads/2020/08/origin-122.jpg",
+      "There are many variables in delivery good service, which means there is no silver bullet or magic that you can use to win over customers. The idea of a small talk is to create a positive impression and make guests feel valued and appreciative.",
+    image_url: "https://i.ytimg.com/vi/oJAAK27nYsQ/maxresdefault.jpg",
     video_url:
-    '<iframe width="560" height="315" src="https://www.youtube.com/embed/69fKNJuhdAY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/oJAAK27nYsQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     game_type: "water-rising",
     game_id: "1ydjnm6UyE5pm5-onpFT-w3KdBSNzxU-fsj6KAvtb9mA",
   };
