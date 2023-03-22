@@ -98,6 +98,7 @@ const WaterRising = () => {
 
   // Answering One Questions
   const submitAnswer = (e, ans) => {
+
     const form = document.querySelector("form");
     const human = document.getElementById("human");
     const water_level = document.getElementById("water_level");

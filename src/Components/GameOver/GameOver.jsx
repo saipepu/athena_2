@@ -96,6 +96,7 @@ const GameOver = ({
             <button
               className="go_to_home"
               onClick={() => {
+                updateEmployeeScore();
                 setGameOver(!gameOver);
                 navigation(`/dashboard/${role}/${id}`);
               }}
@@ -103,7 +104,10 @@ const GameOver = ({
               Go to Home
             </button>
           )}
-          <button className="play_again" onClick={() => setGameOver(!gameOver)}>
+          <button className="play_again" onClick={() => {
+            updateEmployeeScore();
+            setGameOver(!gameOver)
+          }}>
             Play Again
           </button>
         </div>

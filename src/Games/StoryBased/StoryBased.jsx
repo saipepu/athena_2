@@ -20,6 +20,7 @@ const StoryBased = () => {
   const [gameOver, setGameOver] = useState(false);
   const [click, setClick] = useState(false);
   const [blockNextScene, setBlockNextScene] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [response, setResponse] = useState();
 
   const [scenes, setScenes] = useState([]);
@@ -131,13 +132,13 @@ const StoryBased = () => {
       const elapsedTime = endTime - startTime;
       console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
       setMiliToHour = miliToHour(elapsedTime);
+      employee.hr_of_training = parseInt(
+        employee?.hr_of_training + setMiliToHour
+      );
 
       // const toUpdate = { ATH: employee.ATH + 1, exp: employee.exp + score, hr_of_training: employee.hr_of_training + setMiliToHour }
       employee.ATH = employee?.ATH + 1;
       employee.exp = employee?.exp + score;
-      employee.hr_of_training = parseInt(
-        employee?.hr_of_training + setMiliToHour
-      );
       for (let x in employee?.inProgress) {
         // eslint-disable-next-line eqeqeq
         if (course_id == employee?.inProgress[x].course_id) {
