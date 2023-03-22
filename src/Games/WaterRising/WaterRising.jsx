@@ -179,7 +179,7 @@ const WaterRising = () => {
               <div className="progress_container">
                 <div className="title">Experience Bar</div>
                 <div className="progress">
-                  <img src={exp_img} alt="exp" className="exp_img" />
+                  <img height="25px" width="25px" src={exp_img} alt="exp" className="exp_img" />
                   <div className="progress_bar">
                     <div className="bar" id="bar"></div>
                     <div className="xp">XP</div>

@@ -34,7 +34,7 @@ const Training = () => {
   // eslint-disable-next-line no-unused-vars
   const [employee, setEmployee] = useState();
   const [haveComplete, setHaveComplete] = useState(true);
-  const [changeTab, setChangeTab] = useState(false);
+  const [changeTab, setChangeTab] = useState('Recommend');
 
   useEffect(() => {
       fetchOneEmployee(role, id, setEmployee);
@@ -125,9 +125,9 @@ const Training = () => {
       >
         <Tabs variant="soft-rounded" colorScheme="blue">
           <TabList>
-            <Tab onClick={() => setChangeTab(!changeTab)}>Recommend</Tab>
-            <Tab onClick={() => setChangeTab(!changeTab)}>In Progress</Tab>
-            <Tab onClick={() => setChangeTab(!changeTab)}>Completed</Tab>
+            <Tab onClick={() => setChangeTab('Recommend')}>Recommend</Tab>
+            <Tab onClick={() => setChangeTab('In Progress')}>In Progress</Tab>
+            <Tab onClick={() => setChangeTab('Completed')}>Completed</Tab>
           </TabList>
           <TabPanels>
             {/* Recommend */}
@@ -635,7 +635,8 @@ const Training = () => {
         </Tabs>
 
         {/* SoftSkillBlog */}
-        <VStack
+        {changeTab === "Recommend" ? (
+          <VStack
           width="100%"
           justifyContent={"flex-start"}
           alignItems={"flex-start"}
@@ -709,7 +710,12 @@ const Training = () => {
               )
             })}
           </HStack>
-        </VStack>
+          </VStack>
+        ) : (
+          <>
+          </>
+        )}
+
       </VStack>
     </Layout>
   );
