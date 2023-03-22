@@ -1,11 +1,11 @@
 import { api } from "./server_api";
 
-export const fetchAllEmployee = async (set, get, pageNumber, limit) => {
-  await fetch(`${api}/employee/getAll?page=${pageNumber}&limit=${limit}`)
+export const fetchAllEmployee = async (set) => {
+  await fetch(`${api}/employee/getAll`)
     .then((result) =>
       result.json().then((data) => {
-        console.log(data);
-        set(data.message.result);
+        // console.log(data);
+        set(data.message);
       })
     )
 

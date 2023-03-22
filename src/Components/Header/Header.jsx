@@ -76,6 +76,7 @@ const Header = ({ role, id, employee }) => {
           display="flex"
           flexDirection="column"
           justifyContent="flex-end"
+          alignItems="flex-end"
         >
           <Text fontSize="12px" fontWeight="normal">
             {employee?.ATH} Token

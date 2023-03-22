@@ -30,16 +30,13 @@ const Training = () => {
   // eslint-disable-next-line no-unused-vars
   const [response, setResponse] = useState();
   // eslint-disable-next-line no-unused-vars
-  const [employee, setEmployee] = useState(state?.employee);
+  const [employee, setEmployee] = useState();
   const [haveComplete, setHaveComplete] = useState(true);
   const [first, setFirst] = useState(true);
   const [changeTab, setChangeTab] = useState(false);
 
   useEffect(() => {
-    if (first) {
-      setFirst(false);
-      fetchOneEmployee(role, id, employee);
-    }
+      fetchOneEmployee(role, id, setEmployee);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [changeTab, role, id]);
 

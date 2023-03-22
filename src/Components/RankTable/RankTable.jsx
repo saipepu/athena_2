@@ -1,7 +1,8 @@
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import {
-  Button,
-  ButtonGroup,
   Box,
+  ButtonGroup,
+  IconButton,
   Image,
   Table,
   TableCaption,
@@ -19,13 +20,30 @@ import rank1_avatar from "../../assets/rank1_avatar.png";
 
 const RankTable = ({ role, id, setNumberOfEmployee }) => {
   let [employeeList, setEmployeeList] = useState([]);
-
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(15);
+  const [page, setPage] = useState(0);
+  const [listLimit, setListLimit] = useState([]);
 
   useEffect(() => {
-    fetchAllEmployee(setEmployeeList, employeeList, page, limit);
-  }, [limit]);
+    fetchAllEmployee(setEmployeeList);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    let arrList = [];
+    let z = 0;
+    for (let i = 0; i < employeeList.length / 6; i = i + 1) {
+      let arr = [];
+      for (let j = 0; j < 5; j++) {
+        if (z < employeeList.length) {
+          employeeList[z].id = z;
+          arr.push(employeeList[z]);
+          z++;
+        }
+      }
+      arrList.push(arr);
+    }
+    setListLimit(arrList);
+  }, [employeeList])
 
   useEffect(() => {
     setNumberOfEmployee(employeeList.length);
@@ -36,6 +54,14 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
     textAlign: "left",
     color: "white",
   };
+
+  const handlePage = (action) => {
+    if(action === 'back' && page > 0) {
+      setPage(page - 1);
+    } else if(action === 'forward' && page < listLimit.length-1) {
+      setPage(page + 1);
+    }
+  }
 
   return (
     <TableContainer
@@ -53,7 +79,13 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
         width="100%"
         overflow="visible"
       >
-        <TableCaption>Employee Ranks</TableCaption>
+        <TableCaption>
+          <ButtonGroup display="flex" alignItems="center" gap="12px" width="full" justifyContent="center">
+            <IconButton icon={<ArrowBackIcon />} onClick={() => handlePage('back')}/>
+              <Text fontSize="18px">Employee Ranks</Text>
+            <IconButton icon={<ArrowForwardIcon />} onClick={() => handlePage('forward')}/>
+          </ButtonGroup>
+        </TableCaption>
         <Thead overflow="visible" borderRadius="12px" width="100%">
           <Tr className="table_head">
             <Th textAlign="right" color="white">
@@ -67,7 +99,7 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {employeeList?.map((employee, index) => {
+          {listLimit[page]?.map((employee, index) => {
             return (
               <Tr height="40px" minHeight={"40px"} key={index}>
                 <Td
@@ -120,13 +152,6 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
           })}
         </Tbody>
       </Table>
-      <Button
-        backgroundColor="#EE5253"
-        color="white"
-        onClick={() => setLimit((limit) => limit + 15)}
-      >
-        Load More
-      </Button>
     </TableContainer>
   );
 };
