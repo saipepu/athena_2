@@ -23,13 +23,21 @@ const GameOver = ({
     return (mili / (1000 * 60)) % 60;
   }
 
-  const updateEmployeeScore = () => {
+  useEffect(() => {
     const startTime = localStorage.getItem("startTime");
     const endTime = new Date().getTime();
     const elapsedTime = endTime - startTime;
     console.log(`Time spent on website: ${miliToMinute(elapsedTime)} ms`);
     setMiliToMinute = miliToMinute(elapsedTime);
 
+    employee.hr_of_training = parseInt(
+      employee?.hr_of_training + setMiliToMinute
+    );
+
+    updateEmployee(role, id, employee, setResponse);
+   }, [])
+
+  const updateEmployeeScore = () => {
     employee.ATH = employee?.ATH + 1;
     let exp = 0;
     if(employeeScore < numberOfQ/2) {
@@ -39,10 +47,9 @@ const GameOver = ({
     } else {
       exp = 10;
     }
+
     employee.exp = employee?.exp + exp;
-    employee.hr_of_training = parseInt(
-      employee?.hr_of_training + setMiliToMinute
-    );
+
     for (let x in employee?.inProgress) {
       // eslint-disable-next-line eqeqeq
       if (course_id == employee?.inProgress[x].course_id) {
