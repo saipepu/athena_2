@@ -148,7 +148,7 @@ const SignIn = () => {
               border="none"
               htmlFor="switch"
             >
-              Sign Up as HR
+              Sign In as HR
             </FormLabel>
           </FormControl>
 
