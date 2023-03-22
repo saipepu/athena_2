@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/athena_2/static/css/main.352b9a94.css",
-    "main.js": "/athena_2/static/js/main.81412d78.js",
+    "main.js": "/athena_2/static/js/main.a1922034.js",
     "static/media/water_game_background.png": "/athena_2/static/media/water_game_background.ed75cac84074dda243de.png",
     "static/media/avatar_boy.png": "/athena_2/static/media/avatar_boy.e4e50ac53985d590d710.png",
     "static/media/micperson.png": "/athena_2/static/media/micperson.93a5c5f16c6332a56a0e.png",
@@ -29,10 +29,10 @@
     "static/media/pole4.png": "/athena_2/static/media/pole4.e8c1c5bdcb238d3772c0.png",
     "index.html": "/athena_2/index.html",
     "main.352b9a94.css.map": "/athena_2/static/css/main.352b9a94.css.map",
-    "main.81412d78.js.map": "/athena_2/static/js/main.81412d78.js.map"
+    "main.a1922034.js.map": "/athena_2/static/js/main.a1922034.js.map"
   },
   "entrypoints": [
     "static/css/main.352b9a94.css",
-    "static/js/main.81412d78.js"
+    "static/js/main.a1922034.js"
   ]
 }
