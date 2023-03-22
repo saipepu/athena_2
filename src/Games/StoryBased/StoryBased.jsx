@@ -199,7 +199,7 @@ const StoryBased = () => {
             <div className="progress_container">
               <div className="title">Experience Bar</div>
               <div className="progress">
-                <img src={exp_img} alt="exp" className="exp_img" />
+                <img width="25px" height="25px" src={exp_img} alt="exp" className="exp_img" />
                 <div className="progress_bar">
                   <div className="bar" id="bar"></div>
                   <div className="xp">{score} XP</div>
