@@ -19,25 +19,23 @@ const GameOver = ({
   const [response, setResponse] = useState();
 
   let setMiliToMinute = 0;
+  
   function miliToMinute(mili) {
     return (mili / (1000 * 60)) % 60;
   }
 
-  useEffect(() => {
-    const startTime = localStorage.getItem("startTime");
-    const endTime = new Date().getTime();
-    const elapsedTime = endTime - startTime;
-    console.log(`Time spent on website: ${miliToMinute(elapsedTime)} ms`);
-    setMiliToMinute = miliToMinute(elapsedTime);
+  const updateEmployeeScore = (action) => {
+    if(action !== "play again") {
+      const startTime = localStorage.getItem("startTime");
+      const endTime = new Date().getTime();
+      const elapsedTime = endTime - startTime;
+      console.log(`Time spent on website: ${miliToMinute(elapsedTime)} ms`);
+      setMiliToMinute = miliToMinute(elapsedTime);
+    }
 
     employee.hr_of_training = parseInt(
       employee?.hr_of_training + setMiliToMinute
     );
-
-    updateEmployee(role, id, employee, setResponse);
-   }, [])
-
-  const updateEmployeeScore = () => {
     employee.ATH = employee?.ATH + 1;
     let exp = 0;
     if(employeeScore < numberOfQ/2) {
@@ -112,7 +110,7 @@ const GameOver = ({
             </button>
           )}
           <button className="play_again" onClick={() => {
-            updateEmployeeScore();
+            updateEmployeeScore("play again");
             setGameOver(!gameOver)
           }}>
             Play Again
