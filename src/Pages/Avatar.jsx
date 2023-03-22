@@ -130,7 +130,7 @@ const Avatar = () => {
                   position: "absolute",
                   width: "100px",
                   height: "100px",
-                  top: "14%",
+                  top: "7%",
                   left: "51.5%",
                   transform: "translateX(-50%)",
                 }}
