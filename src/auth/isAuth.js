@@ -1,14 +1,14 @@
-export const isAuth = ( role, id ) => {
+export const isAuth = (role, id) => {
   // console.log('isAuth', role , id)
-  const session = JSON.parse(localStorage.getItem('athena-token'))
-  if(session != null) {
+  const session = JSON.parse(localStorage.getItem("athena-token"));
+  if (session != null) {
     const [currentRole, currentData] = Object.entries(session)[0];
-    if(role !== currentRole || id !== currentData._id) {
+    if (role !== currentRole || id !== currentData._id) {
       return false;
     } else {
-      return true
+      return true;
     }
   } else {
-    return false
+    return false;
   }
-}
+};

@@ -4,48 +4,56 @@ import treasure_chest from "../../assets/treasure_chest.png";
 import { useNavigate } from "react-router-dom";
 import { updateEmployee } from "../../api/server_routes";
 
-const GameOver = ({ setGameOver, gameOver, win, role, id, employee, course_id }) => {
-
+const GameOver = ({
+  setGameOver,
+  gameOver,
+  win,
+  role,
+  id,
+  employee,
+  course_id,
+}) => {
   console.log(role, id);
   const navigation = useNavigate();
   const [response, setResponse] = useState();
 
-  let setMiliToHour = 0;
-  function miliToHour(mili) {
-    return ((mili / 1000 / 60 / 60) % 24).toFixed(3);
+  let setMiliToMinute = 0;
+  function miliToMinute(mili) {
+    return (mili / (1000 * 60)) % 60;
   }
 
   console.log(employee, course_id);
 
   const updateEmployeeScore = () => {
-
-    const startTime = localStorage.getItem('startTime');
+    const startTime = localStorage.getItem("startTime");
     const endTime = new Date().getTime();
     const elapsedTime = endTime - startTime;
-    console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
-    setMiliToHour = miliToHour(elapsedTime)
+    console.log(`Time spent on website: ${miliToMinute(elapsedTime)} ms`);
+    setMiliToMinute = miliToMinute(elapsedTime);
 
     employee.ATH = employee?.ATH + 1;
     employee.exp = employee?.exp + 10;
-    employee.hr_of_training = parseInt(employee?.hr_of_training + setMiliToHour);
-    for(let x in employee?.inProgress) {
+    employee.hr_of_training = parseInt(
+      employee?.hr_of_training + setMiliToMinute
+    );
+    for (let x in employee?.inProgress) {
       // eslint-disable-next-line eqeqeq
-      if(course_id == employee?.inProgress[x].course_id) {
-        employee.inProgress[x].quiz = true
+      if (course_id == employee?.inProgress[x].course_id) {
+        employee.inProgress[x].quiz = true;
       }
     }
     console.log(employee);
     updateEmployee(role, id, employee, setResponse);
-  }
+  };
 
   useEffect(() => {
     if (response?.updateSuccess) {
-      setGameOver(!gameOver)
-      navigation(`/dashboard/${role}/${id}`)
+      setGameOver(!gameOver);
+      navigation(`/dashboard/${role}/${id}`);
     } else {
-      console.log('Error Updating Employee Data . . .')
+      console.log("Error Updating Employee Data . . .");
     }
-  }, [response, navigation, id, role, gameOver, setGameOver])
+  }, [response, navigation, id, role, gameOver, setGameOver]);
 
   return (
     <div className="model_wrapper">
@@ -81,8 +89,8 @@ const GameOver = ({ setGameOver, gameOver, win, role, id, employee, course_id })
             <button
               className="go_to_home"
               onClick={() => {
-                setGameOver(!gameOver)
-                navigation(`/dashboard/${role}/${id}`)
+                setGameOver(!gameOver);
+                navigation(`/dashboard/${role}/${id}`);
               }}
             >
               Go to Home
