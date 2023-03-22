@@ -20,19 +20,20 @@ import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import { CheckIcon, MinusIcon } from "@chakra-ui/icons";
 import "../index.css";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import AthenaBlogData from '../api/AthenaBlogsData';
 import { fetchOneEmployee, updateEmployee } from "../api/server_routes";
 
 const Training = () => {
+  const blogs = AthenaBlogData;
+  console.log(blogs)
   const { role, id } = useParams();
-  const { state } = useLocation();
   const navigation = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [response, setResponse] = useState();
   // eslint-disable-next-line no-unused-vars
   const [employee, setEmployee] = useState();
   const [haveComplete, setHaveComplete] = useState(true);
-  const [first, setFirst] = useState(true);
   const [changeTab, setChangeTab] = useState(false);
 
   useEffect(() => {
@@ -44,12 +45,12 @@ const Training = () => {
     author: "Chirst Voss, Dan Shapiro & more!",
     title: "How to win a negotiation",
     intro:
-      "Successful negotiation is not about getting to yes,It’s about mastering no and understanding what path to an agreement is.",
+      "Successful negotiation is not about getting to yes,It's about mastering no and understanding what path to an agreement is.",
     description:
       "There are many variables in every negotiation, which means there is no silver bullet or magic erase you can use to win. The idea of “Winning” changes depending on the situation, the key to success is been able to identify the type of negotiation and use a strategy that gets you what you want.",
     image_url: "https://bigthink.com/wp-content/uploads/2020/08/origin-122.jpg",
     video_url:
-      '<iframe width="560" height="315" src="https://www.youtube.com/embed/69fKNJuhdAY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+    '<iframe width="560" height="315" src="https://www.youtube.com/embed/69fKNJuhdAY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
     game_type: "water-rising",
     game_id: "1ydjnm6UyE5pm5-onpFT-w3KdBSNzxU-fsj6KAvtb9mA",
   };
@@ -58,7 +59,7 @@ const Training = () => {
     author: "Patrick David",
     title: "How to handle customers",
     intro:
-      "There’s little emphasis on customer complaints and that can highly affect business.",
+      "There's little emphasis on customer complaints and that can highly affect business.",
     description:
       "There are many ways to handle customer complaints. There are many variables and it is difficult to deal with different characters and personalities, however, creating and adhering to a set of protocols, it can help alleviate the hardship and elevate customer’s experiences.",
     image_url:
@@ -116,12 +117,11 @@ const Training = () => {
   return (
     <Layout>
       <VStack
-        maxHeight="100%"
         width={"100%"}
         justifyContent={"flex-start"}
         alignItems={"flex-start"}
         overflow="scroll"
-        padding="24px 0px 300px 24px"
+        padding="24px 0px 0px 24px"
       >
         <Tabs variant="soft-rounded" colorScheme="blue">
           <TabList>
@@ -633,6 +633,83 @@ const Training = () => {
             </TabPanel>
           </TabPanels>
         </Tabs>
+
+        {/* SoftSkillBlog */}
+        <VStack
+          width="100%"
+          justifyContent={"flex-start"}
+          alignItems={"flex-start"}
+          padding="0px 16px"
+        >
+          <Text
+            as="h1"
+            textAlign="left"
+            fontSize="32px"
+            fontWeight="bold"
+          >
+            SoftSkills
+          </Text>
+          <HStack
+            height="300px"
+            maxWidth="100%"
+            gap="12px"
+            overflow="scroll"
+            padding={"0px 50px 12px 12px"}
+          >
+            {/* water rising */}
+            {blogs?.map((blog, index) => {
+              return (
+              <Box key={index} width="100%" height="100%">
+                <Card
+                  height="270px"
+                  width="300px"
+                  onClick={() => handleClick(1)}
+                  cursor={"pointer"}
+                  direction={"column"}
+                  minWidth="full"
+                  overflow="hidden"
+                  borderRadius="10px"
+                >
+                  <AspectRatio ratio={2 / 1}>
+                    <Image src={blog.image_url} objectFit="cover" />
+                  </AspectRatio>
+                  <CardBody width="full" p="12px" height="90px">
+                    <HStack
+                      width="full"
+                      justifyContent="space-between"
+                      alignItems="flex-start"
+                    >
+                      <Heading
+                        size="md"
+                        fontSize="18px"
+                        width="100%"
+                        textAlign="left"
+                      >
+                        {blog.title}
+                      </Heading>
+                      {/* <IconButton icon={<PlusSquareIcon />} size="sm" /> */}
+                    </HStack>
+                  </CardBody>
+                  <CardFooter width="full" p="12px" pt="0px">
+                    <HStack width="full" justifyContent="flex-start">
+                      <Badge fontSize="8px">Negotiation</Badge>
+                      <Badge
+                        fontSize="8px"
+                        style={{
+                          backgroundColor: "var(--theme-color)",
+                          color: "white",
+                        }}
+                      >
+                        Management
+                      </Badge>
+                    </HStack>
+                  </CardFooter>
+                </Card>
+              </Box>
+              )
+            })}
+          </HStack>
+        </VStack>
       </VStack>
     </Layout>
   );

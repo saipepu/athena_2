@@ -29,6 +29,7 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
   }, []);
 
   useEffect(() => {
+    employeeList.sort((a,b) => b.exp - a.exp)
     let arrList = [];
     let z = 0;
     for (let i = 0; i < employeeList.length / 6; i = i + 1) {
@@ -113,7 +114,7 @@ const RankTable = ({ role, id, setNumberOfEmployee }) => {
                     alignItems={"center"}
                     gap="22px"
                   >
-                    <Text fontSize="12px">{index + 1}</Text>
+                    <Text fontSize="12px">{(index+1)+(page*5)}</Text>
                     <Image src={rank1_avatar} alt="avatar" height="30px" />
                   </Box>
                 </Td>

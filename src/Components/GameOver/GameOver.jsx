@@ -12,8 +12,9 @@ const GameOver = ({
   id,
   employee,
   course_id,
+  employeeScore,
+  numberOfQ
 }) => {
-  console.log(role, id);
   const navigation = useNavigate();
   const [response, setResponse] = useState();
 
@@ -21,8 +22,6 @@ const GameOver = ({
   function miliToMinute(mili) {
     return (mili / (1000 * 60)) % 60;
   }
-
-  console.log(employee, course_id);
 
   const updateEmployeeScore = () => {
     const startTime = localStorage.getItem("startTime");
@@ -32,7 +31,15 @@ const GameOver = ({
     setMiliToMinute = miliToMinute(elapsedTime);
 
     employee.ATH = employee?.ATH + 1;
-    employee.exp = employee?.exp + 10;
+    let exp = 0;
+    if(employeeScore < numberOfQ/2) {
+      exp = 5;
+    } else if(employeeScore === numberOfQ) {
+      exp = 15;
+    } else {
+      exp = 10;
+    }
+    employee.exp = employee?.exp + exp;
     employee.hr_of_training = parseInt(
       employee?.hr_of_training + setMiliToMinute
     );
@@ -51,7 +58,7 @@ const GameOver = ({
       setGameOver(!gameOver);
       navigation(`/dashboard/${role}/${id}`);
     } else {
-      console.log("Error Updating Employee Data . . .");
+      console.log("Updating Employee Data . . .");
     }
   }, [response, navigation, id, role, gameOver, setGameOver]);
 
@@ -64,7 +71,7 @@ const GameOver = ({
         <div className="content">
           {win ? (
             <p className="title">
-              You have earn <span>1 Token</span> and <span>10 XP</span> today.
+              You have earn <span>1 Token</span> and <span>{employeeScore < numberOfQ/2 ? '5' : employeeScore === numberOfQ ? '15' : '10'} Exp</span> today.
             </p>
           ) : (
             <p className="title">Oh no! You are drowned!</p>

@@ -17,11 +17,8 @@ import StartModel from "../../Components/StartModel/StartModel";
 import GameOver from "../../Components/GameOver/GameOver";
 import WaterRisingData from "../../api/WaterRisingData";
 import { useLocation, useParams } from "react-router-dom";
-// import { TimerContext } from '../../context/TimerContext'
 
 const WaterRising = () => {
-  // const {setStopTimer} = useContext(TimerContext)
-  // const [employee, setEmployee] = useState();
 
   const { role, id } = useParams();
   const { state } = useLocation();
@@ -31,6 +28,13 @@ const WaterRising = () => {
   const sample = WaterRisingData;
   const [qNo, setQNo] = useState(0);
   const [waterHeight, setWaterHeight] = useState(90);
+  const [correct, setCorrect] = useState(false);
+  const [start, setStart] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [win, setWin] = useState(false);
+  const scale = 5;
+  const [employeeScore, setEmployeeScore] = useState(0);
+
   const initialScore = {
     score1: 80,
     score2: 80,
@@ -39,12 +43,6 @@ const WaterRising = () => {
     score5: 80,
   };
   const [score, setScore] = useState(initialScore);
-  const [correct, setCorrect] = useState(false);
-  const [start, setStart] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
-  const [win, setWin] = useState(false);
-  const scale = 5;
-
   const participant = [
     {
       human: false,
@@ -104,12 +102,14 @@ const WaterRising = () => {
     const human = document.getElementById("human");
     const water_level = document.getElementById("water_level");
 
-    if (ans === sample[qNo].answer) {
+    console.log(JSON.stringify(ans), JSON.stringify(sample[qNo].answer), ans === sample[qNo].answer)
+
+    if (ans === JSON.stringify(sample[qNo].answer)) {
+      setEmployeeScore(employeeScore + 1)
       setCorrect(true);
     } else {
       setCorrect(false);
     }
-    // setAnswer(ans);
 
     setWaterHeight(waterHeight - 5);
 
@@ -117,7 +117,7 @@ const WaterRising = () => {
 
     // Time Out after Answering One Question && Check if the Player is Drawn
     setTimeout(() => {
-      if (qNo < 7) {
+      if (qNo < sample?.length-1) {
         setQNo(qNo + 1);
       } else {
         setWin(true);
@@ -150,8 +150,6 @@ const WaterRising = () => {
     if (correct) {
       score["score4"] = score["score4"] - scale;
       setScore({ ...score });
-    } else {
-      // console.log('not correct for score4', 144)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [correct]);
@@ -171,8 +169,7 @@ const WaterRising = () => {
             <div className="progress_wrapper">
               <div className="info">
                 <div className="name_container">
-                  <p className="rank">A</p>
-                  <p className="name">5 ATHENA</p>
+                  <p className="name">{employee.name}</p>
                 </div>
                 <div className="avatar">
                   <img src={avatar} alt="avatar" className="avatar_img" />
@@ -257,7 +254,7 @@ const WaterRising = () => {
                           type="radio"
                           key={index.toString()}
                           id={index}
-                          onClick={(e) => submitAnswer(e, item)}
+                          onClick={(e) => submitAnswer(e, JSON.stringify(item))}
                           name="radio"
                         />
                         <label
@@ -287,6 +284,8 @@ const WaterRising = () => {
                   id={id}
                   employee={employee}
                   course_id={course_id}
+                  employeeScore={employeeScore}
+                  numberOfQ={sample.length}
                 />
               </>
             ) : (
