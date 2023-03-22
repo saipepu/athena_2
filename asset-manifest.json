@@ -1,16 +1,11 @@
 {
   "files": {
-    "main.css": "/athena_2/static/css/main.52718dc1.css",
-    "main.js": "/athena_2/static/js/main.1beb0267.js",
-    "static/media/third_scene_backgorund.png": "/athena_2/static/media/third_scene_backgorund.e15bc8b8e8650e234793.png",
+    "main.css": "/athena_2/static/css/main.352b9a94.css",
+    "main.js": "/athena_2/static/js/main.81412d78.js",
     "static/media/water_game_background.png": "/athena_2/static/media/water_game_background.ed75cac84074dda243de.png",
     "static/media/avatar_boy.png": "/athena_2/static/media/avatar_boy.e4e50ac53985d590d710.png",
-    "static/media/talky_talky_startscreen.png": "/athena_2/static/media/talky_talky_startscreen.d80d4a678f6fc54e8e8d.png",
-    "static/media/start_model.png": "/athena_2/static/media/start_model.9dd30c94257f0646cd12.png",
     "static/media/micperson.png": "/athena_2/static/media/micperson.93a5c5f16c6332a56a0e.png",
     "static/media/avatar_with_hat.png": "/athena_2/static/media/avatar_with_hat.19c8230e20c8fd5ffba8.png",
-    "static/media/fifth_model.png": "/athena_2/static/media/fifth_model.4a32a63f7afe70884891.png",
-    "static/media/customer_third.png": "/athena_2/static/media/customer_third.2f08cb18674abb8a3a4f.png",
     "static/media/treasure_chest.png": "/athena_2/static/media/treasure_chest.0adc9e122c0442097638.png",
     "static/media/black_suit.png": "/athena_2/static/media/black_suit.3b000158dd33361226cb.png",
     "static/media/green_hoodie.png": "/athena_2/static/media/green_hoodie.fac40b5dafa70adc05ca.png",
@@ -33,11 +28,11 @@
     "static/media/pole1.png": "/athena_2/static/media/pole1.0ea51c0ba0752f262a00.png",
     "static/media/pole4.png": "/athena_2/static/media/pole4.e8c1c5bdcb238d3772c0.png",
     "index.html": "/athena_2/index.html",
-    "main.52718dc1.css.map": "/athena_2/static/css/main.52718dc1.css.map",
-    "main.1beb0267.js.map": "/athena_2/static/js/main.1beb0267.js.map"
+    "main.352b9a94.css.map": "/athena_2/static/css/main.352b9a94.css.map",
+    "main.81412d78.js.map": "/athena_2/static/js/main.81412d78.js.map"
   },
   "entrypoints": [
-    "static/css/main.52718dc1.css",
-    "static/js/main.1beb0267.js"
+    "static/css/main.352b9a94.css",
+    "static/js/main.81412d78.js"
   ]
 }
