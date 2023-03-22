@@ -145,7 +145,7 @@ const Training = () => {
                   fontSize="32px"
                   fontWeight="bold"
                 >
-                  Recommend
+                  Recommended
                 </Text>
                 <HStack
                   maxWidth="100%"
@@ -648,7 +648,7 @@ const Training = () => {
             fontSize="32px"
             fontWeight="bold"
           >
-            SoftSkills
+            Soft Skills
           </Text>
           <HStack
             height="300px"

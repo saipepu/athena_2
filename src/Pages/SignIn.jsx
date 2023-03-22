@@ -121,7 +121,7 @@ const SignIn = () => {
       <Box margin="0" width="full" height="full" display="grid" flex="1">
         <form onSubmit={formik.handleSubmit} style={formStyle}>
           <Text fontSize="32px" fontWeight="bold">
-            SignIn
+            Sign In
           </Text>
 
           <FormControl

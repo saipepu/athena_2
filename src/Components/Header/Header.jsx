@@ -18,6 +18,7 @@ import olive_garden from '../../assets/Athena_dashboard_logo.png'
 
 const Header = ({ role, id, employee }) => {
   const [response, setResponse] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [errorMessage, setErrorMessage] = useState();
   const navigation = useNavigate();
 

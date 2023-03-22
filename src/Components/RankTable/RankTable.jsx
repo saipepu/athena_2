@@ -31,6 +31,7 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
   useEffect(() => {
     employeeList.sort((a,b) => b.exp - a.exp)
     let arrList = [];
+    let haveExpList = [];
     let z = 0;
     let totalMinute = 0;
     let limit = 5;
@@ -41,14 +42,18 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
           employeeList[z].id = z;
           arr.push(employeeList[z]);
           totalMinute += employeeList[z]?.hr_of_training;
+          if(employeeList[z].exp > 0) {
+            haveExpList.push(employeeList[z])
+          }
           z++;
         }
       }
       arrList.push(arr);
     }
-    setWorstPerformer(employeeList[employeeList.length-1])
+    setWorstPerformer(haveExpList[haveExpList.length-1])
     setTotalMinute(totalMinute);
     setListLimit(arrList);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeList])
   console.log(listLimit)
 
@@ -65,7 +70,7 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
   const handlePage = (action) => {
     if(action === 'back' && page > 0) {
       setPage(page - 1);
-    } else if(action === 'forward' && page <= listLimit.length-1) {
+    } else if(action === 'forward' && page < listLimit.length-1) {
       setPage(page + 1);
     }
   }
@@ -88,9 +93,16 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
       >
         <TableCaption>
           <ButtonGroup display="flex" alignItems="center" gap="12px" width="full" justifyContent="center">
-            <IconButton icon={<ArrowBackIcon />} onClick={() => handlePage('back')}/>
-              <Text fontSize="18px">Employee Ranks</Text>
-            <IconButton icon={<ArrowForwardIcon />} onClick={() => handlePage('forward')}/>
+            <IconButton variant="unstyled" icon={<ArrowBackIcon />} onClick={() => handlePage('back')}/>
+            {listLimit.map((item, index) => (
+              <Text
+                width="25px" height="25px" lineHeight="80%" cursor="pointer"
+                padding="6px" borderRadius="10000px" fontSize="18px"
+                bgColor={page === index ? 'gray.200' : 'transparent'}
+                onClick={() => setPage(index)}
+              >{index+1}</Text>
+            ))}
+            <IconButton variant="unstyled" icon={<ArrowForwardIcon />} onClick={() => handlePage('forward')}/>
           </ButtonGroup>
         </TableCaption>
         <Thead overflow="visible" borderRadius="12px" width="100%">
@@ -98,7 +110,7 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
             <Th textAlign="right" color="white">
               Ranking
             </Th>
-            <Th style={ThStyle}>id</Th>
+            {/* <Th style={ThStyle}>id</Th> */}
             <Th style={ThStyle}>Name</Th>
             <Th style={ThStyle}>Department</Th>
             <Th style={ThStyle}>Position</Th>
@@ -140,12 +152,12 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
                     <Image src={rank1_avatar} alt="avatar" height="30px" />
                   </Box>
                 </Td>
-                <Td
+                {/* <Td
                   className={employee._id === id ? "highlight" : ""}
                   textAlign="left"
                 >
                   {employee._id.slice(-5)}
-                </Td>
+                </Td> */}
                 <Td
                   className={employee._id === id ? "highlight" : ""}
                   textAlign="left"
