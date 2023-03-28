@@ -31,49 +31,48 @@ const Avatar = () => {
   const button_selector = {
     position: "absolute",
     left: currentTab === "clothing" ? "0%" : "50%",
-    width: "50%",
+    width: "100%",
     height: "100%",
     backgroundColor: "var(--theme-color)",
-    borderRadius: "100px",
     transition: "all 0.3s ease-in-out",
   };
 
   const itemLists = [
-    {
-      name: "Brown Sweater",
-      price: "0.3 ATH",
-      image: brown_sweater,
-    },
+    // {
+    //   name: "Brown Sweater",
+    //   price: "0.3 ATH",
+    //   image: brown_sweater,
+    // },
     {
       name: "Hat",
-      price: "3 ATH",
+      price: "10 ATH",
       image: hat,
     },
-    {
-      name: "Green Hoodie",
-      price: "1 ATH",
-      image: green_hoodie,
-    },
-    {
-      name: "White Sneaker",
-      price: "2 ATH",
-      image: white_sneaker,
-    },
-    {
-      name: "Pink Dress",
-      price: "1 ATH",
-      image: pink_dress,
-    },
-    {
-      name: "Blue T-Shirt",
-      price: "1 ATH",
-      image: blue_tshirt,
-    },
-    {
-      name: "Black Suit",
-      price: "10 ATH",
-      image: black_suit,
-    },
+    // {
+    //   name: "Green Hoodie",
+    //   price: "1 ATH",
+    //   image: green_hoodie,
+    // },
+    // {
+    //   name: "White Sneaker",
+    //   price: "2 ATH",
+    //   image: white_sneaker,
+    // },
+    // {
+    //   name: "Pink Dress",
+    //   price: "1 ATH",
+    //   image: pink_dress,
+    // },
+    // {
+    //   name: "Blue T-Shirt",
+    //   price: "1 ATH",
+    //   image: blue_tshirt,
+    // },
+    // {
+    //   name: "Black Suit",
+    //   price: "10 ATH",
+    //   image: black_suit,
+    // },
   ];
 
   const itemPages = [];
@@ -149,16 +148,17 @@ const Avatar = () => {
             display="flex"
             flexDirection="column"
             justifyContent={"center"}
+            alignItems="flex-start"
             overflow="scroll"
           >
             <Box
               marginBottom="24px"
-              width="100%"
+              width="20%"
               minHeight="65px"
               position="relative"
-              border="1px solid black"
-              borderRadius="100px"
+              borderRadius="20px"
               display="flex"
+              justifyContent="flex-start"
               overflow="hidden"
             >
               <div className="button_selector" style={button_selector}></div>
@@ -173,7 +173,7 @@ const Avatar = () => {
               >
                 Clothing
               </Button>
-              <Button
+              {/* <Button
                 height="100%"
                 variant="unstyled"
                 onClick={() => setCurrentTab("accessories")}
@@ -183,7 +183,7 @@ const Avatar = () => {
                 color={currentTab === "accessories" ? "white" : "black"}
               >
                 Accessories
-              </Button>
+              </Button> */}
             </Box>
             <Box width="100%">
               <Text fontSize="20px" textAlign={"left"}>
@@ -252,7 +252,7 @@ const Avatar = () => {
                 );
               })}
             </Grid>
-            <Box
+            {/* <Box
               width="100%"
               display="flex"
               justifyContent="center"
@@ -268,7 +268,7 @@ const Avatar = () => {
                 bgColor="transparent"
                 icon={<ArrowForwardIcon />}
               />
-            </Box>
+            </Box> */}
           </VStack>
         </Box>
       </HStack>
