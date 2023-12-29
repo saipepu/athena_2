@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     if (!isAuth(role, id)) {
       console.log("no auth");
-      navigation("/sign-in");
+      navigation("/sign-up");
     } else {
       fetchOneEmployee(role, id, setEmployee);
     }
