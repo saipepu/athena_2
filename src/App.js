@@ -16,12 +16,14 @@ import Avatar from "./Pages/Avatar";
 import Rewards from "./Pages/Rewards";
 import PageNotFound from "./Pages/PageNotFound";
 import CourseDetail from "./Pages/CourseDetail";
+import LandingPage from "./Pages/LandingPage";
 
 function App() {
   return (
     <div className="App">
       <HashRouter>
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route
