@@ -24,7 +24,6 @@ const WaterRising = () => {
   const { state } = useLocation();
   const course_id = state?.course_id;
   const employee = state?.employee;
-  console.log(state);
   const sample = WaterRisingData;
   const [qNo, setQNo] = useState(0);
   const [waterHeight, setWaterHeight] = useState(90);
@@ -103,8 +102,6 @@ const WaterRising = () => {
     const human = document.getElementById("human");
     const water_level = document.getElementById("water_level");
 
-    console.log(JSON.stringify(ans), JSON.stringify(sample[qNo].answer), ans === sample[qNo].answer)
-
     if (ans === JSON.stringify(sample[qNo].answer)) {
       setEmployeeScore(employeeScore + 1)
       setCorrect(true);
@@ -134,7 +131,6 @@ const WaterRising = () => {
       const water_level_top = water_level.getBoundingClientRect().top;
       const human_top = human.getBoundingClientRect().top;
       const offset = water_level_top - human_top;
-      // console.log(offset);
 
       if (offset < 10) {
         setGameOver(!gameOver);
@@ -165,7 +161,6 @@ const WaterRising = () => {
     <>
       <div className="wrapper">
         <div className="container">
-          {/* <p>Game</p> */}
           <div className="water_container" id="container">
             <div className="progress_wrapper">
               <div className="info">
@@ -198,7 +193,6 @@ const WaterRising = () => {
                 {/* game screen layer */}
                 <div className="pole_container">
                   {participant.map((player, index) => {
-                    // console.log(player.score - waterHeight);
                     return (
                       <div
                         key={index.toString()}

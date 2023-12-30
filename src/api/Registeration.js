@@ -1,7 +1,8 @@
 import { api } from "./server_api";
 
 export const signUp = async (values, setResponse, isHR) => {
-  console.log("sign up registration");
+  
+  // sign up registration
   let type = isHR ? "admin" : "employee";
   await fetch(`${api}/${type}/signup`, {
     method: "POST",
@@ -14,8 +15,10 @@ export const signUp = async (values, setResponse, isHR) => {
     .then((result) => result.json().then((data) => setResponse(data)))
     .catch((error) => error);
 };
+
 export const signIn = async (values, setResponse, isHR) => {
-  console.log("sign in registration");
+
+  // sign in registration
   let type = isHR ? "admin" : "employee";
   await fetch(`${api}/${type}/signin`, {
     method: "POST",
@@ -29,7 +32,8 @@ export const signIn = async (values, setResponse, isHR) => {
     .catch((error) => error);
 };
 export const signOut = async (setResponse, role) => {
-  console.log("sign out registration");
+  
+  // sign out registration
   await fetch(`${api}/${role}/signout`, {
     method: "GET",
   })

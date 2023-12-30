@@ -26,19 +26,19 @@ const GameOver = ({
 
   const updateEmployeeScore = (action) => {
     if(action !== "play again") {
-      const startTime = localStorage.getItem("startTime");
+      const startTime = localStorage.getItem("startTime"); // start counting the time so that HR can know how much time each employee span of the quiz
       const endTime = new Date().getTime();
       const elapsedTime = endTime - startTime;
-      console.log(`Time spent on website: ${miliToMinute(elapsedTime)} ms`);
-      setMiliToMinute = miliToMinute(elapsedTime);
+      
+      setMiliToMinute = miliToMinute(elapsedTime); // converting mili sec to minute
     }
 
     employee.hr_of_training = parseInt(
       employee?.hr_of_training + setMiliToMinute
     );
-    employee.ATH = employee?.ATH + 1;
+    employee.ATH = employee?.ATH + 1; // add 1 token for each game
     let exp = 0;
-    if(employeeScore < numberOfQ/2) {
+    if(employeeScore < numberOfQ/2) { // grading the exp point based on the score
       exp = 5;
     } else if(employeeScore === numberOfQ) {
       exp = 15;
@@ -54,16 +54,13 @@ const GameOver = ({
         employee.inProgress[x].quiz = true;
       }
     }
-    console.log(employee);
     updateEmployee(role, id, employee, setResponse);
   };
 
   useEffect(() => {
     if (response?.updateSuccess) {
       setGameOver(!gameOver);
-      navigation(`/dashboard/${role}/${id}`);
-    } else {
-      console.log("Updating Employee Data . . .");
+      navigation(`/dashboard/${role}/${id}`); // after successfully updating the employee data, redirect the user to the dashboard
     }
   }, [response, navigation, id, role, gameOver, setGameOver]);
 

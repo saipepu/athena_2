@@ -1,5 +1,6 @@
+// authentication middleware
 export const isAuth = (role, id) => {
-  // console.log('isAuth', role , id)
+
   const session = JSON.parse(localStorage.getItem("athena-token"));
   if (session != null) {
     const [currentRole, currentData] = Object.entries(session)[0];
@@ -11,4 +12,5 @@ export const isAuth = (role, id) => {
   } else {
     return false;
   }
+
 };

@@ -19,14 +19,12 @@ const Sidebar = ({ role, id }) => {
 
   const navigation = (path) => {
     if (employee) {
-      console.log("Passing from Sidebar -> ", employee);
       navigate("/" + path, { state: { employee: employee } });
     }
   };
 
   useEffect(() => {
     fetchOneEmployee(role, id, setEmployee);
-    console.log("Fetcted from Sidebar");
   }, [role, id]);
 
   const ButtonStyle = {
@@ -49,8 +47,6 @@ const Sidebar = ({ role, id }) => {
 
   return (
     <Container
-      // display={{ base: 'none', md: 'block'}}
-      // display={'none'}
       width={"250px"}
       minWidth={"250px"}
       minHeight={"full"}
@@ -177,15 +173,6 @@ const Sidebar = ({ role, id }) => {
         ) : (
           ""
         )}
-
-        {/* <Button
-          width={'90%'} padding={'32px 0px 32px 24px'} justifyContent="flex-start"
-          onMouseOver={() => setHover('setting')} onMouseLeave={() => setHover("")}
-          id="button" leftIcon={<Image src={settings} width="28px" />} bgColor="white" style={currentUrl === 'setting' ? ButtonTarget : hover === 'setting' ? ButtonHoverStyle : ButtonStyle}>
-          <Text as="a" fontSize={'20px'} color={currentUrl === 'setting' ? 'white': 'black'}>
-            Setting
-          </Text>
-        </Button> */}
       </ButtonGroup>
     </Container>
   );

@@ -50,14 +50,12 @@ const SignIn = () => {
     let signIn = JSON.parse(localStorage.getItem("athena-token"));
     if (signIn != null) {
       const [role, data] = Object.entries(signIn)[0];
-      console.log(role, data._id);
       navigation(`/dashboard/${role}/${data._id}`);
     }
 
     if (response?.signInSuccess) {
       localStorage.setItem("athena-token", JSON.stringify(response.message));
       const [role, data] = Object.entries(response.message)[0];
-      console.log(role, data._id);
       navigation(`/dashboard/${role}/${data._id}`);
     } else {
       setErrorMessage(response?.error);

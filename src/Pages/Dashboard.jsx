@@ -27,7 +27,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchOneEmployee(role, id, setEmployee);
-    console.log("dashboard");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [role, id]);
 

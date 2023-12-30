@@ -28,13 +28,11 @@ const Header = ({ role, id, employee }) => {
   };
 
   useEffect(() => {
-    // console.log(response)
     if (response?.signOutSuccess) {
       navigation("/sign-in");
     }
   }, [response, navigation]);
 
-  // const svg = '<img src={olive_garden'
 
   return (
     <Container
@@ -54,7 +52,6 @@ const Header = ({ role, id, employee }) => {
         display="flex"
         justifyContent="flex-start"
         alignItems="center"
-        // dangerouslySetInnerHTML={{ __html: svg }}
       >
         <Image src={olive_garden} objectFit="contain" height="65px" width="auto" />
       </Box>
@@ -96,10 +93,6 @@ const Header = ({ role, id, employee }) => {
           </Text>
         </Box>
         <Menu bgColor="red">
-          {/* <MenuButton as={Button} backgroundColor="red" borderRadius="1000px">
-            <Image src={avatar} alt="avatar" width="65px" />
-          </MenuButton> */}
-
           <MenuButton
             bgColor="transparent"
             height="65px"

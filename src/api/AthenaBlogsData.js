@@ -7,27 +7,18 @@ const options = {
   sheetName: "Sheet1", // if sheetName is supplied, this will take precedence over sheetNumber
 };
 const data = [];
+
+// getting the content data from google sheet
 GSheetReader(
   options,
   (results) => {
     results.map((item, index) => {
-      console.log(item);
       data.push(item);
       return ""
     });
-    // console.log(data);
   },
   (error) => {
     console.log(error);
   }
 );
 export default data;
-
-// returnAllResults: false,
-// filter: {
-//   'Col 1': 'Jan'
-// },
-// filterOptions: {
-//   operator: 'or',
-//   matching: 'loose'
-// }

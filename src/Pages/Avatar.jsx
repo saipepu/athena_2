@@ -38,41 +38,11 @@ const Avatar = () => {
   };
 
   const itemLists = [
-    // {
-    //   name: "Brown Sweater",
-    //   price: "0.3 ATH",
-    //   image: brown_sweater,
-    // },
     {
       name: "Hat",
       price: "10 ATH",
       image: hat,
-    },
-    // {
-    //   name: "Green Hoodie",
-    //   price: "1 ATH",
-    //   image: green_hoodie,
-    // },
-    // {
-    //   name: "White Sneaker",
-    //   price: "2 ATH",
-    //   image: white_sneaker,
-    // },
-    // {
-    //   name: "Pink Dress",
-    //   price: "1 ATH",
-    //   image: pink_dress,
-    // },
-    // {
-    //   name: "Blue T-Shirt",
-    //   price: "1 ATH",
-    //   image: blue_tshirt,
-    // },
-    // {
-    //   name: "Black Suit",
-    //   price: "10 ATH",
-    //   image: black_suit,
-    // },
+    }
   ];
 
   const itemPages = [];
@@ -173,17 +143,6 @@ const Avatar = () => {
               >
                 Clothing
               </Button>
-              {/* <Button
-                height="100%"
-                variant="unstyled"
-                onClick={() => setCurrentTab("accessories")}
-                flex="1"
-                bgColor="transparent"
-                fontSize="20px"
-                color={currentTab === "accessories" ? "white" : "black"}
-              >
-                Accessories
-              </Button> */}
             </Box>
             <Box width="100%">
               <Text fontSize="20px" textAlign={"left"}>
@@ -252,23 +211,6 @@ const Avatar = () => {
                 );
               })}
             </Grid>
-            {/* <Box
-              width="100%"
-              display="flex"
-              justifyContent="center"
-              gap="100px"
-            >
-              <IconButton
-                onClick={() => handlePagination("back")}
-                bgColor="transparent"
-                icon={<ArrowBackIcon />}
-              />
-              <IconButton
-                onClick={() => handlePagination("forward")}
-                bgColor="transparent"
-                icon={<ArrowForwardIcon />}
-              />
-            </Box> */}
           </VStack>
         </Box>
       </HStack>

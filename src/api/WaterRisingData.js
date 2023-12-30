@@ -7,6 +7,8 @@ const options = {
   sheetName: "Sheet1", // if sheetName is supplied, this will take precedence over sheetNumber
 };
 const data = [];
+
+// Getting waterRising Game Content from Google Sheet
 GSheetReader(
   options,
   (results) => {
@@ -15,19 +17,9 @@ GSheetReader(
       data.push(item);
       return "";
     });
-    // console.log(data);
   },
   (error) => {
     console.log(error);
   }
 );
 export default data;
-
-// returnAllResults: false,
-// filter: {
-//   'Col 1': 'Jan'
-// },
-// filterOptions: {
-//   operator: 'or',
-//   matching: 'loose'
-// }

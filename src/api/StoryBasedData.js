@@ -11,6 +11,8 @@ const options = {
 export default function () {
   return new Promise((resolve, reject) => {
     const data = [];
+
+    // Getting StoryBasedData Content from Google Sheet
     GSheetReader(
       options,
       (results) => {

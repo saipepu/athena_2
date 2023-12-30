@@ -55,7 +55,6 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
     setListLimit(arrList);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeList])
-  console.log(listLimit)
 
   useEffect(() => {
     setNumberOfEmployee(employeeList.length);
@@ -77,7 +76,6 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
 
   return (
     <TableContainer
-      // bgColor="red"
       minWidth="800px"
       width="100%"
       maxWidth="1000px"
@@ -110,7 +108,6 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
             <Th textAlign="right" color="white">
               Ranking
             </Th>
-            {/* <Th style={ThStyle}>id</Th> */}
             <Th style={ThStyle}>Name</Th>
             <Th style={ThStyle}>Department</Th>
             <Th style={ThStyle}>Position</Th>
@@ -152,12 +149,6 @@ const RankTable = ({ setWorstPerformer, setTotalMinute, role, id, setNumberOfEmp
                     <Image src={rank1_avatar} alt="avatar" height="30px" />
                   </Box>
                 </Td>
-                {/* <Td
-                  className={employee._id === id ? "highlight" : ""}
-                  textAlign="left"
-                >
-                  {employee._id.slice(-5)}
-                </Td> */}
                 <Td
                   className={employee._id === id ? "highlight" : ""}
                   textAlign="left"

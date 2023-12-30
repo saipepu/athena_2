@@ -30,13 +30,3 @@ export default GSheetReader(
     console.log(error);
   }
 );
-// export default data;
-
-// returnAllResults: false,
-// filter: {
-//   'Col 1': 'Jan'
-// },
-// filterOptions: {
-//   operator: 'or',
-//   matching: 'loose'
-// }

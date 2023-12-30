@@ -11,19 +11,15 @@ const Layout = ({ children }) => {
   const navigation = useNavigate();
 
   const { role, id } = useParams();
-  // console.log(role, id);
 
   const [employee, setEmployee] = useState();
   useEffect(() => {
     if (!isAuth(role, id)) {
-      console.log("no auth");
       navigation("/sign-up");
     } else {
       fetchOneEmployee(role, id, setEmployee);
     }
-    console.log("Fetch From Layout");
   }, [role, id, navigation]);
-  // console.log(employee);
 
   const [isSmallScreen] = useMediaQuery("(max-width: 758px)");
 

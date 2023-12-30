@@ -18,19 +18,9 @@ GSheetReader(
       data.push(item);
       return "";
     });
-    // console.log(data);
   },
   (error) => {
     console.log(error);
   }
 );
 export default data;
-
-// returnAllResults: false,
-// filter: {
-//   'Col 1': 'Jan'
-// },
-// filterOptions: {
-//   operator: 'or',
-//   matching: 'loose'
-// }

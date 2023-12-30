@@ -23,11 +23,9 @@ const CourseDetail = () => {
 
   var course = state?.blog;
   var employee = state?.employee;
-  console.log(employee);
 
   const handleChange = (action) => {
     setChange(true);
-    console.log(action);
     switch (action) {
       // eslint-disable-next-line no-lone-blocks
       case "watched": {
@@ -63,7 +61,6 @@ const CourseDetail = () => {
         for (let x in employee?.inProgress) {
           // eslint-disable-next-line eqeqeq
           if (course_id == employee?.inProgress[x].course_id) {
-            console.log(watch, read, quiz);
             employee.inProgress[x].reading = read;
             employee.inProgress[x].video = watch;
           }

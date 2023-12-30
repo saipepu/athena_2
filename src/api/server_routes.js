@@ -4,7 +4,6 @@ export const fetchAllEmployee = async (set) => {
   await fetch(`${api}/employee/getAll`)
     .then((result) =>
       result.json().then((data) => {
-        // console.log(data);
         set(data.message);
       })
     )
@@ -13,7 +12,8 @@ export const fetchAllEmployee = async (set) => {
 };
 
 export const fetchOneEmployee = async (role, id, setEmployee) => {
-  console.log("Getting User with id -> ", id);
+
+  // Getting User with id
   await fetch(`${api}/${role}/getOne/${id}`, {
     method: "GET",
   })
@@ -22,8 +22,8 @@ export const fetchOneEmployee = async (role, id, setEmployee) => {
 };
 
 export const updateEmployee = async (role, id, obj, setResponse) => {
-  console.log("updating employee data . . . ");
-  console.log(obj);
+
+  // updating employee data . . .
   await fetch(`${api}/${role}/updateInfo/${id}`, {
     method: "POST",
     headers: {
@@ -34,7 +34,6 @@ export const updateEmployee = async (role, id, obj, setResponse) => {
   })
     .then((result) =>
       result.json().then((data) => {
-        console.log(data);
         setResponse(data);
       })
     )

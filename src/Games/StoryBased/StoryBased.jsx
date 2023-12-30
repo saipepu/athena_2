@@ -10,7 +10,6 @@ import { updateEmployee } from "../../api/server_routes";
 
 const StoryBased = () => {
   const { state } = useLocation();
-  console.log(state);
   const course_id = state?.course_id;
   const employee = state?.employee;
   const [progressCount, setProgressCount] = useState(0);
@@ -115,28 +114,21 @@ const StoryBased = () => {
     return true;
   }
 
-  // console.log(employee)
-  // console.log(role, id)
-
   let setMiliToHour = 0;
   function miliToHour(mili) {
-    // return ((mili / 1000 / 60 / 60) % 24).toFixed(3);
     return (mili / (1000 * 60)) % 60;
   }
 
   async function isGameOver() {
     if (gameOver) {
-      console.log("HELLO");
       const startTime = localStorage.getItem("startTime");
       const endTime = new Date().getTime();
       const elapsedTime = endTime - startTime;
-      console.log(`Time spent on website: ${miliToHour(elapsedTime)} ms`);
       setMiliToHour = miliToHour(elapsedTime);
       employee.hr_of_training = parseInt(
         employee?.hr_of_training + setMiliToHour
       );
 
-      // const toUpdate = { ATH: employee.ATH + 1, exp: employee.exp + score, hr_of_training: employee.hr_of_training + setMiliToHour }
       employee.ATH = employee?.ATH + 1;
       employee.exp = employee?.exp + score;
       for (let x in employee?.inProgress) {
@@ -189,7 +181,6 @@ const StoryBased = () => {
           <div className="progress_wrapper">
             <div className="info">
               <div className="name_container">
-                {/* <p className="rank">A</p> */}
                 <p className="name">{employee.name.toUpperCase()}</p>
               </div>
               <div className="avatar">

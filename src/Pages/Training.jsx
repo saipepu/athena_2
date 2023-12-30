@@ -26,7 +26,6 @@ import { fetchOneEmployee, updateEmployee } from "../api/server_routes";
 
 const Training = () => {
   const blogs = AthenaBlogData;
-  console.log(blogs)
   const { role, id } = useParams();
   const navigation = useNavigate();
   // eslint-disable-next-line no-unused-vars
@@ -69,11 +68,11 @@ const Training = () => {
     game_type: "story-based",
     game_id: "1q0gdTTfZnGJuieaCY3DdHPaVOPJq1Qg35zlfPMGjy8s",
   };
+
   const blogList = [blog1, blog2];
 
   const handleClick = (blog) => {
     if (employee) {
-      console.log("click", blog, blogList[blog - 1]);
       const obj = {
         course_id: blog,
         reading: false,
@@ -88,7 +87,6 @@ const Training = () => {
         employee?.inProgress.push(obj);
         updateEmployee(role, id, employee, setResponse);
       }
-      console.log(employee, 58);
       navigation(`/course-detail/${blog}/${role}/${id}`, {
         state: { blog: blogList[blog - 1], employee: employee },
       });
@@ -111,7 +109,6 @@ const Training = () => {
     } else {
       setHaveComplete(false);
     }
-    console.log("Training");
   }, [employee]);
 
   return (
