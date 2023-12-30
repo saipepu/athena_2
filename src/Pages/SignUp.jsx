@@ -24,7 +24,7 @@ const SignUp = () => {
   const formStyle = {
     margin: "auto",
     width: "100%",
-    padding: "120px",
+    padding: "0px 120px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
