@@ -1,0 +1,35 @@
+GET http://localhost:3500/api/employee/
+###
+GET http://localhost:3500/api/employee/getAll
+###
+GET http://localhost:3500/api/employee/getOne/641739447a75df301467a1b1
+###
+POST http://localhost:3500/api/employee/signup
+Content-Type: application/json
+
+{
+  "name": "boss",
+  "email": "testing22@athena.com",
+  "password": "12345",
+  "department": "Chef",
+  "position": "Assistant Chef"
+}
+
+###
+POST http://localhost:3500/api/employee/signin
+Content-Type: application/json
+
+{
+  "email": "yyy@yyy.yyy",
+  "password": "yyy"
+}
+###
+POST http://localhost:3500/api/employee/updateInfo/641739447a75df301467a1b1
+Content-Type: application/json
+
+{
+  "name": "raya"
+}
+
+###
+DELETE http://localhost:3500/api/employee/delete/6414a94e1538c5798a016c00

@@ -1,0 +1,37 @@
+GET http://localhost:3500/api/helloworld
+###
+Get http://localhost:3500/api/admin/
+###
+GET http://localhost:3500/api/admin/getAll
+###
+GET http://localhost:3500/api/admin/getOne/641565e9a0b3cb0603a5e3da
+###
+POST http://localhost:3500/api/admin/signup
+Content-Type: application/json
+
+{
+  "name": "pepu",
+  "email": "u6511923@au.edu",
+  "password": "pepu123"
+}
+###
+POST http://localhost:3500/api/admin/signin
+Content-Type: application/json
+
+{
+  "email": "Hr1@athena.com",
+  "password": "HR"
+}
+
+
+###
+GET http://localhost:3500/api/admin/signout
+###
+POST http://localhost:3500/api/admin/updateName/6413e60e331e06dd796c9d0f
+Content-Type: application/json
+
+{
+  "name": "sai"
+}
+###
+GET http://localhost:3500/api/admin/deleteAccount/6413e60e331e06dd796c9d0f
