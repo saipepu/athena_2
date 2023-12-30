@@ -1,6 +1,6 @@
 ### Athena
 
-This Project is for a Tech Startup Team called <h5>‘Athena’</h5>.
+This Project is for a Tech Startup Team called **‘Athena’**.
 Athena is a learn-to-earn platform that encourage the process of learning by gamification.
 
 <hr>
