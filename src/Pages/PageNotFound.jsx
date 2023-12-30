@@ -10,7 +10,7 @@ const PageNotFound = () => {
       const [role, data] = Object.entries(session)[0];
       navigation(`/dashboard/${role}/${data._id}`);
     } else {
-      navigation("/sign-up");
+      navigation("/");
     }
   }, [navigation]);
 
